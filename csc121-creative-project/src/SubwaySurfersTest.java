@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import processing.event.*;
 
-class CircleWorldTest {
+class SubwaySurfersTest {
 
-    CircleWorld cw1 = new CircleWorld(100, 150);
+    SubwaySurfers cw1 = new SubwaySurfers(100, 150);
     
     @Test
     void tests() {        

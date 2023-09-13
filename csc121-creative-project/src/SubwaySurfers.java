@@ -7,12 +7,12 @@ import processing.event.MouseEvent;
  * user clicks the mouse, the drop is moved over to the
  * location of the click;
  */
-public class CircleWorld {
+public class SubwaySurfers {
     // the position of the drop
     double x;
     double y;
 
-    public CircleWorld(double x, double y) {
+    public SubwaySurfers(double x, double y) {
         this.x = x;
         this.y = y; 
     }
@@ -33,9 +33,9 @@ public class CircleWorld {
      * down a little bit, if it hasn't hit the bottom
      * of the screen yet.
      */
-    public CircleWorld update() {
+    public SubwaySurfers update() {
         if (this.y < 400) {
-            return new CircleWorld(this.x, this.y + .5);
+            return new SubwaySurfers(this.x, this.y + .5);
         } else {
             return this;
         }
@@ -45,8 +45,8 @@ public class CircleWorld {
      * Produces an updated world with the position of the
      * drop updated to the location of the mouse press.
      */
-    public CircleWorld mousePressed(MouseEvent mev) {
-        return new CircleWorld(mev.getX(), mev.getY());
+    public SubwaySurfers mousePressed(MouseEvent mev) {
+        return new SubwaySurfers(mev.getX(), mev.getY());
     }
     
     /**
