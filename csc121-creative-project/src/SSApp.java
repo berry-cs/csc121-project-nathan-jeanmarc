@@ -14,7 +14,7 @@ public class SSApp extends PApplet {
     
     public void setup() {
         w = new SubwaySurfers(200, 0);
-        p = new Player (new Posn(600, 550));
+        p = new Player(new Posn(600, 550));
     }
     
     public void draw() {

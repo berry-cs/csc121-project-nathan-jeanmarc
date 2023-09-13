@@ -1,22 +1,32 @@
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
-/* represents a player */
+/* represents a player in Subway Surfers */
 class Player {
 
-	Posn pos;
-	int floorLvl;
-	float bottomBound;
-	float topBound;
-	float rightBound;
-	float leftBound;
-	boolean isJumping;
-	boolean isFalling;
-	boolean collision;
-	int width;
-	int height;
-	int currentTrack;
+	Posn pos;                    // represents the position of the center of the player sprite
+	int floorLvl = 700;
+	float bottomBound;           // stores the y value of the bottom edge of the player sprite
+	float topBound;				 // stores the y value of the top edge of the player sprite
+	float rightBound;            // stores the x value of the right edge of the player sprite
+	float leftBound;             // stores the x value of the left edge of the player sprite
+	boolean isJumping = false;   // whether or not the player is jumping
+	boolean isFalling = false;   // whether or not the player is falling
+	boolean collision = false;   // whether or not the player has collided with an obstacle
+	int width = 75;              // width of player sprite (in px)
+	int height = 125;            // height of player sprite (in px)
+	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
+<<<<<<< HEAD
+	float gravity = 0.5f;
+	float maxGrav = 20;
+	float minGrav = 0.5f;
+	
+	float jumpSpd = 15;
+	float minJumpSpd = 4;
+	float maxJumpSpd = 15;
+	float jumpHeight = 300;
+=======
 	float gravity;
 	float maxGrav;
 	float minGrav;
@@ -28,24 +38,11 @@ class Player {
 	int jumpHeight;
 
 	Player(Posn pos) {
+>>>>>>> 8f5382674869c762fb8ae1a7ad0475cdb711388f
 
+	public Player(Posn pos) {
 		// sets the pos to the Posn given in the constructor
 		this.pos = pos;
-
-		// sets the initial ground level to 700
-		this.floorLvl = 700;
-
-		/*
-		 * initially sets the booleans for if the player is jumping/falling or in a
-		 * collision to false
-		 */
-		this.isJumping = false;
-		this.isFalling = false;
-		this.collision = false;
-
-		// defines the size of the player
-		this.width = 75;
-		this.height = 125;
 
 		// starts the player on the middle track
 		this.currentTrack = 2;
@@ -55,21 +52,10 @@ class Player {
 		this.topBound = pos.y - (height / 2);
 		this.rightBound = pos.x + (width / 2);
 		this.leftBound = pos.x - (width / 2);
-
-		// defines the gravity, jump speed, and jump height
-		this.gravity = 0.5f;
-		this.maxGrav = 20;
-		this.minGrav = 0.5f;
-
-		this.jumpSpd = 15;
-		this.minJumpSpd = 4;
-		this.maxJumpSpd = 15;
-		this.jumpHeight = 300;
 	}
 
 	/* updates this player */
 	void update(PApplet c) {
-
 		this.render(c);
 		this.updateBounds();
 		this.gravity();
@@ -80,7 +66,7 @@ class Player {
 	/* renders the player as a red square in the correct lane */
 	PApplet render(PApplet c) {
 
-		// sets x to the current track
+		// sets x based on the current track
 		switch (currentTrack) {
 		case 1:
 			pos = pos.newX(200);
@@ -100,7 +86,7 @@ class Player {
 
 		// renders the player
 		c.fill(255, 0, 0);
-		c.rectMode(3);
+		c.rectMode(3);       // rectangle is placed with (x,y) at center
 		c.rect(pos.x, pos.y, width, height, 25);
 		return c;
 	}
