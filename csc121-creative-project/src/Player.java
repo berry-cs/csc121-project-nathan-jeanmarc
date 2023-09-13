@@ -20,11 +20,11 @@ class Player {
 	float gravity;
 	float maxGrav;
 	float minGrav;
-	
+
 	float jumpSpd;
 	float maxJumpSpd;
 	float minJumpSpd;
-	
+
 	int jumpHeight;
 
 	Player(Posn pos) {
@@ -128,6 +128,10 @@ class Player {
 		}
 	}
 
+	/*
+	 * when the player isFalling, not jumping, and the bottom bound is above the
+	 * floor level, applies the gravity
+	 */
 	void gravity() {
 		if (!isJumping && isFalling && bottomBound < floorLvl) {
 			pos = pos.newY(pos.y + gravity);
@@ -140,6 +144,10 @@ class Player {
 		}
 	}
 
+	/*
+	 * when the player is not falling, isJumping and the bottom bound is below the
+	 * jump height relative to the floor, causes the player to jump
+	 */
 	void jump() {
 		if (!isFalling && isJumping && bottomBound > (floorLvl - jumpHeight)) {
 			pos = pos.newY(pos.y - jumpSpd);
