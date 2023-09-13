@@ -41,12 +41,10 @@ class Player {
 	}
 
 	/* updates this player */
-	void update(PApplet c) {
-		this.render(c);
-		this.updateBounds();
-		this.gravity();
-		this.jump();
-
+	void update() {
+		updateBounds();
+		gravity();
+		jump();
 	}
 
 	/* renders the player as a red square in the correct lane */

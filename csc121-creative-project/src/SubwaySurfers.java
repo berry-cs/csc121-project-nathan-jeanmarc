@@ -1,5 +1,5 @@
 import processing.core.PApplet;
-import processing.event.MouseEvent;
+import processing.event.KeyEvent;
 
 
 /**
@@ -9,14 +9,18 @@ import processing.event.MouseEvent;
  * location of the click;
  */
 public class SubwaySurfers {
-    // the position of the drop
-    int x;
-    int y;
+	Player p;
 
+	/* create new Player at given x, y */
     public SubwaySurfers(int x, int y) {
-        this.x = x;
-        this.y = y; 
-       
+    	this.p = new Player(new Posn(x,y));
+    }
+    
+    /*
+     * Create new object with given player
+     */
+    public SubwaySurfers(Player p) {
+    	this.p = p;
     }
     
     /**
@@ -24,9 +28,7 @@ public class SubwaySurfers {
      */
     public PApplet draw(PApplet c) {
         c.background(255);
-        c.fill(0, 0, 255);
-        c.circle((int)this.x, (int)this.y, 15);
-        return c;
+        return p.render(c);
     }
 
     /**
@@ -35,19 +37,13 @@ public class SubwaySurfers {
      * of the screen yet.
      */
     public SubwaySurfers update() {
-        if (this.y < 1200) {
-            return new SubwaySurfers(this.x, this.y + 1);
-        } else {
-            return this;
-        }
-    } 
+        p.update();
+        return new SubwaySurfers(p);
+    }
     
-    /**
-     * Produces an updated world with the position of the
-     * drop updated to the location of the mouse press.
-     */
-    public SubwaySurfers mousePressed(MouseEvent mev) {
-        return new SubwaySurfers(mev.getX(), mev.getY());
+    public SubwaySurfers keyPressed(KeyEvent kev) {
+    	p.move(kev);
+    	return new SubwaySurfers(p);
     }
     
     /**
@@ -55,6 +51,6 @@ public class SubwaySurfers {
      * drop
      */
     public String toString() {
-        return "[" + x + ", " + y + "]";
+        return "[" + p.pos.x + ", " + p.pos.y + "]";
     }
 }
