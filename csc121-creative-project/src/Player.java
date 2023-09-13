@@ -17,7 +17,6 @@ class Player {
 	int height = 125;            // height of player sprite (in px)
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
-<<<<<<< HEAD
 	float gravity = 0.5f;
 	float maxGrav = 20;
 	float minGrav = 0.5f;
@@ -26,19 +25,6 @@ class Player {
 	float minJumpSpd = 4;
 	float maxJumpSpd = 15;
 	float jumpHeight = 300;
-=======
-	float gravity;
-	float maxGrav;
-	float minGrav;
-
-	float jumpSpd;
-	float maxJumpSpd;
-	float minJumpSpd;
-
-	int jumpHeight;
-
-	Player(Posn pos) {
->>>>>>> 8f5382674869c762fb8ae1a7ad0475cdb711388f
 
 	public Player(Posn pos) {
 		// sets the pos to the Posn given in the constructor
