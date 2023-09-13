@@ -6,18 +6,21 @@ import processing.event.*;
  */
 public class SSApp extends PApplet {
     SubwaySurfers w;
+    Player p;
     
     public void settings() {
-        this.size(400, 400);
+        this.size(1200, 800);
     }
     
     public void setup() {
         w = new SubwaySurfers(200, 0);
+        p = new Player (new Posn(600, 550));
     }
     
     public void draw() {
         w = w.update();
         w.draw(this);
+        p.update(this);
     }
     
     public void mousePressed(MouseEvent mev) {
@@ -25,7 +28,7 @@ public class SSApp extends PApplet {
     }
     
     public void keyPressed(KeyEvent kev) {
-        // w = w.keyPressed(kev);
+    	p.move(kev);
     }
 
     public static void main(String[] args) {

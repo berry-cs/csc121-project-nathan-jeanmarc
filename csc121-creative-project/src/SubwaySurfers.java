@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 import processing.event.MouseEvent;
 
+
 /**
  * Represents an interactive application where a drop of
  * water falls down from the top of the window. If the 
@@ -9,12 +10,13 @@ import processing.event.MouseEvent;
  */
 public class SubwaySurfers {
     // the position of the drop
-    double x;
-    double y;
+    int x;
+    int y;
 
-    public SubwaySurfers(double x, double y) {
+    public SubwaySurfers(int x, int y) {
         this.x = x;
         this.y = y; 
+       
     }
     
     /**
@@ -34,12 +36,12 @@ public class SubwaySurfers {
      * of the screen yet.
      */
     public SubwaySurfers update() {
-        if (this.y < 400) {
-            return new SubwaySurfers(this.x, this.y + .5);
+        if (this.y < 1200) {
+            return new SubwaySurfers(this.x, this.y + 1);
         } else {
             return this;
         }
-    }
+    } 
     
     /**
      * Produces an updated world with the position of the
