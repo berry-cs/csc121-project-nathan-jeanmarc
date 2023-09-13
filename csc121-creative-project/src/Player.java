@@ -57,9 +57,9 @@ class Player {
 		this.leftBound = pos.x - (width / 2);
 
 		// defines the gravity, jump speed, and jump height
-		this.gravity = 1;
+		this.gravity = 0.5f;
 		this.maxGrav = 20;
-		this.minGrav = 1;
+		this.minGrav = 0.5f;
 
 		this.jumpSpd = 15;
 		this.minJumpSpd = 4;
