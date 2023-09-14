@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -10,40 +12,63 @@ import processing.event.KeyEvent;
  */
 public class SubwaySurfers {
 	Player p;
+	
+	int maxTrains = 5;
+	ArrayList<Train> trains;  // should be an array list, just one for now
+	
+	float gameSpd = 2;  // controls the speed of the game
 
-	/* create new Player at given x, y */
+	/* 
+	 * Create new game with player at given x, y and train on the left track
+	 */
     public SubwaySurfers(int x, int y) {
     	this.p = new Player(new Posn(x,y));
+    	// debugging train
+    	this.trains = new ArrayList<Train>();
+    	trains.add(new Train(10, 1, 1, gameSpd, false));
     }
     
     /*
      * Create new object with given player
      */
-    public SubwaySurfers(Player p) {
+    public SubwaySurfers(Player p, ArrayList<Train> t) {
     	this.p = p;
+    	this.trains = t;
     }
     
     /**
-     * Renders a picture of the drop on the window
+     * Renders a picture of the player and obstacles on the window
      */
     public PApplet draw(PApplet c) {
         c.background(255);
+        trains.forEach(train -> train.render(c));
         return p.render(c);
     }
 
     /**
      * Produces an updated world where the drop moves
-     * down a little bit, if it hasn't hit the bottom
-     * of the screen yet.
+     * player moves if needed
      */
     public SubwaySurfers update() {
         p.update();
-        return new SubwaySurfers(p);
+        trains.forEach(train -> train.update());
+        return new SubwaySurfers(p, trains);
     }
     
     public SubwaySurfers keyPressed(KeyEvent kev) {
     	p.move(kev);
-    	return new SubwaySurfers(p);
+    	
+    	if (trains.size() < maxTrains) {
+    		if (kev.getKey() == '1') {
+    			trains.add( new Train(10, 1, 1, gameSpd, false));
+    		} else if (kev.getKey() == '2') {
+    			trains.add( new Train(10, 2, 1, gameSpd, false));
+    		} else /*if (kev.getKey() == '3')*/ {
+    			trains.add( new Train(10, 3, 1, gameSpd, false));
+    		}
+    	}
+    	
+    	return new SubwaySurfers(p, trains);
     }
     
     /**

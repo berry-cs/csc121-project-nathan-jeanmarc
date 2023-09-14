@@ -29,5 +29,9 @@ class Posn {
 		return new Posn(this.x, i);
 	}
 	
+	public String toString() {
+		return "(" + x + "," + y +")";
+	}
+	
 
 }
