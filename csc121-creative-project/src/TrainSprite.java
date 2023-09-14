@@ -9,6 +9,9 @@ class TrainSprite {
 	int height = 55;
 	float growSpd = 1;
 	
+	float topBound;
+	Boolean offScreen = false;
+	
 	TrainSprite(Posn pos) {
 		this.pos = pos;
 
@@ -38,6 +41,10 @@ class TrainSprite {
 	 * Shifts and grows this frame based on the given speed and track
 	 */
 	void update(float overallSpd, int track) {
+		
+		topBound = pos.y - height/2;
+		
+		offScreen = topBound > 800;
 		
 		float currentGrowSpd = growSpd * (overallSpd/2);
 		

@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 import processing.core.PApplet;
-import processing.event.KeyEvent;
 
 /**
  * Represents a train obstacle that moves toward the player
@@ -85,6 +84,7 @@ public class Train implements IEntity {
 	 */
 	void update() {
 		frames.forEach(frame -> frame.update(overallSpd, track));
+		frames.removeIf(frame -> frame.offScreen);
 	}
 }
 

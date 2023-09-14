@@ -13,7 +13,6 @@ import processing.event.KeyEvent;
 public class SubwaySurfers {
 	Player p;
 	
-	int maxTrains = 5;
 	ArrayList<Train> trains;  // should be an array list, just one for now
 	
 	float gameSpd = 2;  // controls the speed of the game
@@ -53,12 +52,12 @@ public class SubwaySurfers {
         p.update();
         trains.forEach(train -> train.update());
         return new SubwaySurfers(p, trains);
+        
     }
     
     public SubwaySurfers keyPressed(KeyEvent kev) {
     	p.move(kev);
     	
-    	if (trains.size() < maxTrains) {
     		if (kev.getKey() == '1') {
     			trains.add( new Train(10, 1, 2, gameSpd, false));
     		} else if (kev.getKey() == '2') {
@@ -66,7 +65,7 @@ public class SubwaySurfers {
     		} else if (kev.getKey() == '3') {
     			trains.add( new Train(10, 3, 1, gameSpd, false));
     		}
-    	}
+    	
     	
     	return new SubwaySurfers(p, trains);
     }
