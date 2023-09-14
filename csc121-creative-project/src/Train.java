@@ -36,8 +36,10 @@ public class Train implements IEntity {
 	 */
 	Train(int length, ArrayList<TrainSprite> frames, int track, float speed, float gameSpd, boolean hasRamp) {
 		this.length = length;
-		this.frames = frames;
 		this.track = track;
+
+		this.frames = frames;
+		
 		this.hasRamp = hasRamp;
 		this.gameSpd = gameSpd;
 		
