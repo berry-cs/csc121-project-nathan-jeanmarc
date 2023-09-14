@@ -24,7 +24,7 @@ public class SubwaySurfers {
     	this.p = new Player(new Posn(x,y));
     	// debugging train
     	this.trains = new ArrayList<Train>();
-    	trains.add(new Train(10, 1, 1, gameSpd, false));
+    	//trains.add(new Train(10, 1, 1, gameSpd, false));
     }
     
     /*
@@ -59,11 +59,11 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(10, 1, 2, gameSpd, false));
+    			trains.add( new Train(50, 1, 2, gameSpd, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(10, 2, 1, gameSpd, false));
+    			trains.add( new Train(50, 2, 2, gameSpd, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(10, 3, 1, gameSpd, false));
+    			trains.add( new Train(50, 3, 2, gameSpd, false));
     		}
     	
     	

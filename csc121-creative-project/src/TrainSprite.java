@@ -52,18 +52,18 @@ class TrainSprite {
 		case 1:
 			width += currentGrowSpd;
 			height += currentGrowSpd;
-			pos = pos.posnSum(new Posn(-overallSpd/2, overallSpd));
+			pos = pos.posnSum(new Posn(-overallSpd/2, overallSpd + currentGrowSpd));
 			break;
 		case 2:
 			width += currentGrowSpd;
 			height += currentGrowSpd;
-			pos = pos.newY((pos.y + overallSpd));
+			pos = pos.newY((pos.y + overallSpd + currentGrowSpd));
 
 			break;
 		case 3:
 			width += currentGrowSpd;
 			height += currentGrowSpd;
-			pos = pos.posnSum(new Posn(overallSpd/2, overallSpd));
+			pos = pos.posnSum(new Posn(overallSpd/2, overallSpd + currentGrowSpd));
 			break;
 		}
 	}
