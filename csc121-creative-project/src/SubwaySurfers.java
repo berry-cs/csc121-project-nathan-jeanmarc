@@ -60,7 +60,7 @@ public class SubwaySurfers {
     	
     	if (trains.size() < maxTrains) {
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(10, 1, 1, gameSpd, false));
+    			trains.add( new Train(10, 1, 2, gameSpd, false));
     		} else if (kev.getKey() == '2') {
     			trains.add( new Train(10, 2, 1, gameSpd, false));
     		} else if (kev.getKey() == '3') {

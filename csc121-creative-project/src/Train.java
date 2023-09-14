@@ -12,6 +12,7 @@ public class Train implements IEntity {
 	int track;						// the track the train is on: one of 1, 2, 3
 	float speed;					// the speed of the train relative to the rest of the stage
 	float gameSpd;					// the current speed of the game (needed for calculating 
+	float overallSpd; 				// the current speed of the train with the gameSpd factored in
 	boolean hasRamp;				// whether or not the train has a ramp on the front the player can run up (has no speed)
 	
 	/**
@@ -26,6 +27,7 @@ public class Train implements IEntity {
 
 		this.hasRamp = hasRamp;
 		this.gameSpd = gameSpd;
+		this.overallSpd = speed * gameSpd;
 		
 		if (hasRamp) this.speed = 0;
 		else this.speed = speed;
@@ -82,61 +84,7 @@ public class Train implements IEntity {
 	 * and track
 	 */
 	void update() {
-		frames.forEach(frame -> frame.update(speed, gameSpd, track));
+		frames.forEach(frame -> frame.update(overallSpd, track));
 	}
 }
-
-/**
- * A shape representing a frame in a train
- */
-class TrainSprite {
-	Posn pos;    // position of middle of this sprite
-	int width;
-	int height;
-	
-	TrainSprite(Posn pos) {
-		this.pos = pos;
-		this.width = 50;
-		this.height = 100;
-	}
-	
-	TrainSprite(float x, float y) {
-		this.pos = new Posn(x, y);
-		this.width = 50;
-		this.height = 100;
-	}
-	
-	TrainSprite(float x, float y, int width, int height) {
-		this.pos = new Posn(x, y);
-		this.width = width;
-		this.height = height;
-	}
-	
-	/**
-	 * Draws this frame of the train on the screen
-	 */
-	void draw(PApplet c) {
-		c.fill(0,0,255);
-		c.rectMode(3);
-		c.rect(pos.x, pos.y, width, height);
-	}
-	
-	/**
-	 * Shifts and grows this frame based on the given speed and track
-	 */
-	void update(float trainSpd, float gameSpd, int track) {
-		switch (track) {
-		case 1:
-			pos = pos.newY(pos.y + (trainSpd * gameSpd));
-			break;
-		case 2:
-			pos = pos.newY(pos.y + (trainSpd * gameSpd));
-			break;
-		case 3:
-			pos = pos.newY(pos.y + (trainSpd * gameSpd));
-			break;
-		}
-	}
-}
-
 
