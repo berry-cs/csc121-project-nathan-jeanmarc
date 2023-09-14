@@ -21,7 +21,7 @@ public class SSApp extends PApplet {
     }
     
     public void keyPressed(KeyEvent kev) {
-    	w.p.move(kev);
+    	w.keyPressed(kev);
     }
 
     public static void main(String[] args) {
