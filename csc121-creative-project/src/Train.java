@@ -59,8 +59,10 @@ public class Train implements IEntity {
 	 * track it is on
 	 */
 	private TrainSprite calcFrame() {
-		Posn pos = new Posn(0, 200);
+		// Posn pos = new Posn(0, frames.get(frames.size()-1).pos.y - speed); // needs to be tweaked to fix train spawn at fast speeds
 
+		Posn pos = new Posn(0, 200); // will be replaced by above when fixed
+		
 		switch (track) {
 		case 1:
 			pos = pos.newX(300);
