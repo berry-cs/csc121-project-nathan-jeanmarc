@@ -37,24 +37,6 @@ public class Train implements IEntity {
 	}
 
 	/**
-	 * For "reconstructing" an existing train
-	 */
-	Train(int length, ArrayList<TrainSprite> frames, int track, float speed, float gameSpd, boolean hasRamp) {
-		this.length = length;
-		this.track = track;
-
-		this.frames = frames;
-
-		this.hasRamp = hasRamp;
-		this.gameSpd = gameSpd;
-
-		if (hasRamp)
-			this.speed = 0;
-		else
-			this.speed = speed;
-	}
-
-	/**
 	 * Constructs the appropriate first TrainSprite for this train based on which
 	 * track it is on
 	 */
