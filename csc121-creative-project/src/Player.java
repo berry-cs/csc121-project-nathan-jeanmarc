@@ -13,7 +13,7 @@ class Player {
 	boolean isFalling = false;   // whether or not the player is falling
 	int floorLvl = 700;
 	
-	boolean collision = false;   // whether or not the player has collided with an obstacle
+	boolean hasCollided = false;   // whether or not the player has collided with an obstacle
 	
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 

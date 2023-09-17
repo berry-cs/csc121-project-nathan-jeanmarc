@@ -11,26 +11,12 @@ class TrainSprite {
 	
 	float growSpd = 1;
 	
-
 	Boolean offScreen = false;
 	
 	TrainSprite(Posn pos) {
 		this.pos = pos;
 		bounds = new Bounds(pos, width, height);
 
-	}
-	
-	TrainSprite(float x, float y) {
-		this.pos = new Posn(x, y);
-		bounds = new Bounds(pos, width, height);
-
-	}
-	
-	TrainSprite(float x, float y, int width, int height) {
-		this.pos = new Posn(x, y);
-		this.width = width;
-		this.height = height;
-		bounds = new Bounds(pos, width, height);
 	}
 	
 	/**
