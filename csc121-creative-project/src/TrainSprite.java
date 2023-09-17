@@ -9,15 +9,22 @@ class TrainSprite {
 	int height = 55;
 	Bounds bounds;
 	
-	float growSpd = 1;
+	//float growSpd = 1;
 	
 	Boolean offScreen = false;
 	
 	TrainSprite(Posn pos) {
 		this.pos = pos;
 		bounds = new Bounds(pos, width, height);
-
 	}
+	
+	TrainSprite(float x, float y, int width, int height) {
+		this.pos = new Posn(x,y);
+		this.width = width;
+		this.height = height;
+		this.bounds = new Bounds(pos, width, height);
+	}
+
 	
 	/**
 	 * Draws this frame of the train on the screen
@@ -32,12 +39,11 @@ class TrainSprite {
 	 * Shifts and grows this frame based on the given speed and track
 	 */
 	void update(float overallSpd, int track) {
-		
+
 		bounds.tBound = pos.y - height/2;
-		
 		offScreen = bounds.tBound > 800;
 		
-		float currentGrowSpd = growSpd * (overallSpd/2);
+		float currentGrowSpd = /*growSpd * */(overallSpd/2);
 		
 		switch (track) {
 		case 1:
