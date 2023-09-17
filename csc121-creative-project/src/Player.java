@@ -5,16 +5,16 @@ import processing.event.KeyEvent;
 class Player {
 
 	Posn pos;                    // represents the position of the center of the player sprite
-	int floorLvl = 700;
-	float bottomBound;           // stores the y value of the bottom edge of the player sprite
-	float topBound;				 // stores the y value of the top edge of the player sprite
-	float rightBound;            // stores the x value of the right edge of the player sprite
-	float leftBound;             // stores the x value of the left edge of the player sprite
-	boolean isJumping = false;   // whether or not the player is jumping
-	boolean isFalling = false;   // whether or not the player is falling
-	boolean collision = false;   // whether or not the player has collided with an obstacle
 	int width = 75;              // width of player sprite (in px)
 	int height = 125;            // height of player sprite (in px)
+	Bounds bounds;
+	
+	boolean isJumping = false;   // whether or not the player is jumping
+	boolean isFalling = false;   // whether or not the player is falling
+	int floorLvl = 700;
+	
+	boolean collision = false;   // whether or not the player has collided with an obstacle
+	
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
 	float gravity = 0.5f;
@@ -34,10 +34,7 @@ class Player {
 		this.currentTrack = 2;
 
 		// defines the edges of the player box
-		this.bottomBound = pos.y + (height / 2);
-		this.topBound = pos.y - (height / 2);
-		this.rightBound = pos.x + (width / 2);
-		this.leftBound = pos.x - (width / 2);
+		this.bounds = new Bounds(pos, width, height);
 	}
 
 	/* updates this player */
@@ -64,7 +61,7 @@ class Player {
 		}
 
 		// if the player is somehow below floorLvl fixes it
-		if (bottomBound > floorLvl) {
+		if (bounds.bBound > floorLvl) {
 			pos = pos.newY(floorLvl - (height / 2));
 		}
 
@@ -77,10 +74,7 @@ class Player {
 
 	/* updates the bounds of the player */
 	void updateBounds() {
-		bottomBound = pos.y + (height / 2);
-		topBound = pos.y - (height / 2);
-		rightBound = pos.x + (width / 2);
-		leftBound = pos.x - (width / 2);
+		bounds = new Bounds(pos, width, height);
 	}
 
 	/* moves the player */
@@ -103,12 +97,12 @@ class Player {
 	 * floor level, applies the gravity
 	 */
 	void gravity() {
-		if (!isJumping && isFalling && bottomBound < floorLvl) {
+		if (!isJumping && isFalling && bounds.bBound < floorLvl) {
 			pos = pos.newY(pos.y + gravity);
 			if (gravity < maxGrav) {
 				gravity += 0.5;
 			}
-		} else if (bottomBound >= floorLvl) {
+		} else if (bounds.bBound >= floorLvl) {
 			isFalling = false;
 			gravity = minGrav;
 		}
@@ -119,7 +113,7 @@ class Player {
 	 * jump height relative to the floor, causes the player to jump
 	 */
 	void jump() {
-		if (!isFalling && isJumping && bottomBound > (floorLvl - jumpHeight)) {
+		if (!isFalling && isJumping && bounds.bBound > (floorLvl - jumpHeight)) {
 			pos = pos.newY(pos.y - jumpSpd);
 			if (jumpSpd > minJumpSpd) {
 				jumpSpd -= 0.1;

@@ -7,18 +7,22 @@ class TrainSprite {
 	Posn pos;    // position of middle of this sprite
 	int width = 50;
 	int height = 55;
+	Bounds bounds;
+	
 	float growSpd = 1;
 	
-	float topBound;
+
 	Boolean offScreen = false;
 	
 	TrainSprite(Posn pos) {
 		this.pos = pos;
+		bounds = new Bounds(pos, width, height);
 
 	}
 	
 	TrainSprite(float x, float y) {
 		this.pos = new Posn(x, y);
+		bounds = new Bounds(pos, width, height);
 
 	}
 	
@@ -26,6 +30,7 @@ class TrainSprite {
 		this.pos = new Posn(x, y);
 		this.width = width;
 		this.height = height;
+		bounds = new Bounds(pos, width, height);
 	}
 	
 	/**
@@ -42,9 +47,9 @@ class TrainSprite {
 	 */
 	void update(float overallSpd, int track) {
 		
-		topBound = pos.y - height/2;
+		bounds.tBound = pos.y - height/2;
 		
-		offScreen = topBound > 800;
+		offScreen = bounds.tBound > 800;
 		
 		float currentGrowSpd = growSpd * (overallSpd/2);
 		
