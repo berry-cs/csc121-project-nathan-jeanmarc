@@ -40,8 +40,8 @@ public class SubwaySurfers {
      */
     public PApplet draw(PApplet c) {
         c.background(255);
-        trains.forEach(train -> train.render(c));
-        return p.render(c);
+        trains.forEach(train -> train.draw(c));
+        return p.draw(c);
     }
 
     /**

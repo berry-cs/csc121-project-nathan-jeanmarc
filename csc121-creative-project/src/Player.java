@@ -45,7 +45,7 @@ class Player {
 	}
 
 	/* renders the player as a red square in the correct lane */
-	PApplet render(PApplet c) {
+	PApplet draw(PApplet c) {
 
 		// sets x based on the current track
 		switch (currentTrack) {

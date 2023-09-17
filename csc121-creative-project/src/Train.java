@@ -57,7 +57,7 @@ public class Train implements IEntity {
 	/**
 	 * Renders the train on the given scene by drawing each of its frames
 	 */
-	PApplet render(PApplet c) {
+	PApplet draw(PApplet c) {
 		frames.forEach(frame -> frame.draw(c));
 		return c;
 	}
