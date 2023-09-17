@@ -17,13 +17,13 @@ class Player {
 	
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
-	float gravity = 0.5f;
 	float maxGrav = 20;
 	float minGrav = 0.5f;
-	
-	float jumpSpd = 15;
+	float gravity = minGrav;
+
 	float minJumpSpd = 4;
 	float maxJumpSpd = 15;
+	float jumpSpd = maxJumpSpd;
 	float jumpHeight = 300;
 
 	public Player(Posn pos) {
