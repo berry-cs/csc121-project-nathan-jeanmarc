@@ -73,7 +73,7 @@ public class Train implements IEntity {
 
 		if (currentLen < length && !finishedSpawn) {
 			// duplicate last frame in this train
-			frames.add(0, calcFrame(frames.get(0).pos.y - overallSpd));
+			frames.add(0, calcFrame(frames.get(0).pos.y - overallSpd/2)); // change to just - overallSpd for old train behavior
 		} else {
 			finishedSpawn = true;
 
