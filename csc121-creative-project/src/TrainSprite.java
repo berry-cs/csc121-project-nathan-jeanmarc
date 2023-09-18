@@ -40,7 +40,8 @@ class TrainSprite {
 	 */
 	void update(float overallSpd, int track) {
 
-		bounds.tBound = pos.y - height/2;
+		bounds = bounds.update(pos, width, height);
+		
 		offScreen = bounds.tBound > 800;
 		
 		float currentGrowSpd = /*growSpd * */(overallSpd/2);

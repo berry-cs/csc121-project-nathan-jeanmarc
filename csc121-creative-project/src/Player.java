@@ -39,7 +39,7 @@ class Player {
 
 	/* updates this player */
 	void update() {
-		updateBounds();
+		bounds = bounds.update(pos);
 		gravity();
 		jump();
 	}
@@ -70,11 +70,6 @@ class Player {
 		c.rectMode(3);       // rectangle is placed with (x,y) at center
 		c.rect(pos.x, pos.y, width, height, 25);
 		return c;
-	}
-
-	/* updates the bounds of the player */
-	void updateBounds() {
-		bounds = new Bounds(pos, width, height);
 	}
 
 	/* moves the player */
