@@ -13,7 +13,7 @@ import processing.event.KeyEvent;
 public class SubwaySurfers {
 	Player p;
 	
-	ArrayList<Train> trains;  // should be an array list, just one for now
+	ArrayList<Train> trains;
 	
 	float gameSpd = 2;  // controls the speed of the game
 

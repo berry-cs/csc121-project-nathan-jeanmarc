@@ -1,4 +1,4 @@
-class Obstacle {
+class Obstacle extends Entity {
 	
 	Posn pos;
 	Bounds bounds;
@@ -12,6 +12,7 @@ class Obstacle {
 	float gameSpd;
 	
 	Obstacle(int width, int height, int track, float gameSpd) {
+		super(track);
 		switch (track) {
 		case 1:
 			this.pos = new Posn(300, 200);
@@ -28,7 +29,6 @@ class Obstacle {
 		this.height = height;
 		this.bounds = new Bounds(pos, width, height);
 		
-		this.track = track;
 		this.gameSpd = gameSpd;
 	}
 	
