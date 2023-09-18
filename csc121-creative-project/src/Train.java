@@ -23,7 +23,7 @@ public class Train implements IEntity {
 		this.track = track;
 
 		frames = new ArrayList<TrainSprite>(length);
-		frames.add(calcFrame());
+		frames.add(calcFrame(200));
 
 		this.hasRamp = hasRamp;
 		this.gameSpd = gameSpd;
@@ -35,8 +35,8 @@ public class Train implements IEntity {
 	 * Constructs the appropriate first TrainSprite for this train based on which
 	 * track it is on
 	 */
-	private TrainSprite calcFrame() {
-		Posn pos = new Posn(0, 200); // will be replaced by above when fixed
+	private TrainSprite calcFrame(float y) {
+		Posn pos = new Posn(0, y); 
 		
 		switch (track) {
 		case 1:
@@ -69,35 +69,17 @@ public class Train implements IEntity {
 	 * train's speed and track
 	 */
 	void update() {
-		if (frames.size() < length && !finishedSpawn) {
+		int currentLen = frames.size();
+
+		if (currentLen < length && !finishedSpawn) {
 			// duplicate last frame in this train
-			frames.add(0, calcFrame());
-			// update all but the last frame of this train
-			for (int i = 1; i < frames.size(); i++) {
-				frames.get(i).update(overallSpd, track);
-			}
-			
-			/*
-			// add extra frames to make train more smooth (fixes choppiness with faster trains)
-			if (frames.get(frames.size() - 2).pos.y - frames.get(frames.size() - 1).pos.y > 19) {
-				length *= 2;
-				int oldSize = frames.size();
-				for (int i = 0; i < oldSize - 1; i++) {
-					TrainSprite hiFrame = frames.get(i);
-					TrainSprite loFrame = frames.get(i+1);
-					frames.add(i, new TrainSprite( (hiFrame.pos.x + loFrame.pos.x) / 2, 
-													(hiFrame.pos.y + loFrame.pos.y) / 2, 
-													(hiFrame.width + loFrame.width) / 2, 
-													(hiFrame.height + loFrame.height) / 2));
-				}
-			}
-			*/
+			frames.add(0, calcFrame(frames.get(0).pos.y - overallSpd));
 		} else {
 			finishedSpawn = true;
-			// update all frames
-			frames.forEach(frame -> frame.update(overallSpd, track));
-		}
 
+		}
+		// update all frames
+		frames.forEach(frame -> frame.update(overallSpd, track));
 		// remove frames when they are off of the screen and the train has finished spawning
 		frames.removeIf(frame -> frame.offScreen && finishedSpawn);
 	}

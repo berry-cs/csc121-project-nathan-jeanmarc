@@ -39,29 +39,26 @@ class TrainSprite {
 	 * Shifts and grows this frame based on the given speed and track
 	 */
 	void update(float overallSpd, int track) {
+		
+		float growAmt = (pos.y - 200)/2;
+		
+		width = (int) Math.floor(50 + growAmt);
+		height = (int) Math.floor(55 + growAmt);
 
 		bounds = bounds.update(pos, width, height);
 		
 		offScreen = bounds.tBound > 800;
 		
-		float currentGrowSpd = /*growSpd * */(overallSpd/2);
-		
 		switch (track) {
 		case 1:
-			width += currentGrowSpd;
-			height += currentGrowSpd;
-			pos = pos.posnSum(new Posn(-overallSpd/2, overallSpd + currentGrowSpd));
+			pos = pos.posnSum(new Posn(-overallSpd/2, overallSpd));
 			break;
 		case 2:
-			width += currentGrowSpd;
-			height += currentGrowSpd;
-			pos = pos.newY((pos.y + overallSpd + currentGrowSpd));
+			pos = pos.newY((pos.y + overallSpd));
 
 			break;
 		case 3:
-			width += currentGrowSpd;
-			height += currentGrowSpd;
-			pos = pos.posnSum(new Posn(overallSpd/2, overallSpd + currentGrowSpd));
+			pos = pos.posnSum(new Posn(overallSpd/2, overallSpd));
 			break;
 		}
 	}
