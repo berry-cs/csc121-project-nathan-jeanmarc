@@ -8,7 +8,7 @@ public class SSApp extends PApplet {
     SubwaySurfers w;
     
     public void settings() {
-        this.size(1200, 800);
+        this.size(1200, 800, P3D);
     }
     
     public void setup() {
