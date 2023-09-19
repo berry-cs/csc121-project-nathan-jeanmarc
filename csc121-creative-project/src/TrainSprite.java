@@ -55,13 +55,13 @@ class TrainSprite {
 		
 		switch (track) {
 		case 1:
-			pos = pos.posnSum(new Posn(-overallSpd/2, overallSpd));
+			pos = pos.posnSum(new Posn(-2, overallSpd));
 			break;
 		case 2:
 			pos = pos.newY((pos.y + overallSpd));
 			break;
 		case 3:
-			pos = pos.posnSum(new Posn(overallSpd/2, overallSpd));
+			pos = pos.posnSum(new Posn(2, overallSpd));
 			break;
 		}
 	}
