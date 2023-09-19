@@ -46,7 +46,8 @@ class TrainSprite {
 		float growAmt = (pos.y - 200)/2;
 		
 		width = (int) Math.floor(50 + growAmt);
-		height = (int) Math.floor(55 + growAmt);
+		height = (int) Math.floor(55 + growAmt); 
+		
 
 		bounds = bounds.update(pos, width, height);
 		
