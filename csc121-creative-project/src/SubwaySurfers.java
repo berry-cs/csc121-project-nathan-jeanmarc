@@ -45,11 +45,11 @@ public class SubwaySurfers {
     }
 
     /**
-     * Produces an updated world where the drop moves
-     * player moves if needed
+     * Produces an updated world where the player and obstacles move if needed
      */
     public SubwaySurfers update() {
         p.update();
+        trains.removeIf(train -> train.frames.size() == 0);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
         return new SubwaySurfers(p, trains);
         

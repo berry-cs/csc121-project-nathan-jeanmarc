@@ -8,13 +8,14 @@ class TrainSprite {
 	int width = 50;
 	int height = 55;
 	Bounds bounds;
-	
-	//float growSpd = 1;
+
+	//float speed; // the speed this frame moves across the screen, dependent on its size
 	
 	Boolean offScreen = false;
 	
-	TrainSprite(Posn pos) {
+	TrainSprite(Posn pos/*, float speed*/) {
 		this.pos = pos;
+		//this.speed = speed;
 		bounds = new Bounds(pos, width, height);
 	}
 	
@@ -37,6 +38,8 @@ class TrainSprite {
 	
 	/**
 	 * Shifts and grows this frame based on the given speed and track
+	 * 
+	 * Returns the updated speed of the train that contains this frame, based on the frame's size
 	 */
 	void update(float overallSpd, int track) {
 		

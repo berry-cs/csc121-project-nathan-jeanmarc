@@ -10,13 +10,13 @@ import processing.core.PApplet;
 public class Train extends Entity {
 	int length; // length of the train (in frames)
 	ArrayList<TrainSprite> frames; // stores a list of the frames that make up the train, the frame at index 0 is the last frame of the train
-	float speed; // the speed of the train relative to the rest of the stage
+	float initialSpdSclr; // the amount the game speed should be scaled initially to produce a train that moves faster than the game
 	float overallSpd; // the current speed of the train with the gameSpd factored in
 	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up (has
 						// no speed)
 	boolean finishedSpawn = false; // returns true if the train has already been fully rendered
 
-	public Train(int length, int track, float speed, float gameSpd, boolean hasRamp) {
+	public Train(int length, int track, float initialSpdSclr, float gameSpd, boolean hasRamp) {
 		super(track);
 		this.length = length;
 
@@ -24,8 +24,8 @@ public class Train extends Entity {
 		frames.add(calcFrame(200));
 
 		this.hasRamp = hasRamp;
-		this.speed = hasRamp ? 0 : speed;
-		this.overallSpd = speed * gameSpd;
+		this.initialSpdSclr = hasRamp ? 0 : initialSpdSclr;
+		this.overallSpd = initialSpdSclr * gameSpd;
 	}
 	
 	/**
@@ -78,5 +78,7 @@ public class Train extends Entity {
 		frames.forEach(frame -> frame.update(overallSpd, track));
 		// remove frames when they are off of the screen and the train has finished spawning
 		frames.removeIf(frame -> frame.offScreen && finishedSpawn);
+		// update speed of this train based on size of first frame, kind of fixes "accordion" issue
+		if (frames.size() != 0) overallSpd += initialSpdSclr * 0.175;
 	}
 }
