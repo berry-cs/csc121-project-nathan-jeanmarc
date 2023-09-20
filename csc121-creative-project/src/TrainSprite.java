@@ -4,7 +4,8 @@ import processing.core.PApplet;
  * A shape representing a frame in a train
  */
 class TrainSprite {
-	Posn pos;    // position of middle of this sprite
+	Vector pos;    // position of middle of this sprite
+	Vector vel;
 	int width = 50;
 	int height = 55;
 	Bounds bounds;
@@ -13,52 +14,33 @@ class TrainSprite {
 	
 	Boolean offScreen = false;
 	
-	TrainSprite(Posn pos/*, float speed*/) {
+	TrainSprite(Vector pos, Vector vel) {
 		this.pos = pos;
-		//this.speed = speed;
+		this.vel = vel;
 		bounds = new Bounds(pos, width, height);
 	}
-	
-	TrainSprite(float x, float y, int width, int height) {
-		this.pos = new Posn(x,y);
-		this.width = width;
-		this.height = height;
-		this.bounds = new Bounds(pos, width, height);
-	}
-
 	
 	/**
 	 * Draws this frame of the train on the screen
 	 */
 	void draw(PApplet c) {
+		c.pushMatrix();
+		c.translate(0, 0, pos.z);
 		c.fill(0,0,255);
 		c.rectMode(3); // problem
 		c.rect(pos.x, pos.y, width, height);
+		c.popMatrix();
 	}
 	
 	/**
-	 * Shifts and grows this frame based on the given speed and track
-	 * 
-	 * Returns the updated speed of the train that contains this frame, based on the frame's size
+	 * Moves this frame by adding its velocity to its position
 	 */
-	void update(float y, int track) {
-		
-		pos = pos.newY(y);
+	void update() {
+		pos = pos.translate(vel);
 		
 		bounds = bounds.update(pos, width, height);
 
-		offScreen = bounds.tBound > 800;
+		offScreen = pos.z > SSConstants.CAMERA_Z;
 		
-		switch (track) {
-		case 1:
-			pos = pos.newY(y);
-			break;
-		case 2:
-			pos = pos.newY(y);
-			break;
-		case 3:
-			pos = pos.newY(y);
-			break; 
-		}  
 	}
 }

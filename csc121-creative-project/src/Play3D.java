@@ -3,6 +3,8 @@ import processing.event.*;
 
 /**
  * Provides the scaffolding to launch a Processing application
+ * 
+ * Test Processing sketch for 3D rendering
  */
 public class Play3D extends PApplet {
 	
@@ -10,14 +12,15 @@ public class Play3D extends PApplet {
 	Player p;
     
     public void settings() {
-        this.size(1200, 800, P3D);
+        //this.size(1200, 800, P3D);
+        this.size(960, 640, P3D);
     }
     
     public void setup() {
-    	a = new TrainSprite3D[] { new TrainSprite3D(new Posn(300, 400), 0),
-    								new TrainSprite3D(new Posn(300, 400), 30),
-    								new TrainSprite3D(new Posn(300, 400), 60) };
-    	p = new Player(new Posn(600, 400));
+    	a = new TrainSprite3D[] { new TrainSprite3D(new Vector(300, 400), 0),
+    								new TrainSprite3D(new Vector(300, 400), 30),
+    								new TrainSprite3D(new Vector(300, 400), 60) };
+    	p = new Player(new Vector(600, 400));
     }
     
     public void draw() {

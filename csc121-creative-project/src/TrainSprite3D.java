@@ -4,7 +4,7 @@ import processing.core.PApplet;
  * A shape representing a frame in a train
  */
 class TrainSprite3D {
-	Posn pos;    // position of middle of this sprite
+	Vector pos;    // position of middle of this sprite
 	float z;
 	int width = 50;
 	int height = 55;
@@ -14,7 +14,7 @@ class TrainSprite3D {
 	
 	Boolean offScreen = false;
 	
-	TrainSprite3D(Posn pos, float z/*, float speed*/) {
+	TrainSprite3D(Vector pos, float z/*, float speed*/) {
 		this.pos = pos;
 		this.z = z;
 		//this.speed = speed;
@@ -22,7 +22,7 @@ class TrainSprite3D {
 	}
 	
 	TrainSprite3D(float x, float y, int width, int height) {
-		this.pos = new Posn(x,y);
+		this.pos = new Vector(x,y,z);
 		this.width = width;
 		this.height = height;
 		this.bounds = new Bounds(pos, width, height);

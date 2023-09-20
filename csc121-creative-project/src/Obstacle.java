@@ -1,6 +1,6 @@
 class Obstacle extends Entity {
 	
-	Posn pos;
+	Vector pos;
 	Bounds bounds;
 	int width;
 	int height;
@@ -15,13 +15,13 @@ class Obstacle extends Entity {
 		super(track);
 		switch (track) {
 		case 1:
-			this.pos = new Posn(300, 200);
+			this.pos = new Vector(300, 200);
 			break;
 		case 2:
-			this.pos = new Posn(600, 200);
+			this.pos = new Vector(600, 200);
 			break;
 		case 3:
-			this.pos = new Posn(900, 200);
+			this.pos = new Vector(900, 200);
 			break;
 		}
 		

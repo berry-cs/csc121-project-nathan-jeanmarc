@@ -4,10 +4,12 @@ import processing.event.KeyEvent;
 /* represents a player in Subway Surfers */
 class Player {
 
-	Posn pos;                    // represents the position of the center of the player sprite
+	Vector pos;                    // represents the position of the center of the player sprite
 	int width = 75;              // width of player sprite (in px)
 	int height = 125;            // height of player sprite (in px)
 	Bounds bounds;
+	
+	//PlayerState state = PlayerState.FALLING;
 	
 	boolean isJumping = false;   // whether or not the player is jumping
 	boolean isFalling = false;   // whether or not the player is falling
@@ -17,16 +19,15 @@ class Player {
 	
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
-	float maxGrav = 20;
-	float minGrav = 0.5f;
-	float gravity = minGrav;
+
+	float gravity = SSConstants.minGrav;
 
 	float minJumpSpd = 4;
 	float maxJumpSpd = 15;
 	float jumpSpd = maxJumpSpd;
 	float jumpHeight = 300;
 
-	public Player(Posn pos) {
+	public Player(Vector pos) {
 		// sets the pos to the Posn given in the constructor
 		this.pos = pos;
 
@@ -94,12 +95,12 @@ class Player {
 	void gravity() {
 		if (!isJumping && isFalling && bounds.bBound < floorLvl) {
 			pos = pos.newY(pos.y + gravity);
-			if (gravity < maxGrav) {
+			if (gravity < SSConstants.maxGrav) {
 				gravity += 0.5;
 			}
 		} else if (bounds.bBound >= floorLvl) {
 			isFalling = false;
-			gravity = minGrav;
+			gravity = SSConstants.minGrav;
 		}
 	}
 

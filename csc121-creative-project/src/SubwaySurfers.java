@@ -15,20 +15,20 @@ public class SubwaySurfers {
 	
 	ArrayList<Train> trains;
 	
-	float gameSpd = 1;  // controls the speed of the game
+	float gameSpd = SSConstants.gameSpd;  // controls the speed of the game
 
 	/* 
 	 * Create new game with player at given x, y and train on the left track
 	 */
-    public SubwaySurfers(int x, int y) {
-    	this.p = new Player(new Posn(x,y));
+    public SubwaySurfers(int x, int y, int z) {
+    	this.p = new Player(new Vector(x,y,z));
     	// debugging train
     	this.trains = new ArrayList<Train>();
     	//trains.add(new Train(10, 1, 1, gameSpd, false));
     }
     
     /*
-     * Create new object with given player
+     * Create new object with given player and train list
      */
     public SubwaySurfers(Player p, ArrayList<Train> t) {
     	this.p = p;
@@ -39,7 +39,10 @@ public class SubwaySurfers {
      * Renders a picture of the player and obstacles on the window
      */
     public PApplet draw(PApplet c) {
+    	// colors the canvas background
         c.background(255);
+        // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
+        c.camera(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 0, 0, 1, 0);
         trains.forEach(train -> train.draw(c));
         return p.draw(c);
     }
@@ -59,11 +62,11 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(50, 1, 10, gameSpd, false));
+    			trains.add( new Train(50, 1, 10, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(50, 2, 2, gameSpd, false));
+    			trains.add( new Train(50, 2, 2, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(50, 3, 2, gameSpd, false));
+    			trains.add( new Train(50, 3, 2, false));
     		}
     	
     	

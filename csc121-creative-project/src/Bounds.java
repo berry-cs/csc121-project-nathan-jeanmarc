@@ -6,12 +6,12 @@ class Bounds {
 	float rBound;
 	float lBound;
 	
-	Posn pos;
+	Vector pos;
 	int width;
 	int height;
 	
 	
-	Bounds(Posn pos, int width, int height) {
+	Bounds(Vector pos, int width, int height) {
 		this.pos = pos;
 		this.width = width;
 		this.height = height;
@@ -23,11 +23,11 @@ class Bounds {
 	}
 	
 	/* produces an updated version of this Bounds */
-	Bounds update(Posn p) {
+	Bounds update(Vector p) {
 		return new Bounds(p, width, height);
 	}
 	
-	Bounds update(Posn p, int width, int height) {
+	Bounds update(Vector p, int width, int height) {
 		return new Bounds(p, width, height);
 	}
 }
