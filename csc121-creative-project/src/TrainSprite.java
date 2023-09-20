@@ -8,6 +8,7 @@ class TrainSprite {
 	int width = 50;
 	int height = 55;
 	Bounds bounds;
+	int z = 0;
 
 	//float speed; // the speed this frame moves across the screen, dependent on its size
 	
@@ -33,6 +34,7 @@ class TrainSprite {
 	void draw(PApplet c) {
 		c.fill(0,0,255);
 		c.rectMode(3);
+		c.translate(0, 0, z); // problem
 		c.rect(pos.x, pos.y, width, height);
 	}
 	
@@ -43,6 +45,9 @@ class TrainSprite {
 	 */
 	void update(float overallSpd, int track) {
 		
+		z++;
+		
+		/*
 		float growAmt = (pos.y - 200)/2;
 		
 		width = (int) Math.floor(50 + growAmt);
@@ -62,7 +67,7 @@ class TrainSprite {
 			break;
 		case 3:
 			pos = pos.posnSum(new Posn(2, overallSpd));
-			break;
-		}
+			break; 
+		}  */
 	}
 }
