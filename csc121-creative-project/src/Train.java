@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 import processing.core.PApplet;
 
@@ -21,7 +22,13 @@ public class Train extends Entity {
 		this.length = length;
 
 		frames = new ArrayList<TrainSprite>(length);
-		frames.add(calcFrame(200));
+		//Collections.fill(frames, calcFrame(200));
+		
+		for(int i = 0; i < length; i++) {
+			frames.add(i, calcFrame(200));
+		}
+		
+		//frames.add(calcFrame(200));
 
 		this.hasRamp = hasRamp;
 		this.initialSpdSclr = hasRamp ? 0 : initialSpdSclr;
@@ -66,19 +73,55 @@ public class Train extends Entity {
 	 * train's speed and track
 	 */
 	void update() {
+		
+		// holds the "first frame" of the train (last frame for rendering purposes
+		TrainSprite firstFrame = frames.get(length-1);
+		
+		// iterates over every element in the trains list
+		// if i is the first frame moves it down by the speed
+		// if i is another frame moves it 2 pixels up from the frame directly in front of it
+		for (int i = 0; i < length; i++) {
+			if (i == 0) {
+				firstFrame.update(firstFrame.pos.y + overallSpd, track); 
+			} else {
+				frames.get(length-1-i).update(frames.get(length-i).pos.y - 2, track); 
+			}
+		}
+
+		frames.removeIf(frame -> frames.get(length-1).offScreen);
+		
+/*
+		if (amt < overallSpd) {
+			for (int i = 0; i <= amt; i++) {
+				float move = overallSpd - i;
+				frames.get(i).update(move, track);
+			}
+			more = (int) amt;
+		} else {
+			frames.forEach(frame -> frame.update(overallSpd, track));
+		} */
+		
+		
+		
+		/*
 		int currentLen = frames.size();
 
 		if (currentLen < length && !finishedSpawn) {
-			frames.add(0, calcFrame(frames.get(0).pos.y - overallSpd/2)); // change to just - overallSpd for old train behavior
+			//frames.add(0, calcFrame(frames.get(0).pos.y - overallSpd/2)); // change to just - overallSpd for old train behavior
+			frames.add(0, calcFrame(frames.get(0).pos.y - 1));
 		} else {
 			finishedSpawn = true;
 		}
+		*/
 		
 		// update all frames
-		frames.forEach(frame -> frame.update(overallSpd, track));
+		//frames.forEach(frame -> frame.update(overallSpd, track));
+		
 		// remove frames when they are off of the screen and the train has finished spawning
-		frames.removeIf(frame -> frame.offScreen && finishedSpawn);
+		//frames.removeIf(frame -> frame.offScreen && finishedSpawn);
+		
+		
 		// update speed of this train based on size of first frame, kind of fixes "accordion" issue
-		if (frames.size() != 0) overallSpd += initialSpdSclr * 0.175;
+		//if (frames.size() != 0) overallSpd += initialSpdSclr * 0.175;
 	}
 }

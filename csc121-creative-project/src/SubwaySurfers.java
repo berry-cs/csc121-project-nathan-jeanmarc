@@ -15,7 +15,7 @@ public class SubwaySurfers {
 	
 	ArrayList<Train> trains;
 	
-	float gameSpd = 2;  // controls the speed of the game
+	float gameSpd = 1;  // controls the speed of the game
 
 	/* 
 	 * Create new game with player at given x, y and train on the left track
@@ -61,9 +61,9 @@ public class SubwaySurfers {
     		if (kev.getKey() == '1') {
     			trains.add( new Train(50, 1, 10, gameSpd, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(50, 2, 15, gameSpd, false));
+    			trains.add( new Train(50, 2, 1, gameSpd, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(50, 3, 2, gameSpd, false));
+    			trains.add( new Train(50, 3, 1, gameSpd, false));
     		}
     	
     	
