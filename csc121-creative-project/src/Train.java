@@ -74,10 +74,14 @@ public class Train extends Entity {
 		// holds the "first frame" of the train (last frame for rendering purposes
 		TrainSprite firstFrame = frames.get(length-1);
 		
-		// iterates over every element in the trains list
+		// used to tell how many frames to update before train has moved at least its length
+		int spawnNum = (int) firstFrame.pos.y - 200 + 1;
+		
+		
+		// iterates over every necessary element in the trains list 
 		// if i is the first frame moves it down by the speed
 		// if i is another frame moves it 2 pixels up from the frame directly in front of it
-		for (int i = 0; i < length; i++) {
+		for (int i = 0; i < Math.min(length, spawnNum); i++) {
 			if (i == 0) {
 				firstFrame.update(firstFrame.pos.y + overallSpd, track); 
 			} else {

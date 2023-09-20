@@ -61,9 +61,9 @@ public class SubwaySurfers {
     		if (kev.getKey() == '1') {
     			trains.add( new Train(50, 1, 10, gameSpd, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(50, 2, 1, gameSpd, false));
+    			trains.add( new Train(50, 2, 2, gameSpd, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(50, 3, 1, gameSpd, false));
+    			trains.add( new Train(50, 3, 2, gameSpd, false));
     		}
     	
     	
