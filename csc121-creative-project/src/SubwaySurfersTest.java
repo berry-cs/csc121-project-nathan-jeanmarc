@@ -1,8 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
-import processing.event.*;
 
 class SubwaySurfersTest {
 
@@ -11,7 +9,6 @@ class SubwaySurfersTest {
     @Test
     void tests() {        
         assertEquals("[100.0, 150.0]", cw1.toString());
-        
         assertEquals("[100.0, 150.5]", cw1.update().toString());
         assertEquals("[100.0, 151.0]", cw1.update().update().toString());
         

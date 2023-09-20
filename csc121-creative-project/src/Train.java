@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collections;
-
 import processing.core.PApplet;
 
 /**
@@ -22,7 +20,6 @@ public class Train extends Entity {
 		this.length = length;
 
 		frames = new ArrayList<TrainSprite>(length);
-		//Collections.fill(frames, calcFrame(200));
 		
 		for(int i = 0; i < length; i++) {
 			frames.add(i, calcFrame(200));
