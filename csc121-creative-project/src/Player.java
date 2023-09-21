@@ -21,6 +21,8 @@ class Player {
 
 
 	float gravity = SSConstants.minGrav;
+	
+	boolean inPos = false;
 
 	float minJumpSpd = 4;
 	float maxJumpSpd = 15;
@@ -36,6 +38,7 @@ class Player {
 
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
+		
 	}
 
 	/* updates this player */
@@ -59,6 +62,13 @@ class Player {
 		case 3:
 			pos = pos.newX(1000);
 			break;
+		}
+		
+		if (!inPos) {
+			c.pushMatrix();
+			c.translate(0, 0, pos.z);
+			c.popMatrix();
+			inPos = true;
 		}
 
 		// if the player is somehow below floorLvl fixes it
