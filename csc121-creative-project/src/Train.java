@@ -73,7 +73,7 @@ public class Train {
 			}
 		} else {
 			frames.forEach(frame -> frame.update());
-			frames.removeIf(frame -> frames.get(length-1).offScreen);
+			frames.removeIf(frame -> frames.get(0).offScreen);
 		}
 
 		/*

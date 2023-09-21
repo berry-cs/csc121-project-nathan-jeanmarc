@@ -41,10 +41,11 @@ public class SubwaySurfers {
     public PApplet draw(PApplet c) {
     	// colors the canvas background
         c.background(255);
-        // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-        c.camera(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, SSConstants.WIDTH/2, SSConstants.HEIGHT, 0, 0, 1, 0);
         trains.forEach(train -> train.draw(c));
-        return p.draw(c);
+        p.draw(c);
+        // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
+        c.camera(p.pos.x, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, p.pos.x, SSConstants.HEIGHT, 0, 0, 1, 0);
+        return c;
     }
 
     /**
@@ -62,11 +63,11 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(50, 1, 10, false));
+    			trains.add( new Train(100, 1, 15, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(50, 2, 20, false));
+    			trains.add( new Train(125, 2, 20, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(50, 3, 50, false));
+    			trains.add( new Train(150, 3, 50, false));
     		}
     	
     	

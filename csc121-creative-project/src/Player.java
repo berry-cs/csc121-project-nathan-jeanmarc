@@ -54,13 +54,13 @@ class Player {
 		// sets x based on the current track
 		switch (currentTrack) {
 		case 1:
-			pos = pos.newX(200);
+			pos = pos.newX(300);
 			break;
 		case 2:
 			pos = pos.newX(600);
 			break;
 		case 3:
-			pos = pos.newX(1000);
+			pos = pos.newX(900);
 			break;
 		}
 		
