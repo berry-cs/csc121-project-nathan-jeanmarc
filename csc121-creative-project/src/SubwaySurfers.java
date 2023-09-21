@@ -15,7 +15,7 @@ public class SubwaySurfers {
 	
 	Ground g;
 	
-	ArrayList<Train> trains;
+	ArrayList<Train3D> trains;
 	
 	float gameSpd = SSConstants.gameSpd;  // controls the speed of the game
 
@@ -25,7 +25,7 @@ public class SubwaySurfers {
     public SubwaySurfers() {
     	this.p = new Player();
     	// debugging train
-    	this.trains = new ArrayList<Train>();
+    	this.trains = new ArrayList<Train3D>();
     	
     	this.g = new Ground();
     }
@@ -33,7 +33,7 @@ public class SubwaySurfers {
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(Player p, ArrayList<Train> t, Ground g) {
+    public SubwaySurfers(Player p, ArrayList<Train3D> t, Ground g) {
     	this.p = p;
     	this.trains = t;
     	this.g = g;
@@ -57,8 +57,9 @@ public class SubwaySurfers {
      * Produces an updated world where the player and obstacles move if needed
      */
     public SubwaySurfers update() {
+    	System.out.println(trains.size());
         p.update();
-        trains.removeIf(train -> train.frames.size() == 0);  // removes trains that are off the screen
+        trains.removeIf(train -> (train.pos.z - train.length) >= SSConstants.DELETE_POINT);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
         return new SubwaySurfers(p, trains, g);
         
@@ -68,11 +69,11 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(500, 1, 10, false));
+    			trains.add( new Train3D(2000, 1, 10, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(600, 2, 20, false));
+    			trains.add( new Train3D(600, 2, 10, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(700, 3, 25, false));
+    			trains.add( new Train3D(700, 3, 25, false));
     		}
     	
     	

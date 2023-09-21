@@ -16,6 +16,7 @@ public class Train {
 	boolean hasRamp; 			   // whether or not the train has a ramp on the front the player can run up (has
 								   // no speed)
 	boolean finishedSpawn = false; // returns true if the train has already been fully rendered
+	
 
 	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;

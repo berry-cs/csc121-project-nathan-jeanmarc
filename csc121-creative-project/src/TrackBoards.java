@@ -5,10 +5,12 @@ class TrackBoards {
 	int height = 15;
 	int depth = 50;
 	
-	Vector pos = new Vector(0, 820, -1000);
+	Vector pos;
 	
-	TrackBoards() {
-		
+	boolean offScreen = false;
+	
+	TrackBoards(float z) {
+		pos = new Vector(0, SSConstants.ENVIRONMENT_Y, z);
 	}
 	
 	void draw(PApplet c) {
@@ -28,10 +30,20 @@ class TrackBoards {
 		c.translate(1100, pos.y, pos.z);
 		c.box(width, height, depth);
 		c.popMatrix();
+		
+		reset();
 	}
 	
 	void update() {
 		pos = pos.newZ(pos.z + SSConstants.gameSpd);
+		offScreen = pos.z >= SSConstants.DELETE_POINT;
+	}
+	
+	void reset() {
+		if (offScreen) {
+			pos = pos.newZ(SSConstants.BOARD_INITIAL_Z);
+			offScreen = false;
+		}
 	}
 
 }

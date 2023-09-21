@@ -7,7 +7,7 @@ public class SSConstants {
 	public static final int HEIGHT = 800;
 	public static final int CAMERA_Z = 2000;
 	
-	public static float gameSpd = 2;
+	public static float gameSpd = 5;
 	
 	public static final int PLAYER_Z = 1500;
 	public static int floorLvl = HEIGHT;
@@ -21,6 +21,13 @@ public class SSConstants {
 	public static final int TRACK_1 = 100;
 	public static final int TRACK_2 = 600;
 	public static final int TRACK_3 = 1100;
+	
+	public static final int ENVIRONMENT_Y = 820;
+	public static final int BOARD_INITIAL_Z = -3500;
+	public static final int BOARD_AMT = 30; // DO NOT CHANGE
+	
+	public static final int DELETE_POINT = CAMERA_Z - 300;
+	
 	
 	
 }

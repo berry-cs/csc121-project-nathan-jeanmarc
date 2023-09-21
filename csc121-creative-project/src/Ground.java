@@ -8,9 +8,15 @@ class Ground {
 
 	Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
 	
-	ArrayList<TrackBoards> boards = new ArrayList<TrackBoards>(0);
-
+	ArrayList<TrackBoards> boards;
+	
 	Ground() {
+		boards = new ArrayList<TrackBoards>();
+		boards.add(new TrackBoards(SSConstants.BOARD_INITIAL_Z));
+		
+		for (int i = 1; i < 30; i++) {
+			boards.add(new TrackBoards(boards.get(i-1).pos.z+200));
+		} 
 	}
 
 	PApplet draw(PApplet c) {
@@ -27,13 +33,12 @@ class Ground {
 		
 		boards.forEach(board -> board.update());
 		boards.forEach(board -> board.draw(c));
-
 		
 		return c;
 	}
 
 	void drawTracks(PApplet c) {
-		int y = 820;
+		int y = SSConstants.ENVIRONMENT_Y;
 
 		c.fill(90);
 
@@ -70,7 +75,7 @@ class Ground {
 	}
 	
 	void drawSides(PApplet c) {
-		int y = 820;
+		int y = SSConstants.ENVIRONMENT_Y;
 		
 		c.fill(70, 50, 10);
 		c.pushMatrix();
@@ -84,10 +89,5 @@ class Ground {
 		c.popMatrix();
 	}
 	
-	void trackBoardSpawn() {
-		
-		
-		
-	}
 
 }
