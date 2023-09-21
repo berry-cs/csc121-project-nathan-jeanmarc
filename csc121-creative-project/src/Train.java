@@ -11,10 +11,10 @@ public class Train {
 	int length; // length of the train (in frames)
 	int track;
 	ArrayList<TrainSprite> frames; // stores a list of the frames that make up the train, the frame at index 0 is
-									// the last frame of the train
+								   // the last frame of the train
 	Vector vel;
-	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up (has
-						// no speed)
+	boolean hasRamp; 			   // whether or not the train has a ramp on the front the player can run up (has
+								   // no speed)
 	boolean finishedSpawn = false; // returns true if the train has already been fully rendered
 
 	public Train(int length, int track, float speed, boolean hasRamp) {
@@ -24,9 +24,9 @@ public class Train {
 		frames = new ArrayList<TrainSprite>(length);
 		
 		this.hasRamp = hasRamp;
-		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, SSConstants.gameSpd + speed);
+		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, (SSConstants.gameSpd + speed));
 
-		frames.add(calcFrame(-2000));
+		frames.add(calcFrame(SSConstants.TRAIN_INITIAL_Z));
 	}
 
 	/**
@@ -38,13 +38,13 @@ public class Train {
 
 		switch (track) {
 		case 1:
-			pos = pos.newX(300);
+			pos = pos.newX(SSConstants.TRACK_1);
 			break;
 		case 2:
-			pos = pos.newX(600);
+			pos = pos.newX(SSConstants.TRACK_2);
 			break;
 		case 3:
-			pos = pos.newX(900);
+			pos = pos.newX(SSConstants.TRACK_3);
 			break;
 		}
 
@@ -69,26 +69,12 @@ public class Train {
 		if (frames.size() < length) {
 			for (int i = 0; i < vel.z && i < length; i++) {
 				TrainSprite last = frames.get(frames.size() - 1);
-				frames.add(calcFrame(last.pos.z + 5));
+				frames.add(calcFrame(last.pos.z + 4));
 			}
 		} else {
 			frames.forEach(frame -> frame.update());
 			frames.removeIf(frame -> frames.get(0).offScreen);
 		}
 
-		/*
-		 * // holds the "first frame" of the train (last frame for rendering purposes
-		 * TrainSprite firstFrame = frames.get(length-1);
-		 * 
-		 * // used to tell how many frames to update before train has moved at least its
-		 * length int spawnNum = (int) firstFrame.pos.z + 1;
-		 * 
-		 * 
-		 * // iterates over every necessary element in the trains list // if i is the
-		 * first frame moves it down by the speed // if i is another frame moves it 2
-		 * pixels up from the frame directly in front of it for (int i = 0; i <
-		 * Math.min(length, spawnNum); i++) { if (i == 0) { firstFrame.update(); } else
-		 * { frames.get(length - 1 - i).update(); } }
-		 */
 	}
 }

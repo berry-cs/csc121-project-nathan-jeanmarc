@@ -13,6 +13,8 @@ import processing.event.KeyEvent;
 public class SubwaySurfers {
 	Player p;
 	
+	Ground g;
+	
 	ArrayList<Train> trains;
 	
 	float gameSpd = SSConstants.gameSpd;  // controls the speed of the game
@@ -20,19 +22,21 @@ public class SubwaySurfers {
 	/* 
 	 * Create new game with player at given x, y and train on the left track
 	 */
-    public SubwaySurfers(int x, int y, int z) {
-    	this.p = new Player(new Vector(x,y,z));
+    public SubwaySurfers() {
+    	this.p = new Player();
     	// debugging train
     	this.trains = new ArrayList<Train>();
-    	//trains.add(new Train(10, 1, 1, gameSpd, false));
+    	
+    	this.g = new Ground();
     }
     
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(Player p, ArrayList<Train> t) {
+    public SubwaySurfers(Player p, ArrayList<Train> t, Ground g) {
     	this.p = p;
     	this.trains = t;
+    	this.g = g;
     }
     
     /**
@@ -40,11 +44,13 @@ public class SubwaySurfers {
      */
     public PApplet draw(PApplet c) {
     	// colors the canvas background
-        c.background(255);
+        c.background(45, 160, 230);
         trains.forEach(train -> train.draw(c));
         p.draw(c);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
         c.camera(p.pos.x, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, p.pos.x, SSConstants.HEIGHT, 0, 0, 1, 0);
+        
+        g.draw(c);
         return c;
     }
 
@@ -55,7 +61,7 @@ public class SubwaySurfers {
         p.update();
         trains.removeIf(train -> train.frames.size() == 0);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
-        return new SubwaySurfers(p, trains);
+        return new SubwaySurfers(p, trains, g);
         
     }
     
@@ -63,15 +69,15 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train(100, 1, 15, false));
+    			trains.add( new Train(500, 1, 10, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(125, 2, 20, false));
+    			trains.add( new Train(600, 2, 20, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(150, 3, 50, false));
+    			trains.add( new Train(700, 3, 25, false));
     		}
     	
     	
-    	return new SubwaySurfers(p, trains);
+    	return new SubwaySurfers(p, trains, g);
     }
     
     /**

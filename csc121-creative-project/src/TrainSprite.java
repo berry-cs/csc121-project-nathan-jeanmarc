@@ -26,7 +26,7 @@ class TrainSprite {
 	void draw(PApplet c) {
 		c.pushMatrix();
 		c.translate(0, 0, pos.z);
-		c.fill(0,0,255);
+		c.fill(100,0,0);
 		c.rectMode(3); // problem
 		c.rect(pos.x, pos.y, width, height);
 		c.popMatrix();

@@ -29,9 +29,9 @@ class Player {
 	float jumpSpd = maxJumpSpd;
 	float jumpHeight = 300;
 
-	public Player(Vector pos) {
+	public Player() {
 		// sets the pos to the Posn given in the constructor
-		this.pos = pos;
+		this.pos = new Vector(0, SSConstants.floorLvl - height/2, SSConstants.PLAYER_Z);
 
 		// starts the player on the middle track
 		this.currentTrack = 2;
@@ -54,13 +54,13 @@ class Player {
 		// sets x based on the current track
 		switch (currentTrack) {
 		case 1:
-			pos = pos.newX(300);
+			pos = pos.newX(SSConstants.TRACK_1);
 			break;
 		case 2:
-			pos = pos.newX(600);
+			pos = pos.newX(SSConstants.TRACK_2);
 			break;
 		case 3:
-			pos = pos.newX(900);
+			pos = pos.newX(SSConstants.TRACK_3);
 			break;
 		}
 		
@@ -73,7 +73,7 @@ class Player {
 		// renders the player
 		c.pushMatrix();
 		c.translate(0, 0, pos.z);
-		c.fill(255, 0, 0);
+		c.fill(50, 0, 80);
 		c.rectMode(3);       // rectangle is placed with (x,y) at center
 		c.rect(pos.x, pos.y, width, height, 25);
 		c.popMatrix();
