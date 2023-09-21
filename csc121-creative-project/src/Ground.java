@@ -3,7 +3,7 @@ import processing.core.PApplet;
 class Ground {
 	
 	int width = 12000;
-	int height = 9500;
+	int height = 9500; 
 	
 	Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
 	
