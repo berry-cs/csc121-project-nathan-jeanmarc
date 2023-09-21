@@ -6,8 +6,8 @@ import processing.core.PApplet;
 class TrainSprite {
 	Vector pos;    // position of middle of this sprite
 	Vector vel;
-	int width = 50;
-	int height = 55;
+	int width = SSConstants.TRAIN_WIDTH;
+	int height = SSConstants.TRAIN_HEIGHT;
 	Bounds bounds;
 
 	//float speed; // the speed this frame moves across the screen, dependent on its size

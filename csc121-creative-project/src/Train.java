@@ -26,15 +26,15 @@ public class Train {
 		this.hasRamp = hasRamp;
 		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, SSConstants.gameSpd + speed);
 
-		frames.add(calcFrame());
+		frames.add(calcFrame(-2000));
 	}
 
 	/**
 	 * Constructs the appropriate TrainSprite at given y position for this train
 	 * based on which track it is on
 	 */
-	private TrainSprite calcFrame() {
-		Vector pos = new Vector(0, 500, 0);
+	private TrainSprite calcFrame(float z) {
+		Vector pos = new Vector(0, (SSConstants.floorLvl - SSConstants.TRAIN_HEIGHT/2), z);
 
 		switch (track) {
 		case 1:
@@ -52,22 +52,6 @@ public class Train {
 	}
 	
 	/**
-	 * Calculates the appropriate x-coordinate of this train based on its track
-	 */
-	private float calcX() {
-		switch (track) {
-		case 1:
-			return 300;
-		case 2:
-			return 600;
-		case 3:
-			return 900;
-		}
-		
-		return 0;
-	}
-	
-	/**
 	 * Renders the train on the given scene by drawing each of its frames
 	 */
 	PApplet draw(PApplet c) {
@@ -82,13 +66,10 @@ public class Train {
 	 * train's speed and track
 	 */
 	void update() {
-		
-		//frames.forEach(frame -> frame.update(vel));
-		
 		if (frames.size() < length) {
 			for (int i = 0; i < vel.z && i < length; i++) {
 				TrainSprite last = frames.get(frames.size() - 1);
-				frames.add(new TrainSprite(new Vector(calcX(), 500, last.pos.z + 2), vel));
+				frames.add(calcFrame(last.pos.z + 5));
 			}
 		} else {
 			frames.forEach(frame -> frame.update());

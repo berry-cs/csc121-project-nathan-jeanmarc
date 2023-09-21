@@ -13,7 +13,7 @@ class Player {
 	
 	boolean isJumping = false;   // whether or not the player is jumping
 	boolean isFalling = false;   // whether or not the player is falling
-	int floorLvl = 700;
+	int floorLvl = SSConstants.floorLvl;
 	
 	boolean hasCollided = false;   // whether or not the player has collided with an obstacle
 	
@@ -64,12 +64,6 @@ class Player {
 			break;
 		}
 		
-		if (!inPos) {
-			c.pushMatrix();
-			c.translate(0, 0, pos.z);
-			c.popMatrix();
-			inPos = true;
-		}
 
 		// if the player is somehow below floorLvl fixes it
 		if (bounds.bBound > floorLvl) {
@@ -77,9 +71,12 @@ class Player {
 		}
 
 		// renders the player
+		c.pushMatrix();
+		c.translate(0, 0, pos.z);
 		c.fill(255, 0, 0);
 		c.rectMode(3);       // rectangle is placed with (x,y) at center
 		c.rect(pos.x, pos.y, width, height, 25);
+		c.popMatrix();
 		return c;
 	}
 
