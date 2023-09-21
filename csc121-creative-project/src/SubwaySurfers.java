@@ -42,7 +42,7 @@ public class SubwaySurfers {
     	// colors the canvas background
         c.background(255);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-        c.camera(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 1000, 0, 1, 0);
+        c.camera(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, SSConstants.WIDTH/2, SSConstants.HEIGHT, 0, 0, 1, 0);
         trains.forEach(train -> train.draw(c));
         return p.draw(c);
     }
@@ -66,7 +66,7 @@ public class SubwaySurfers {
     		} else if (kev.getKey() == '2') {
     			trains.add( new Train(50, 2, 20, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(50, 3, 2, false));
+    			trains.add( new Train(50, 3, 50, false));
     		}
     	
     	
