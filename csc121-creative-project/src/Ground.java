@@ -20,6 +20,7 @@ class Ground {
 		c.popMatrix();
 
 		drawTracks(c);
+		drawSides(c);
 		return c;
 	}
 
@@ -29,32 +30,32 @@ class Ground {
 		c.fill(90);
 
 		c.pushMatrix();
-		c.translate(30, 820, 0);
+		c.translate(30, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 
 		c.pushMatrix();
-		c.translate(170, 820, 0);
+		c.translate(170, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 
 		c.pushMatrix();
-		c.translate(530, 820, 0);
+		c.translate(530, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 
 		c.pushMatrix();
-		c.translate(670, 820, 0);
+		c.translate(670, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 
 		c.pushMatrix();
-		c.translate(1030, 820, 0);
+		c.translate(1030, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 
 		c.pushMatrix();
-		c.translate(1170, 820, 0);
+		c.translate(1170, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
 	}
@@ -64,7 +65,13 @@ class Ground {
 		
 		c.fill(70, 50, 10);
 		c.pushMatrix();
+		c.translate(-250, y, 0);
+		c.box(100, 60, 7000);
+		c.popMatrix();
 		
+		c.pushMatrix();
+		c.translate(1450, y, 0);
+		c.box(100, 60, 7000);
 		c.popMatrix();
 	}
 
