@@ -7,7 +7,7 @@ public class SSConstants {
 	public static final int HEIGHT = 800;
 	public static final int CAMERA_Z = 2000;
 	
-	public static float gameSpd = 1;
+	public static float gameSpd = 2;
 	
 	public static final int PLAYER_Z = 1500;
 	public static int floorLvl = HEIGHT;

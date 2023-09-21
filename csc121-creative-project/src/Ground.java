@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import processing.core.PApplet;
 
 class Ground {
@@ -6,6 +7,8 @@ class Ground {
 	int height = 9500; 
 
 	Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
+	
+	ArrayList<TrackBoards> boards = new ArrayList<TrackBoards>(0);
 
 	Ground() {
 	}
@@ -21,6 +24,11 @@ class Ground {
 
 		drawTracks(c);
 		drawSides(c);
+		
+		boards.forEach(board -> board.update());
+		boards.forEach(board -> board.draw(c));
+
+		
 		return c;
 	}
 
@@ -58,6 +66,7 @@ class Ground {
 		c.translate(1170, y, 0);
 		c.box(20, 20, 7000);
 		c.popMatrix();
+
 	}
 	
 	void drawSides(PApplet c) {
@@ -73,6 +82,12 @@ class Ground {
 		c.translate(1450, y, 0);
 		c.box(100, 60, 7000);
 		c.popMatrix();
+	}
+	
+	void trackBoardSpawn() {
+		
+		
+		
 	}
 
 }
