@@ -17,6 +17,8 @@ public class SubwaySurfers {
 	
 	ArrayList<Train3D> trains;
 	
+	ArrayList<Obstacle> obstacles;
+	
 	float gameSpd = SSConstants.gameSpd;  // controls the speed of the game
 
 	/* 
@@ -24,19 +26,19 @@ public class SubwaySurfers {
 	 */
     public SubwaySurfers() {
     	this.p = new Player();
-    	// debugging train
     	this.trains = new ArrayList<Train3D>();
-    	
+    	this.obstacles = new ArrayList<Obstacle>();
     	this.g = new Ground();
     }
     
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(Player p, ArrayList<Train3D> t, Ground g) {
+    public SubwaySurfers(Player p, ArrayList<Train3D> t, Ground g, ArrayList<Obstacle> o) {
     	this.p = p;
     	this.trains = t;
     	this.g = g;
+    	this.obstacles = o;
     }
     
     /**
@@ -46,10 +48,12 @@ public class SubwaySurfers {
     	// colors the canvas background
         c.background(45, 160, 230);
         trains.forEach(train -> train.draw(c));
+        obstacles.forEach(obstacle -> obstacle.draw(c));
         p.draw(c);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
         c.camera(p.pos.x, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, p.pos.x, SSConstants.HEIGHT, 0, 0, 1, 0);
         g.draw(c);
+        
         return c;
     }
 
@@ -57,11 +61,19 @@ public class SubwaySurfers {
      * Produces an updated world where the player and obstacles move if needed
      */
     public SubwaySurfers update() {
-    	System.out.println(trains.size());
         p.update();
+        
         trains.removeIf(train -> (train.pos.z - train.length) >= SSConstants.DELETE_POINT);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
-        return new SubwaySurfers(p, trains, g);
+        
+        obstacles.removeIf(obstacle -> obstacle.offScreen);  // removes trains that are off the screen
+        obstacles.forEach(obstacle -> obstacle.update());
+        
+        if (collision()) {
+        	System.out.println("bruh!!!");
+        }
+        
+        return new SubwaySurfers(p, trains, g, obstacles);
         
     }
     
@@ -74,17 +86,23 @@ public class SubwaySurfers {
     			trains.add( new Train3D(600, 2, 10, false));
     		} else if (kev.getKey() == '3') {
     			trains.add( new Train3D(700, 3, 25, false));
+    		} else if (kev.getKey() == '4') {
+    			obstacles.add(new Obstacle(1));
+    		} else if (kev.getKey() == '5') {
+    			obstacles.add(new Obstacle(2));
+    		} else if (kev.getKey() == '6') {
+    			obstacles.add(new Obstacle(3));
     		}
     	
     	
-    	return new SubwaySurfers(p, trains, g);
+    	return new SubwaySurfers(p, trains, g, obstacles);
     }
     
-    /**
-     * Produces a string rendering of the position of the
-     * drop
-     */
-    public String toString() {
-        return "[" + p.pos.x + ", " + p.pos.y + "]";
-    }
+   boolean collision() {
+	   for (int t = 0; t < trains.size(); t++) {
+		   return (trains.get(t).frontZ >= p.pos.z && trains.get(t).rearZ <= p.pos.z && trains.get(t).track == p.currentTrack);
+	   }
+	   
+	   return false;
+   }
 }

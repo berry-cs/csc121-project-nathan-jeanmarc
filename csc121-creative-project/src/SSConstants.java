@@ -17,6 +17,7 @@ public class SSConstants {
 	public static final int TRAIN_WIDTH = 200;
 	public static final int TRAIN_HEIGHT = 255;
 	public static final int TRAIN_INITIAL_Z = -3000;
+	public static final int TRAIN_Y = 685;
 	
 	public static final int TRACK_1 = 100;
 	public static final int TRACK_2 = 600;

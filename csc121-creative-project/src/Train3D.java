@@ -23,7 +23,7 @@ public class Train3D {
 	public Train3D(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
-		this.pos = new Vector(0, 685, SSConstants.TRAIN_INITIAL_Z-length/2);
+		this.pos = new Vector(0, SSConstants.TRAIN_Y, SSConstants.TRAIN_INITIAL_Z-length/2);
 
 		this.hasRamp = hasRamp;
 		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, (SSConstants.gameSpd + speed));

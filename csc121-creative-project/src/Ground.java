@@ -34,6 +34,8 @@ class Ground {
 		boards.forEach(board -> board.update());
 		boards.forEach(board -> board.draw(c));
 		
+	
+		
 		return c;
 	}
 
