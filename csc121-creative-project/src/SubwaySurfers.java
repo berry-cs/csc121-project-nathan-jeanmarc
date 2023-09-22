@@ -100,7 +100,16 @@ public class SubwaySurfers {
     
    boolean collision() {
 	   for (int t = 0; t < trains.size(); t++) {
-		   return (trains.get(t).frontZ >= p.pos.z && trains.get(t).rearZ <= p.pos.z && trains.get(t).track == p.currentTrack);
+		   Train3D tr = trains.get(t);
+		   return (tr.frontZ >= p.pos.z && tr.rearZ <= p.pos.z && tr.track == p.currentTrack);
+	   }
+	   
+	   for (int o = 0; 0 < obstacles.size(); o++) {
+		   Obstacle ob = obstacles.get(o);
+		   return (ob.frontZ >= p.pos.z && 
+				   ob.rearZ <= p.pos.z && 
+				   ob.height >= p.bounds.bBound &&
+				   ob.track == p.currentTrack);
 	   }
 	   
 	   return false;

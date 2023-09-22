@@ -8,6 +8,9 @@ class Obstacle {
 	int height = 150;
 	int depth = 60;
 	
+	float rearZ;				   // z for the rear of the obstacle
+	float frontZ;
+	
 	boolean offScreen = false;
 	
 	int track;
@@ -17,12 +20,14 @@ class Obstacle {
 	Obstacle(int track) {
 		this.track = track;
 		calcPos();
-		//this.bounds = new Bounds(pos, width, height);
 	}
 	
 	void update() {
 		pos = pos.newZ(pos.z + SSConstants.gameSpd);
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
+		
+		rearZ = pos.z - depth/2;
+		frontZ = pos.z + depth/2;
 	}
 	
 	void draw(PApplet c) {
