@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import processing.core.PApplet;
 
-class Ground {
+class Environment {
 
 	int width = 12000;
 	int height = 9500; 
@@ -9,14 +9,31 @@ class Ground {
 	Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
 	
 	ArrayList<TrackBoards> boards;
+	ArrayList<Building> buildings;
 	
-	Ground() {
+	Environment() {
 		boards = new ArrayList<TrackBoards>();
 		boards.add(new TrackBoards(SSConstants.BOARD_INITIAL_Z));
 		
 		for (int i = 1; i < 30; i++) {
 			boards.add(new TrackBoards(boards.get(i-1).pos.z+200));
 		} 
+		
+		buildings = new ArrayList<Building>();
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z, 1, false));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 800, 3, false));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 1600, 1, false));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 2400, 2, false));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 3200, 3, false));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 4000, 1, false));
+		
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z, 2, true));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 800, 3, true));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 1600, 2, true));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 2400, 1, true));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 3200, 3, true));
+		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 4000, 2, true));
+
 	}
 
 	PApplet draw(PApplet c) {
@@ -30,6 +47,11 @@ class Ground {
 
 		drawTracks(c);
 		drawSides(c);
+		
+		buildings.forEach(b -> b.draw(c));
+		buildings.forEach(b -> b.update());
+
+		
 		
 		boards.forEach(board -> board.update());
 		boards.forEach(board -> board.draw(c));

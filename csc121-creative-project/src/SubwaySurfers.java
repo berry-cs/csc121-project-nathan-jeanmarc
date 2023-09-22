@@ -13,7 +13,7 @@ import processing.event.KeyEvent;
 public class SubwaySurfers {
 	Player p;
 	
-	Ground g;
+	Environment g;
 	
 	ArrayList<Train3D> trains;
 	
@@ -28,13 +28,13 @@ public class SubwaySurfers {
     	this.p = new Player();
     	this.trains = new ArrayList<Train3D>();
     	this.obstacles = new ArrayList<Obstacle>();
-    	this.g = new Ground();
+    	this.g = new Environment();
     }
     
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(Player p, ArrayList<Train3D> t, Ground g, ArrayList<Obstacle> o) {
+    public SubwaySurfers(Player p, ArrayList<Train3D> t, Environment g, ArrayList<Obstacle> o) {
     	this.p = p;
     	this.trains = t;
     	this.g = g;
