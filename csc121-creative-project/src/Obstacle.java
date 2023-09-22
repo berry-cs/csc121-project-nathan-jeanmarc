@@ -3,10 +3,11 @@ import processing.core.PApplet;
 class Obstacle {
 	
 	Vector pos;
-	Bounds bounds;
 	int width = SSConstants.TRAIN_WIDTH + 60;
 	int height = 150;
 	int depth = 60;
+	
+	Bounds3D bounds;
 	
 	float rearZ;				   // z for the rear of the obstacle
 	float frontZ;
@@ -20,14 +21,17 @@ class Obstacle {
 	Obstacle(int track) {
 		this.track = track;
 		calcPos();
+		
+		this.bounds = new Bounds3D(pos, width, height, depth);
 	}
 	
 	void update() {
 		pos = pos.newZ(pos.z + SSConstants.gameSpd);
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
 		
-		rearZ = pos.z - depth/2;
-		frontZ = pos.z + depth/2;
+		bounds = bounds.update(pos);
+		rearZ = bounds.backZ;
+		frontZ = bounds.frontZ;
 	}
 	
 	void draw(PApplet c) {

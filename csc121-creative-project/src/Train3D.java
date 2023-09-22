@@ -16,6 +16,8 @@ public class Train3D {
 	boolean hasRamp; 			   // whether or not the train has a ramp on the front the player can run up (has
 	// no speed)
 	Vector pos;
+	
+	Bounds3D bounds;
 
 	float rearZ;				   // z for the rear of the train
 	float frontZ;				   // z for the front of the train
@@ -29,6 +31,8 @@ public class Train3D {
 		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, (SSConstants.gameSpd + speed));
 
 		calcTrack();
+		
+		this.bounds = new Bounds3D(pos, width, height, length);
 	}
 
 	/**
@@ -117,9 +121,9 @@ public class Train3D {
 	 */
 	void update() {
 		pos = pos.newZ(pos.z + vel.z);
-		rearZ = pos.z - length/2;
-		frontZ = pos.z + length/2;
-
+		bounds = bounds.update(pos);
+		frontZ = bounds.frontZ;
+		rearZ = bounds.backZ;
 	}
 }
 

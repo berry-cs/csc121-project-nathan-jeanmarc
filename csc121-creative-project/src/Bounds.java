@@ -7,6 +7,7 @@ class Bounds {
 	float lBound;
 	
 	Vector pos;
+	
 	int width;
 	int height;
 	
