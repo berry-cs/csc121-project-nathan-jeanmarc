@@ -106,9 +106,10 @@ public class SubwaySurfers {
 	   
 	   for (int o = 0; 0 < obstacles.size(); o++) {
 		   Obstacle ob = obstacles.get(o);
+		      
 		   return (ob.frontZ >= p.pos.z && 
 				   ob.rearZ <= p.pos.z && 
-				   ob.height >= p.bounds.bBound &&
+				   ob.bounds.top <= p.bounds.bBound &&
 				   ob.track == p.currentTrack);
 	   }
 	   

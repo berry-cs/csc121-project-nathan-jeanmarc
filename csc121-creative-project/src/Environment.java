@@ -20,31 +20,33 @@ class Environment {
 		} 
 		
 		buildings = new ArrayList<Building>();
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z, 1, false));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 800, 3, false));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 1600, 1, false));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 2400, 2, false));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 3200, 3, false));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 4000, 1, false));
+		buildings.add(new Building(Building.spawnPoint, 1, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, false));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, false));
 		
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z, 2, true));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 800, 3, true));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 1600, 2, true));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 2400, 1, true));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 3200, 3, true));
-		buildings.add(new Building(SSConstants.TRAIN_INITIAL_Z + 4000, 2, true));
+		buildings.add(new Building(Building.spawnPoint, 2, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, true));
+		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, true));
 
 	}
 
 	PApplet draw(PApplet c) {
-		c.pushMatrix();
+		c.pushMatrix();			// draws the ground plane
 		c.rotateX(c.PI/2f);
 		c.translate(0, 0, -900);
 		c.fill(0, 80, 0);
-		c.rectMode(3);       // rectangle is placed with (x,y) at center
+		c.rectMode(3);       
 		c.rect(pos.x, pos.y, width, height, 25);
 		c.popMatrix();
-
+		
 		drawTracks(c);
 		drawSides(c);
 		

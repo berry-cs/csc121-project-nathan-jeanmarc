@@ -9,7 +9,7 @@ import processing.core.PApplet;
 public class Train3D {
 	int track;
 
-	int length; // length of the train (in frames)
+	int length; // length of the train
 	int width = SSConstants.TRAIN_WIDTH;
 	int height = SSConstants.TRAIN_HEIGHT;
 	Vector vel;
@@ -67,25 +67,25 @@ public class Train3D {
 
 		c.pushMatrix();					  // draws front bumper
 		c.fill(60);
-		c.translate(0, 70, length/2);
+		c.translate(0, height-185, length/2);
 		c.box(width+10, 60, 50);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws right headlight
 		c.fill(255, 255, 100);
-		c.translate(width/2 - 30, 15, length/2+1);
+		c.translate(width/2 - 30, height-240, length/2+1);
 		c.circle(0, 0, 40);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws left headlight
 		c.fill(255, 255, 100);
-		c.translate(-width/2 + 30, 15, length/2+1);
+		c.translate(-width/2 + 30, height-240, length/2+1);
 		c.circle(0, 0, 40);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws bottom middle headlight
 		c.fill(255, 255, 100);
-		c.translate(0, 12, length/2+1);
+		c.translate(0, height-243, length/2+1);
 		c.circle(0, 0, 25);
 		c.popMatrix();
 

@@ -11,7 +11,7 @@ class Building {
 	boolean onRight;
 	boolean offScreen;
 	
-	int spawnPoint = SSConstants.TRAIN_INITIAL_Z;
+	static int spawnPoint = SSConstants.TRAIN_INITIAL_Z - 1000;
 
 	Vector pos;
 

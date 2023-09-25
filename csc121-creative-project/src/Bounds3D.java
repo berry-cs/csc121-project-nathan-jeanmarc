@@ -19,7 +19,7 @@ class Bounds3D {
 		
 		this.frontZ = pos.z + depth/2;
 		this.backZ = pos.z - depth/2;
-		this.top = pos.y + height;
+		this.top = SSConstants.floorLvl - height;
 	}
 	
 	/* produces an updated version of this Bounds */
