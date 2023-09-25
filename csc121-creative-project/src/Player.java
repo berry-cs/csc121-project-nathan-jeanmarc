@@ -5,29 +5,29 @@ import processing.event.KeyEvent;
 class Player {
 
 	Vector pos;                    // represents the position of the center of the player sprite
+	Vector vel = new Vector(0,0,0);
 	int width = 75;              // width of player sprite (in px)
 	int height = 125;            // height of player sprite (in px)
 	Bounds bounds;
 	
 	//PlayerState state = PlayerState.FALLING;
+//	boolean isJumping = false;   // whether or not the player is jumping
+//	boolean isFalling = false;   // whether or not the player is falling
 	
-	boolean isJumping = false;   // whether or not the player is jumping
-	boolean isFalling = false;   // whether or not the player is falling
 	int floorLvl = SSConstants.floorLvl;
 	
 	boolean hasCollided = false;   // whether or not the player has collided with an obstacle
 	
 	int currentTrack = 2;        // stores which track the player is on (one of 1, 2, 3)
 
-
-	float gravity = SSConstants.minGrav;
+	Vector gravity = new Vector(0, 0.7f, 0);
 	
 	boolean inPos = false;
 
-	float minJumpSpd = 4;
-	float maxJumpSpd = 15;
-	float jumpSpd = maxJumpSpd;
-	float jumpHeight = 220;
+//	float minJumpSpd = 4;
+//	float maxJumpSpd = 15;
+//	float jumpSpd = maxJumpSpd;
+//	float jumpHeight = 220;
 
 	public Player() {
 		// sets the pos to the Posn given in the constructor
@@ -44,8 +44,8 @@ class Player {
 	/* updates this player */
 	void update() {
 		bounds = bounds.update(pos);
+		pos = pos.translate(vel);
 		gravity();
-		jump();
 	}
 
 	/* renders the player as a red square in the correct lane */
@@ -65,10 +65,10 @@ class Player {
 		}
 		
 
-		// if the player is somehow below floorLvl fixes it
-		if (bounds.bBound > floorLvl) {
-			pos = pos.newY(floorLvl - (height / 2));
-		}
+//		// if the player is somehow below floorLvl fixes it
+//		if (bounds.bBound > floorLvl) {
+//			pos = pos.newY(floorLvl - (height / 2));
+//		}
 
 		// renders the player
 		c.pushMatrix();
@@ -91,7 +91,7 @@ class Player {
 				currentTrack += 1;
 			}
 		} else if (kev.getKey() == 'w' || kev.getKey() == 'W') {
-			isJumping = true;
+			jump();
 		}
 	}
 
@@ -100,15 +100,21 @@ class Player {
 	 * floor level, applies the gravity
 	 */
 	void gravity() {
-		if (!isJumping && isFalling && bounds.bBound < floorLvl) {
-			pos = pos.newY(pos.y + gravity);
-			if (gravity < SSConstants.maxGrav) {
-				gravity += 0.5;
-			}
-		} else if (bounds.bBound >= floorLvl) {
-			isFalling = false;
-			gravity = SSConstants.minGrav;
+		/*
+		 * if (!isJumping && isFalling && bounds.bBound < floorLvl) { pos =
+		 * pos.newY(pos.y + gravity); if (gravity < SSConstants.maxGrav) { gravity +=
+		 * 0.5; } } else if (bounds.bBound >= floorLvl) { isFalling = false; gravity =
+		 * SSConstants.minGrav; }
+		 */
+		
+		if (bounds.bBound < SSConstants.floorLvl) {
+			vel = vel.translate(gravity);
+		} else if (bounds.bBound > SSConstants.floorLvl) {
+			vel = new Vector(0,0,0);
+			pos = new Vector(0, SSConstants.floorLvl - height/2, SSConstants.PLAYER_Z);
 		}
+		
+		System.out.println("vel: " + vel.toString());
 	}
 
 	/*
@@ -116,15 +122,20 @@ class Player {
 	 * jump height relative to the floor, causes the player to jump
 	 */
 	void jump() {
-		if (!isFalling && isJumping && bounds.bBound > (floorLvl - jumpHeight)) {
-			pos = pos.newY(pos.y - jumpSpd);
-			if (jumpSpd > minJumpSpd) {
-				jumpSpd -= 0.1;
-			}
-		} else {
-			isJumping = false;
-			isFalling = true;
-			jumpSpd = maxJumpSpd;
+//		if (!isFalling && isJumping && bounds.bBound > (floorLvl - jumpHeight)) {
+//			pos = pos.newY(pos.y - jumpSpd);
+//			if (jumpSpd > minJumpSpd) {
+//				jumpSpd -= 0.1;
+//			}
+//		} else {
+//			isJumping = false;
+//			isFalling = true;
+//			jumpSpd = maxJumpSpd;
+//		}
+		System.out.println("cuh");
+		if (bounds.bBound >= SSConstants.floorLvl) {
+			vel = new Vector(0, -10, 0);
+			System.out.println("vel: " + vel.toString());
 		}
 	}
 
