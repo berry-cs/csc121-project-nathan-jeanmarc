@@ -27,7 +27,7 @@ class Player {
 	float minJumpSpd = 4;
 	float maxJumpSpd = 15;
 	float jumpSpd = maxJumpSpd;
-	float jumpHeight = 300;
+	float jumpHeight = 220;
 
 	public Player() {
 		// sets the pos to the Posn given in the constructor
