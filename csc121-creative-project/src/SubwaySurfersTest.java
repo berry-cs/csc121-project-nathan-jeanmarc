@@ -2,8 +2,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class SubwaySurfersTest {
+	
+	// Obstacle Tests
+	
+	Obstacle o1 = new Obstacle(1);
+	Obstacle o2 = new Obstacle(2);
+	Obstacle o3 = new Obstacle(3);
+	
+	
+	
 
 	// Bounds3D Tests
+	
 	Bounds3D b3d1 = new Bounds3D(new Vector(0, 0, 0), 100, 200, 400);
 	Bounds3D b3d2 = new Bounds3D(new Vector(-40, 60, 100), 400, 500, 20);
 	
