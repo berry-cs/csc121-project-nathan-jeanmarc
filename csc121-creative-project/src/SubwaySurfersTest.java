@@ -4,6 +4,17 @@ import org.junit.jupiter.api.Test;
 class SubwaySurfersTest {
 
 	// Bounds3D Tests
+	Bounds3D b3d1 = new Bounds3D(new Vector(0, 0, 0), 100, 200, 400);
+	Bounds3D b3d2 = new Bounds3D(new Vector(-40, 60, 100), 400, 500, 20);
+	
+	@Test
+	void testB3DUpdate() {
+		assertEquals(new Bounds3D(new Vector(100, 200, 300), 100, 200, 400), b3d1.update(new Vector(100, 200, 300)));
+		assertEquals(new Bounds3D(new Vector(10, 300, 0), 400, 500, 20), b3d2.update(new Vector(10, 300, 0)));
+		
+		assertEquals(new Bounds3D(new Vector(100, 200, 300), 10, 20, 30), b3d1.update(new Vector(100, 200, 300), 10, 20, 30));
+		assertEquals(new Bounds3D(new Vector(10, 300, 0), 20, 200, 4000), b3d2.update(new Vector(10, 300, 0), 20, 200, 4000));
+	}
 	
 	// Bounds Tests
 	
