@@ -3,6 +3,22 @@ import org.junit.jupiter.api.Test;
 
 class SubwaySurfersTest {
 
+	// Bounds3D Tests
+	
+	// Bounds Tests
+	
+	Bounds b1 = new Bounds(new Vector(0, 0, 0), 100, 200);
+	Bounds b2 = new Bounds(new Vector(-40, 60, 100), 400, 500);
+	
+	@Test
+	void testUpdate() {
+		assertEquals(new Bounds(new Vector(100, 200, 300), 100, 200), b1.update(new Vector(100, 200, 300)));
+		assertEquals(new Bounds(new Vector(10, 300, 0), 400, 500), b2.update(new Vector(10, 300, 0)));
+		
+		assertEquals(new Bounds(new Vector(100, 200, 300), 150, 400), b1.update(new Vector(100, 200, 300), 150, 400));
+		assertEquals(new Bounds(new Vector(100, 200, 300), 10, 20), b2.update(new Vector(100, 200, 300), 10, 20));
+	}
+	
 	// Vector Tests
 
 	Vector v1 = new Vector(10, 20 ,40);

@@ -1,4 +1,7 @@
 /* represents the bounds of an entity that is represented as a square drawn from its center point */
+
+import java.util.Objects;
+
 class Bounds {
 	
 	float tBound;
@@ -31,4 +34,24 @@ class Bounds {
 	Bounds update(Vector p, int width, int height) {
 		return new Bounds(p, width, height);
 	}
+
+	public int hashCode() {
+		return Objects.hash(bBound, height, lBound, pos, rBound, tBound, width);
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Bounds other = (Bounds) obj;
+		return Float.floatToIntBits(bBound) == Float.floatToIntBits(other.bBound) && height == other.height
+				&& Float.floatToIntBits(lBound) == Float.floatToIntBits(other.lBound) && Objects.equals(pos, other.pos)
+				&& Float.floatToIntBits(rBound) == Float.floatToIntBits(other.rBound)
+				&& Float.floatToIntBits(tBound) == Float.floatToIntBits(other.tBound) && width == other.width;
+	}
+	
+	
 }
