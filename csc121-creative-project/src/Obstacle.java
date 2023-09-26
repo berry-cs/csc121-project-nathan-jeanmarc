@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import processing.core.PApplet;
 
 class Obstacle {
@@ -37,7 +39,7 @@ class Obstacle {
 	void draw(PApplet c) {
 		c.pushMatrix();
 		c.fill(70);
-		c.translate(pos.x, SSConstants.ENVIRONMENT_Y-30, pos.z);
+		c.translate(pos.x, pos.y, pos.z);
 		c.box(width, 20, depth); // draws the base
 		
 		c.pushMatrix();
@@ -90,7 +92,7 @@ class Obstacle {
 	
 	void calcPos() {
 		
-		pos = new Vector(0, SSConstants.TRAIN_Y, SSConstants.TRAIN_INITIAL_Z);
+		pos = new Vector(0, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z);
 		
 		switch(track) {
 		case 1:
@@ -104,6 +106,28 @@ class Obstacle {
 			break;
 		}
 	}
+
+	public int hashCode() {
+		return Objects.hash(bounds, depth, frontZ, gameSpd, height, offScreen, pos, rearZ, track, width);
+	}
+
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Obstacle other = (Obstacle) obj;
+		return Objects.equals(bounds, other.bounds) && depth == other.depth
+				&& Float.floatToIntBits(frontZ) == Float.floatToIntBits(other.frontZ)
+				&& Float.floatToIntBits(gameSpd) == Float.floatToIntBits(other.gameSpd) && height == other.height
+				&& offScreen == other.offScreen && Objects.equals(pos, other.pos)
+				&& Float.floatToIntBits(rearZ) == Float.floatToIntBits(other.rearZ) && track == other.track
+				&& width == other.width;
+	}
+	
+	
 	
 	
 

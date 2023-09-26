@@ -9,7 +9,26 @@ class SubwaySurfersTest {
 	Obstacle o2 = new Obstacle(2);
 	Obstacle o3 = new Obstacle(3);
 	
-	
+	@Test
+	void testObUpdate() {
+		assertEquals(new Vector(SSConstants.TRACK_1, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+				o1.pos);
+		o1.update();
+		assertEquals(new Vector(SSConstants.TRACK_1, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+				o1.pos);
+		
+		assertEquals(new Vector(SSConstants.TRACK_2, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+				o2.pos);
+		o2.update();
+		assertEquals(new Vector(SSConstants.TRACK_2, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+				o2.pos);
+		
+		assertEquals(new Vector(SSConstants.TRACK_3, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+				o3.pos);
+		o3.update();
+		assertEquals(new Vector(SSConstants.TRACK_3, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+				o3.pos);
+	}
 	
 
 	// Bounds3D Tests
