@@ -100,12 +100,6 @@ class Player {
 	 * floor level, applies the gravity
 	 */
 	void gravity() {
-		/*
-		 * if (!isJumping && isFalling && bounds.bBound < floorLvl) { pos =
-		 * pos.newY(pos.y + gravity); if (gravity < SSConstants.maxGrav) { gravity +=
-		 * 0.5; } } else if (bounds.bBound >= floorLvl) { isFalling = false; gravity =
-		 * SSConstants.minGrav; }
-		 */
 		
 		if (bounds.bBound < SSConstants.floorLvl) {
 			vel = vel.translate(gravity);
@@ -114,28 +108,15 @@ class Player {
 			pos = new Vector(0, SSConstants.floorLvl - height/2, SSConstants.PLAYER_Z);
 		}
 		
-		System.out.println("vel: " + vel.toString());
+		//System.out.println("vel: " + vel.toString());
 	}
 
-	/*
-	 * when the player is not falling, isJumping and the bottom bound is below the
-	 * jump height relative to the floor, causes the player to jump
-	 */
+
 	void jump() {
-//		if (!isFalling && isJumping && bounds.bBound > (floorLvl - jumpHeight)) {
-//			pos = pos.newY(pos.y - jumpSpd);
-//			if (jumpSpd > minJumpSpd) {
-//				jumpSpd -= 0.1;
-//			}
-//		} else {
-//			isJumping = false;
-//			isFalling = true;
-//			jumpSpd = maxJumpSpd;
-//		}
-		System.out.println("cuh");
+
 		if (bounds.bBound >= SSConstants.floorLvl) {
-			vel = new Vector(0, -10, 0);
-			System.out.println("vel: " + vel.toString());
+			vel = new Vector(0, -16, 0);
+			//System.out.println("vel: " + vel.toString());
 		}
 	}
 
