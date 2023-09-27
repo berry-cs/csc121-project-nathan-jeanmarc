@@ -22,8 +22,7 @@ class Obstacle {
 	
 	Obstacle(int track) {
 		this.track = track;
-		calcPos();
-		
+		pos = new Vector(SSConstants.tracks[track - 1].getxPos(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z);
 		this.bounds = new Bounds3D(pos, width, height, depth);
 	}
 	
@@ -90,24 +89,6 @@ class Obstacle {
 		c.popMatrix();
 	}
 	
-	void calcPos() {
-		
-		pos = new Vector(0, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z);
-		
-		/*(switch(track) {
-		case 1:
-			pos = pos.newX(SSConstants.TRACK_1);
-			break;
-		case 2:
-			pos = pos.newX(SSConstants.TRACK_2);
-			break;
-		case 3:
-			pos = pos.newX(SSConstants.TRACK_3);
-			break;
-		}*/
-		pos = pos.newX(SSConstants.tracks[track - 1].getxPos());
-	}
-
 	public int hashCode() {
 		return Objects.hash(bounds, depth, frontZ, gameSpd, height, offScreen, pos, rearZ, track, width);
 	}
