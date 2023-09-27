@@ -17,7 +17,7 @@ public class SubwaySurfers {
 	
 	Environment g;
 	
-	ArrayList<Train3D> trains;
+	ArrayList<Train> trains;
 	
 	ArrayList<Obstacle> obstacles;
 	
@@ -28,7 +28,7 @@ public class SubwaySurfers {
 	 */
     public SubwaySurfers() {
     	this.p = new Player();
-    	this.trains = new ArrayList<Train3D>();
+    	this.trains = new ArrayList<Train>();
     	this.obstacles = new ArrayList<Obstacle>();
     	this.g = new Environment();
     }
@@ -36,7 +36,7 @@ public class SubwaySurfers {
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(Player p, ArrayList<Train3D> t, Environment g, ArrayList<Obstacle> o) {
+    public SubwaySurfers(Player p, ArrayList<Train> t, Environment g, ArrayList<Obstacle> o) {
     	this.p = p;
     	this.trains = t;
     	this.g = g;
@@ -83,11 +83,11 @@ public class SubwaySurfers {
     	p.move(kev);
     	
     		if (kev.getKey() == '1') {
-    			trains.add( new Train3D(2000, 1, 10, false));
+    			trains.add( new Train(2000, 1, 10, false));
     		} else if (kev.getKey() == '2') {
-    			trains.add( new Train3D(600, 2, 10, false));
+    			trains.add( new Train(600, 2, 10, false));
     		} else if (kev.getKey() == '3') {
-    			trains.add( new Train3D(700, 3, 25, false));
+    			trains.add( new Train(700, 3, 25, false));
     		} else if (kev.getKey() == '4') {
     			obstacles.add(new Obstacle(1));
     		} else if (kev.getKey() == '5') {
@@ -102,7 +102,7 @@ public class SubwaySurfers {
     
    boolean collision() {
 	   for (int t = 0; t < trains.size(); t++) {
-		   Train3D tr = trains.get(t);
+		   Train tr = trains.get(t);
 		   return (tr.frontZ >= p.pos.z && tr.rearZ <= p.pos.z && tr.track == p.currentTrack);
 	   }
 	   

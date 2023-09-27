@@ -6,7 +6,7 @@ import processing.core.PApplet;
  * A Train is made up of a list of TrainSprites (frames) that are rendered
  * behind each other
  */
-public class Train3D {
+public class Train {
 	int track;
 
 	int length; // length of the train
@@ -22,7 +22,7 @@ public class Train3D {
 	float rearZ;				   // z for the rear of the train
 	float frontZ;				   // z for the front of the train
 
-	public Train3D(int length, int track, float speed, boolean hasRamp) {
+	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
 		this.pos = new Vector(SSConstants.tracks[track - 1].getxPos(), SSConstants.TRAIN_Y, SSConstants.TRAIN_INITIAL_Z-length/2);

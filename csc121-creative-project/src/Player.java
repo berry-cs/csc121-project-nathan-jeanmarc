@@ -75,7 +75,7 @@ class Player {
 			vel = vel.translate(gravity);
 		} else if (bounds.bBound > SSConstants.floorLvl) {
 			vel = new Vector(0, 0, 0);
-			pos = new Vector(0, SSConstants.floorLvl - height / 2, SSConstants.PLAYER_Z);
+			pos = new Vector(pos.x, SSConstants.floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
 	}
 
