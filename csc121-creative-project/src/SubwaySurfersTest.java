@@ -5,13 +5,61 @@ import processing.event.*;
 
 class SubwaySurfersTest {
 	
+	// Player Tests
+	
+	Player p = new Player();
+	
+	KeyEvent a = new KeyEvent(null, 0, 0, 0, 'a', java.awt.event.KeyEvent.VK_A);
+	KeyEvent d = new KeyEvent(null, 0, 0, 0, 'd', java.awt.event.KeyEvent.VK_D);
+	KeyEvent w = new KeyEvent(null, 0, 0, 0, 'w', java.awt.event.KeyEvent.VK_W);
+	
+	@Test
+	void testMove() {
+		assertEquals(SSConstants.tracks[1].getxPos(), p.pos.x);
+		p.move(a);
+		p.update();
+		assertEquals(SSConstants.tracks[0].getxPos(), p.pos.x);
+		p.move(d);
+		p.update();
+		assertEquals(SSConstants.tracks[1].getxPos(), p.pos.x);
+		p.move(d);
+		p.update();
+		assertEquals(SSConstants.tracks[2].getxPos(), p.pos.x);
+		p.move(a);
+		p.update();
+		assertEquals(SSConstants.tracks[1].getxPos(), p.pos.x);
+
+	}
+	
+	@Test
+	void testGravity() {
+		assertEquals(new Player().vel, p.vel);
+		p.jump();
+		assertEquals(new Vector(0, -16, 0), p.vel);
+		p.update(); // updates twice to make sure player is "in the air"
+		p.update();
+		assertEquals(new Vector(0, -16, 0).translate(p.gravity), p.vel);
+	}
+	
+	@Test 
+	void testJump() {
+		assertEquals(new Player().vel, p.vel);
+		p.jump();
+		assertEquals(new Vector(0, -16, 0), p.vel);
+	}
+	
+	@Test // since the player has not been moved updating it should be the same as doing nothing to it
+	void testPlUpdate() {
+		p.update();
+		assertEquals(new Player(), p);
+	}
+
+	
 	// Obstacle Tests
 	
 	Obstacle o1 = new Obstacle(1);
 	Obstacle o2 = new Obstacle(2);
 	Obstacle o3 = new Obstacle(3);
-	
-	KeyEvent k = new KeyEvent(null, 0, 0, 0, 'k', java.awt.event.KeyEvent.VK_K);
 	
 	@Test
 	void testObUpdate() {

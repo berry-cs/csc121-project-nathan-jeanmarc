@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -6,11 +8,13 @@ class Player {
 
 	Vector pos; // represents the position of the center of the player sprite
 	Vector vel = new Vector(0, 0, 0);
+	
 	int width = 75; // width of player sprite (in px)
 	int height = 125; // height of player sprite (in px)
+	
 	Bounds bounds;
 
-	int floorLvl = SSConstants.floorLvl;
+	int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
 	boolean hasCollided = false; // whether or not the player has collided with an obstacle
 
@@ -34,14 +38,12 @@ class Player {
 	void update() {
 		bounds = bounds.update(pos);
 		pos = pos.translate(vel);
+		pos = pos.newX(SSConstants.tracks[currentTrack - 1].getxPos());
 		gravity();
 	}
 
 	/* renders the player as a red square in the correct lane */
 	PApplet draw(PApplet c) {
-
-		pos = pos.newX(SSConstants.tracks[currentTrack - 1].getxPos());
-
 		// renders the player
 		c.pushMatrix();
 		c.translate(0, 0, pos.z);
@@ -67,10 +69,6 @@ class Player {
 		}
 	}
 
-	/*
-	 * when the player isFalling, not jumping, and the bottom bound is above the
-	 * floor level, applies the gravity
-	 */
 	void gravity() {
 
 		if (bounds.bBound < SSConstants.floorLvl) {
@@ -86,6 +84,26 @@ class Player {
 		if (bounds.bBound >= SSConstants.floorLvl) {
 			vel = new Vector(0, -16, 0);
 		}
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bounds, currentTrack, floorLvl, gravity, hasCollided, height, inPos, pos, vel, width);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Player other = (Player) obj;
+		return Objects.equals(bounds, other.bounds) && currentTrack == other.currentTrack && floorLvl == other.floorLvl
+				&& Objects.equals(gravity, other.gravity) && hasCollided == other.hasCollided && height == other.height
+				&& inPos == other.inPos && Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel)
+				&& width == other.width;
 	}
 
 }
