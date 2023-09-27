@@ -52,7 +52,7 @@ class Player {
 	PApplet draw(PApplet c) {
 
 		// sets x based on the current track
-		switch (currentTrack) {
+		/*switch (currentTrack) {
 		case 1:
 			pos = pos.newX(SSConstants.TRACK_1);
 			break;
@@ -62,7 +62,8 @@ class Player {
 		case 3:
 			pos = pos.newX(SSConstants.TRACK_3);
 			break;
-		}
+		}*/
+	    pos = pos.newX(SSConstants.tracks[currentTrack - 1].getxPos());
 		
 
 //		// if the player is somehow below floorLvl fixes it

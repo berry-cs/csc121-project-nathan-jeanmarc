@@ -94,7 +94,7 @@ class Obstacle {
 		
 		pos = new Vector(0, SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z);
 		
-		switch(track) {
+		/*(switch(track) {
 		case 1:
 			pos = pos.newX(SSConstants.TRACK_1);
 			break;
@@ -104,7 +104,8 @@ class Obstacle {
 		case 3:
 			pos = pos.newX(SSConstants.TRACK_3);
 			break;
-		}
+		}*/
+		pos = pos.newX(SSConstants.tracks[track - 1].getxPos());
 	}
 
 	public int hashCode() {

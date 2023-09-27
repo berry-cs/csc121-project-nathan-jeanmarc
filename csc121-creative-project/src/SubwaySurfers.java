@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 import processing.core.PApplet;
 import processing.event.KeyEvent;
@@ -11,6 +12,7 @@ import processing.event.KeyEvent;
  * location of the click;
  */
 public class SubwaySurfers {
+    
 	Player p;
 	
 	Environment g;

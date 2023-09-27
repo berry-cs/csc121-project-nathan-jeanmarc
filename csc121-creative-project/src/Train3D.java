@@ -40,19 +40,7 @@ public class Train3D {
 	 * based on which track it is on
 	 */
 	void calcTrack() {
-
-		switch (track) {
-		case 1:
-			pos = pos.newX(SSConstants.TRACK_1);
-			break;
-		case 2:
-			pos = pos.newX(SSConstants.TRACK_2);
-			break;
-		case 3:
-			pos = pos.newX(SSConstants.TRACK_3);
-			break;
-		}
-
+		pos = pos.newX(SSConstants.tracks[track - 1].getxPos());
 	}
 
 	/**

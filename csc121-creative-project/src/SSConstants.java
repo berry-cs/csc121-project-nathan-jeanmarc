@@ -1,7 +1,10 @@
+import java.util.Random;
 
 /**
  * Stores constants related to Subway Surfers
  */
+
+
 public class SSConstants {
 	public static final int WIDTH = 1200;
 	public static final int HEIGHT = 800;
@@ -19,9 +22,12 @@ public class SSConstants {
 	public static final int TRAIN_INITIAL_Z = -3000;
 	public static final int TRAIN_Y = 685;
 	
-	public static final int TRACK_1 = 100;
+	/*public static final int TRACK_1 = 100;
 	public static final int TRACK_2 = 600;
-	public static final int TRACK_3 = 1100;
+	public static final int TRACK_3 = 1100;*/
+	
+	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };
+	
 	
 	public static final int ENVIRONMENT_Y = 820;
 	public static final int BOARD_INITIAL_Z = -3500;
@@ -30,5 +36,6 @@ public class SSConstants {
 	public static final int DELETE_POINT = CAMERA_Z - 300;
 	
 	
-	
+    public static final Random rgen = new Random();
+
 }
