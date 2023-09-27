@@ -5,6 +5,26 @@ import processing.event.*;
 
 class SubwaySurfersTest {
 	
+	// TrackBoards Tests
+	
+	TrackBoards tb1 = new TrackBoards(SSConstants.BOARD_INITIAL_Z);
+	TrackBoards tb2 = new TrackBoards(SSConstants.DELETE_POINT-SSConstants.gameSpd);
+	
+	@Test // tests every testable method
+	void testTrackBoards() {
+		tb1.update();
+		assertEquals(SSConstants.BOARD_INITIAL_Z+SSConstants.gameSpd, tb1.pos.z);
+		assertFalse(tb1.offScreen);
+
+		assertFalse(tb2.offScreen);
+		assertEquals(SSConstants.DELETE_POINT-SSConstants.gameSpd, tb2.pos.z);
+		tb2.update(); // pushes the board past the delete point
+		assertTrue(tb2.offScreen);
+		tb2.reset();
+		assertEquals(SSConstants.BOARD_INITIAL_Z, tb2.pos.z);
+		
+	}
+	
 	// Train Tests
 	
 	Train t = new Train(100, 2, 10, false);
@@ -60,7 +80,7 @@ class SubwaySurfersTest {
 	}
 	
 	@Test // since the player has not been moved updating it should be the same as doing nothing to it
-	void testPlUpdate() {
+	void testPlayerUpdate() {
 		p.update();
 		assertEquals(new Player(), p);
 	}
@@ -73,7 +93,7 @@ class SubwaySurfersTest {
 	Obstacle o3 = new Obstacle(3);
 	
 	@Test
-	void testObUpdate() {
+	void testObstacleUpdate() {
 		assertEquals(new Vector(SSConstants.tracks[0].getxPos(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
 				o1.pos);
 		o1.update();
@@ -100,7 +120,7 @@ class SubwaySurfersTest {
 	Bounds3D b3d2 = new Bounds3D(new Vector(-40, 60, 100), 400, 500, 20);
 	
 	@Test
-	void testB3DUpdate() {
+	void testBounds3DUpdate() {
 		assertEquals(new Bounds3D(new Vector(100, 200, 300), 100, 200, 400), b3d1.update(new Vector(100, 200, 300)));
 		assertEquals(new Bounds3D(new Vector(10, 300, 0), 400, 500, 20), b3d2.update(new Vector(10, 300, 0)));
 		
@@ -114,7 +134,7 @@ class SubwaySurfersTest {
 	Bounds b2 = new Bounds(new Vector(-40, 60, 100), 400, 500);
 	
 	@Test
-	void testUpdate() {
+	void testBoundsUpdate() {
 		assertEquals(new Bounds(new Vector(100, 200, 300), 100, 200), b1.update(new Vector(100, 200, 300)));
 		assertEquals(new Bounds(new Vector(10, 300, 0), 400, 500), b2.update(new Vector(10, 300, 0)));
 		

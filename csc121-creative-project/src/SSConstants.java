@@ -22,10 +22,7 @@ public class SSConstants {
 	public static final int TRAIN_INITIAL_Z = -3000;
 	public static final int TRAIN_Y = 685;
 	
-	/*public static final int TRACK_1 = 100;
-	public static final int TRACK_2 = 600;
-	public static final int TRACK_3 = 1100;*/
-	
+
 	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };
 	
 	

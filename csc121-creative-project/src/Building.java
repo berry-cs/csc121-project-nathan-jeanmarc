@@ -30,12 +30,16 @@ class Building {
 		c.popMatrix();
 	}
 	
+	/** updates the building position and offScreen boolean, 
+	 * if it is offscreen then sets the building back at the beginning with a random height */
 	void update() {
 		pos = pos.newZ(pos.z + SSConstants.gameSpd);
 		
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
 		
 		if (offScreen) {
+			size = SSConstants.rgen.nextInt(3);
+			choosePos();
 			pos = pos.newZ(spawnPoint);
 		}
 	}
@@ -44,15 +48,15 @@ class Building {
 		pos = new Vector(0, 0, 0);
 
 		switch(size) {
-		case 1:
+		case 0:
 			height = 850;
 			pos = pos.newY(425);
 			break;
-		case 2:
+		case 1:
 			height = 1050;
 			pos = pos.newY(325);
 			break;
-		case 3:
+		case 2:
 			height = 1200;
 			pos = pos.newY(250);
 			break;

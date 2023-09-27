@@ -12,6 +12,8 @@ class Environment {
 	ArrayList<Building> buildings;
 	
 	Environment() {
+		
+		// adds the TrackBoards
 		boards = new ArrayList<TrackBoards>();
 		boards.add(new TrackBoards(SSConstants.BOARD_INITIAL_Z));
 		
@@ -19,23 +21,17 @@ class Environment {
 			boards.add(new TrackBoards(boards.get(i-1).pos.z+200));
 		} 
 		
+		// adds the buildings
 		buildings = new ArrayList<Building>();
 		buildings.add(new Building(Building.spawnPoint, 1, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, false));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, false));
-		
+		for (int i = 0; i < 6; i++) {
+			buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, SSConstants.rgen.nextInt(3), false));
+		}
 		buildings.add(new Building(Building.spawnPoint, 2, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 3, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 2, true));
-		buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, 1, true));
-
+		for (int i = 0; i < 6; i++) {
+			buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, SSConstants.rgen.nextInt(3), true));
+		}
+		
 	}
 
 	PApplet draw(PApplet c) {
