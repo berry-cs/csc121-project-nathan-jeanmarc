@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 import processing.core.PApplet;
 
 /**
@@ -92,10 +94,7 @@ public class Train {
 	}
 
 	/**
-	 * Adds a new train frame if the train length has not been reached yet
-	 * 
-	 * Updates the position of this train by shifting each frame based on the
-	 * train's speed and track
+	 * Updates the position of the train by adding the velocity, also updates the bounds
 	 */
 	void update() {
 		pos = pos.newZ(pos.z + vel.z);
@@ -103,5 +102,28 @@ public class Train {
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(bounds, frontZ, hasRamp, height, length, pos, rearZ, track, vel, width);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Train other = (Train) obj;
+		return Objects.equals(bounds, other.bounds)
+				&& Float.floatToIntBits(frontZ) == Float.floatToIntBits(other.frontZ) && hasRamp == other.hasRamp
+				&& height == other.height && length == other.length && Objects.equals(pos, other.pos)
+				&& Float.floatToIntBits(rearZ) == Float.floatToIntBits(other.rearZ) && track == other.track
+				&& Objects.equals(vel, other.vel) && width == other.width;
+	}
+	
+	
 }
 

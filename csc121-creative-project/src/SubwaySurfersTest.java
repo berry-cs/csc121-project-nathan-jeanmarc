@@ -5,6 +5,17 @@ import processing.event.*;
 
 class SubwaySurfersTest {
 	
+	// Train Tests
+	
+	Train t = new Train(100, 2, 10, false);
+	
+	@Test
+	void testTrainUpdate() {
+		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2 ,t.pos.z);
+		t.update();
+		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2+t.vel.z, t.pos.z);
+	}
+	
 	// Player Tests
 	
 	Player p = new Player();
