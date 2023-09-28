@@ -1,3 +1,4 @@
+import java.util.Objects;
 
 public class Track {
     int xPos;
@@ -12,4 +13,22 @@ public class Track {
     public int getX() {
         return xPos;
     }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(xPos);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Track other = (Track) obj;
+		return xPos == other.xPos;
+	}
 }
+

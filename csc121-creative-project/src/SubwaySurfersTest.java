@@ -46,19 +46,19 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testMove() {
-		assertEquals(SSConstants.tracks[1].getX(), p.pos.x);
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[0].getX(), p.pos.x);
+		assertEquals(SSConstants.tracks[0].getX(), SSConstants.tracks[p.currentTrack-1].getX());
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), p.pos.x);
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[2].getX(), p.pos.x);
+		assertEquals(SSConstants.tracks[2].getX(), SSConstants.tracks[p.currentTrack-1].getX());
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), p.pos.x);
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
 
 	}
 	

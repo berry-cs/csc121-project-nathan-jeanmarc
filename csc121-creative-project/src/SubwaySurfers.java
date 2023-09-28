@@ -78,9 +78,9 @@ public class SubwaySurfers {
     	ph.move(kev);
     	
 		if (kev.getKey() == '1') {
-			trains.add(new Train(2000, 1, 10, false));
+			trains.add(new Train(2000, 1, 10, true));
 		} else if (kev.getKey() == '2') {
-			trains.add(new Train(600, 2, 10, false));
+			trains.add(new Train(600, 2, 10, true));
 		} else if (kev.getKey() == '3') {
 			trains.add(new Train(700, 3, 25, false));
 		} else if (kev.getKey() == '4') {
@@ -97,7 +97,10 @@ public class SubwaySurfers {
    boolean collision() {
 	   for (int t = 0; t < trains.size(); t++) {
 		   Train tr = trains.get(t);
-		   return (tr.frontZ >= ph.pos.z && tr.rearZ <= ph.pos.z && tr.track == ph.currentTrack);
+		   return (tr.frontZ >= ph.pos.z && 
+				   tr.rearZ <= ph.pos.z && 
+				   ph.bounds.bBound > tr.bounds.top &&
+				   tr.track == ph.currentTrack);
 	   }
 	   
 	   for (int o = 0; 0 < obstacles.size(); o++) {
