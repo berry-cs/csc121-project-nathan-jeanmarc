@@ -27,7 +27,7 @@ public class Train {
 	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
-		this.pos = new Vector(SSConstants.tracks[track - 1].getxPos(), SSConstants.TRAIN_Y, SSConstants.TRAIN_INITIAL_Z-length/2);
+		this.pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.TRAIN_Y, SSConstants.TRAIN_INITIAL_Z-length/2);
 
 		this.hasRamp = hasRamp;
 		this.vel = hasRamp ? new Vector(0, 0, SSConstants.gameSpd) : new Vector(0, 0, (SSConstants.gameSpd + speed));

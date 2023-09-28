@@ -1,4 +1,6 @@
 import java.util.Objects;
+
+import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 /* represents a player's hitbox in Subway Surfers */
@@ -7,24 +9,33 @@ class PlayerHitbox extends PlayerComponent {
 
 	public PlayerHitbox() {
 		super();
-		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getxPos(), SSConstants.floorLvl - height / 2,
+		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
 
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
-
 	}
 
 	/* updates this player */
 	public void update() {
 		bounds = bounds.update(pos);
 		pos = pos.translate(vel);
-		pos = pos.newX(SSConstants.tracks[currentTrack - 1].getxPos());
+		pos = pos.newX(SSConstants.tracks[currentTrack - 1].getX());
 		gravity();
+	}
+	
+	PApplet draw(PApplet c) {
+		c.pushMatrix();
+		c.translate(0, 0, pos.z);
+		c.fill(255, 0, 80);
+		c.rectMode(3); // rectangle is placed with (x,y) at center
+		c.rect(pos.x, pos.y, width, height, 25);
+		c.popMatrix();
+		return c;
 	}
 
 	/* moves the player */
-	void move(KeyEvent kev) {
+	public void move(KeyEvent kev) {
 		if (kev.getKey() == 'a' || kev.getKey() == 'A') {
 			if (currentTrack > 1) {
 				currentTrack -= 1;

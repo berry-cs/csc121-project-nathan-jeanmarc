@@ -1,3 +1,4 @@
+import processing.event.KeyEvent;
 
 public abstract class PlayerComponent {
 	int currentTrack = 2; // stores which track the player is on (one of 1, 2, 3)
@@ -41,6 +42,21 @@ public abstract class PlayerComponent {
 		} else if (bounds.bBound > SSConstants.floorLvl) {
 			vel = new Vector(0, 0, 0);
 			pos = new Vector(pos.x, SSConstants.floorLvl - height / 2, SSConstants.PLAYER_Z);
+		}
+	}
+	
+	/* moves the player */
+	public void move(KeyEvent kev) {
+		if (kev.getKey() == 'a' || kev.getKey() == 'A') {
+			if (currentTrack > 1) {
+				currentTrack -= 1;
+			}
+		} else if (kev.getKey() == 'd' || kev.getKey() == 'D') {
+			if (currentTrack < 3) {
+				currentTrack += 1;
+			}
+		} else if (kev.getKey() == 'w' || kev.getKey() == 'W') {
+			jump();
 		}
 	}
 }

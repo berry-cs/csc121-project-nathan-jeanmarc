@@ -27,7 +27,13 @@ public class PlayerSprite extends PlayerComponent {
 	public void update() {
 		bounds = bounds.update(pos);
 		pos = pos.translate(vel);
-		pos = pos.newX(SSConstants.tracks[currentTrack - 1].getxPos());
+		
+		if (pos.x < SSConstants.tracks[currentTrack - 1].getX() - 40) {
+			pos = pos.translate(new Vector(40, 0, 0));
+		} else if (pos.x > SSConstants.tracks[currentTrack-1].getX() + 40) {
+			pos = pos.translate(new Vector(-40, 0, 0));
+		} else pos = pos.newX(SSConstants.tracks[currentTrack-1].getX());
+		
 		gravity();
 	}
 }

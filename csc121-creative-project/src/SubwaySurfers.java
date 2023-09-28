@@ -4,13 +4,6 @@ import java.util.Random;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
-
-/**
- * Represents an interactive application where a drop of
- * water falls down from the top of the window. If the 
- * user clicks the mouse, the drop is moved over to the
- * location of the click;
- */
 public class SubwaySurfers {
     
 	PlayerHitbox ph;
@@ -53,8 +46,9 @@ public class SubwaySurfers {
         trains.forEach(train -> train.draw(c));
         obstacles.forEach(obstacle -> obstacle.draw(c));
         ps.draw(c);
+        ph.draw(c);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-        c.camera(ph.pos.x, SSConstants.HEIGHT/2, SSConstants.CAMERA_Z, ph.pos.x, SSConstants.HEIGHT, 0, 0, 1, 0);
+        c.camera(ps.pos.x, SSConstants.HEIGHT/2 - (SSConstants.floorLvl-ps.bounds.bBound), SSConstants.CAMERA_Z, ps.pos.x, SSConstants.HEIGHT - (SSConstants.floorLvl-ps.bounds.bBound), 0, 0, 1, 0);
         g.draw(c);
         
         return c;
@@ -65,6 +59,7 @@ public class SubwaySurfers {
      */
     public SubwaySurfers update() {
         ph.update();
+        ps.update();
         
         trains.removeIf(train -> (train.pos.z - train.length) >= SSConstants.DELETE_POINT);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
@@ -80,25 +75,30 @@ public class SubwaySurfers {
         
     }
     
+    /**
+     * Handles KeyEvents for the SubwaySurfers game
+     * @param kev - the KeyEvent to be processed
+     * @return the updated game
+     */
     public SubwaySurfers keyPressed(KeyEvent kev) {
     	ph.move(kev);
+    	ps.move(kev);
     	
-    		if (kev.getKey() == '1') {
-    			trains.add( new Train(2000, 1, 10, false));
-    		} else if (kev.getKey() == '2') {
-    			trains.add( new Train(600, 2, 10, false));
-    		} else if (kev.getKey() == '3') {
-    			trains.add( new Train(700, 3, 25, false));
-    		} else if (kev.getKey() == '4') {
-    			obstacles.add(new Obstacle(1));
-    		} else if (kev.getKey() == '5') {
-    			obstacles.add(new Obstacle(2));
-    		} else if (kev.getKey() == '6') {
-    			obstacles.add(new Obstacle(3));
-    		}
-    	
-    	
-    	return new SubwaySurfers(ph, ps, trains, g, obstacles);
+		if (kev.getKey() == '1') {
+			trains.add(new Train(2000, 1, 10, false));
+		} else if (kev.getKey() == '2') {
+			trains.add(new Train(600, 2, 10, false));
+		} else if (kev.getKey() == '3') {
+			trains.add(new Train(700, 3, 25, false));
+		} else if (kev.getKey() == '4') {
+			obstacles.add(new Obstacle(1));
+		} else if (kev.getKey() == '5') {
+			obstacles.add(new Obstacle(2));
+		} else if (kev.getKey() == '6') {
+			obstacles.add(new Obstacle(3));
+		}
+
+		return new SubwaySurfers(ph, ps, trains, g, obstacles);
     }
     
    boolean collision() {

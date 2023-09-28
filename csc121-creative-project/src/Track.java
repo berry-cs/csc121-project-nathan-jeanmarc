@@ -9,7 +9,7 @@ public class Track {
     /**
      * @return the xPos
      */
-    public int getxPos() {
+    public int getX() {
         return xPos;
     }
 }
