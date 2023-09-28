@@ -14,13 +14,13 @@ public class SSConstants {
 	
 	public static final int PLAYER_Z = 1500;
 	public static int floorLvl = HEIGHT;
-	public static final float maxGrav = 20;
-	public static final float minGrav = 0.5f;
 	
-	public static final int TRAIN_WIDTH = 200;
-	public static final int TRAIN_HEIGHT = 255;
+	public static final int TRAIN_WIDTH = 250;
+	public static final int TRAIN_HEIGHT = 305;
 	public static final int TRAIN_INITIAL_Z = -3000;
-	public static final int TRAIN_Y = 685;
+	public static final int TRAIN_Y = 655;
+	
+	public static final int OBSTACLE_WIDTH = 260;
 	
 
 	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };

@@ -24,15 +24,6 @@ class PlayerHitbox extends PlayerComponent {
 		gravity();
 	}
 	
-	PApplet draw(PApplet c) {
-		c.pushMatrix();
-		c.translate(0, 0, pos.z);
-		c.fill(255, 0, 80);
-		c.rectMode(3); // rectangle is placed with (x,y) at center
-		c.rect(pos.x, pos.y, width, height, 25);
-		c.popMatrix();
-		return c;
-	}
 
 	/* moves the player */
 	public void move(KeyEvent kev) {

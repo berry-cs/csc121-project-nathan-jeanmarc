@@ -46,7 +46,6 @@ public class SubwaySurfers {
         trains.forEach(train -> train.draw(c));
         obstacles.forEach(obstacle -> obstacle.draw(c));
         ps.draw(c);
-        ph.draw(c);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
         c.camera(ps.pos.x, SSConstants.HEIGHT/2 - (SSConstants.floorLvl-ps.bounds.bBound), SSConstants.CAMERA_Z, ps.pos.x, SSConstants.HEIGHT - (SSConstants.floorLvl-ps.bounds.bBound), 0, 0, 1, 0);
         g.draw(c);

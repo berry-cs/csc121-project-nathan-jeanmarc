@@ -4,7 +4,7 @@ public abstract class PlayerComponent {
 	int currentTrack = 2; // stores which track the player is on (one of 1, 2, 3)
 	Vector pos; // represents the position of the center of the player sprite
 	Vector vel = new Vector(0, 0, 0);
-	Vector gravity = new Vector(0, 1, 0);
+	Vector gravity = new Vector(0, 0.75f, 0);
 	
 	int width = 75; // width of player sprite (in px)
 	int height = 125; // height of player sprite (in px)
@@ -29,7 +29,7 @@ public abstract class PlayerComponent {
 	 */
 	public void jump() {
 		if (bounds.bBound >= SSConstants.floorLvl) {
-			vel = new Vector(0, -14, 0);
+			vel = new Vector(0, -16, 0);
 		}
 	}
 	

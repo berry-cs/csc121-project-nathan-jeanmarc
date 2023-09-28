@@ -53,38 +53,38 @@ public class Train {
 
 		c.pushMatrix();					  // draws right headlight
 		c.fill(255, 255, 100);
-		c.translate(width/2 - 30, height-240, length/2+1);
-		c.circle(0, 0, 40);
+		c.translate(width/2 - 40, height-250, length/2+1);
+		c.circle(0, 0, 50);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws left headlight
 		c.fill(255, 255, 100);
-		c.translate(-width/2 + 30, height-240, length/2+1);
-		c.circle(0, 0, 40);
+		c.translate(-width/2 + 40, height-250, length/2+1);
+		c.circle(0, 0, 50);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws bottom middle headlight
 		c.fill(255, 255, 100);
-		c.translate(0, height-243, length/2+1);
-		c.circle(0, 0, 25);
+		c.translate(0, height-260, length/2+1);
+		c.circle(0, 0, 35);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws top middle headlight
 		c.fill(255, 255, 100);
-		c.translate(0, -20, length/2+1);
-		c.circle(0, 0, 25);
+		c.translate(0, 0, length/2+1);
+		c.circle(0, 0, 35);
 		c.popMatrix();
 
 		c.pushMatrix();					  // draws left window pane
 		c.fill(0, 60, 100);
-		c.translate(-width/2 + 58, -75, length/2+1);
-		c.rect(0, 0, (width-25)/2, 65);
+		c.translate(-width/2 + 64, -75, length/2+1);
+		c.rect(0, 0, (width-10)/2, 75);
 		c.popMatrix();
 
 		c.pushMatrix();				   	  // draws right window pane
 		c.fill(0, 60, 100);
-		c.translate(width/2 - 58, -75, length/2+1);
-		c.rect(0, 0, (width-25)/2, 65);
+		c.translate(width/2 - 64, -75, length/2+1);
+		c.rect(0, 0, (width-10)/2, 75);
 		c.popMatrix();
 
 		c.popMatrix(); 

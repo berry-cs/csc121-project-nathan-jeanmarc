@@ -5,7 +5,7 @@ import processing.core.PApplet;
 class Obstacle {
 	
 	Vector pos;
-	int width = SSConstants.TRAIN_WIDTH + 60;
+	int width = SSConstants.OBSTACLE_WIDTH;
 	int height = 150;
 	int depth = 60;
 	
