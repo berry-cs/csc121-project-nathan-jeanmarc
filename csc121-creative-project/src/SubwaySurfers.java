@@ -5,9 +5,7 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SubwaySurfers {
-    
-	PlayerHitbox ph;
-	PlayerSprite ps;
+	Player ph;
 	
 	Environment g;
 	
@@ -19,8 +17,7 @@ public class SubwaySurfers {
 	 * Create new game with player at given x, y and train on the left track
 	 */
     public SubwaySurfers() {
-    	this.ph = new PlayerHitbox();
-    	this.ps = new PlayerSprite(ph.pos, ph.bounds);
+    	this.ph = new Player();
     	this.trains = new ArrayList<Train>();
     	this.obstacles = new ArrayList<Obstacle>();
     	this.g = new Environment();
@@ -29,9 +26,8 @@ public class SubwaySurfers {
     /*
      * Create new object with given player and train list
      */
-    public SubwaySurfers(PlayerHitbox ph, PlayerSprite ps, ArrayList<Train> t, Environment g, ArrayList<Obstacle> o) {
+    public SubwaySurfers(Player ph, ArrayList<Train> t, Environment g, ArrayList<Obstacle> o) {
     	this.ph = ph;
-    	this.ps = ps;
     	this.trains = t;
     	this.g = g;
     	this.obstacles = o;
@@ -45,9 +41,9 @@ public class SubwaySurfers {
         c.background(45, 160, 230);
         trains.forEach(train -> train.draw(c));
         obstacles.forEach(obstacle -> obstacle.draw(c));
-        ps.draw(c);
+        ph.draw(c);
         // positions the camera at (x1,y1,z1) looking toward (x2,y2,z2) SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-        c.camera(ps.pos.x, SSConstants.HEIGHT/2 - (SSConstants.floorLvl-ps.bounds.bBound), SSConstants.CAMERA_Z, ps.pos.x, SSConstants.HEIGHT - (SSConstants.floorLvl-ps.bounds.bBound), 0, 0, 1, 0);
+        c.camera(ph.pos.x, SSConstants.HEIGHT/2 - (SSConstants.floorLvl-ph.bounds.bBound), SSConstants.CAMERA_Z, ph.pos.x, SSConstants.HEIGHT - (SSConstants.floorLvl-ph.bounds.bBound), 0, 0, 1, 0);
         g.draw(c);
         
         return c;
@@ -58,7 +54,6 @@ public class SubwaySurfers {
      */
     public SubwaySurfers update() {
         ph.update();
-        ps.update();
         
         trains.removeIf(train -> (train.pos.z - train.length) >= SSConstants.DELETE_POINT);  // removes trains that are off the screen
         trains.forEach(train -> train.update());
@@ -70,7 +65,7 @@ public class SubwaySurfers {
         	System.out.println("bruh!!!");
         }
         
-        return new SubwaySurfers(ph, ps, trains, g, obstacles);
+        return new SubwaySurfers(ph, trains, g, obstacles);
         
     }
     
@@ -81,7 +76,6 @@ public class SubwaySurfers {
      */
     public SubwaySurfers keyPressed(KeyEvent kev) {
     	ph.move(kev);
-    	ps.move(kev);
     	
 		if (kev.getKey() == '1') {
 			trains.add(new Train(2000, 1, 10, false));
@@ -97,7 +91,7 @@ public class SubwaySurfers {
 			obstacles.add(new Obstacle(3));
 		}
 
-		return new SubwaySurfers(ph, ps, trains, g, obstacles);
+		return new SubwaySurfers(ph, trains, g, obstacles);
     }
     
    boolean collision() {

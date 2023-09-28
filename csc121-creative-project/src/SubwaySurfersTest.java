@@ -38,7 +38,7 @@ class SubwaySurfersTest {
 	
 	// Player Tests
 	
-	PlayerHitbox p = new PlayerHitbox();
+	Player p = new Player();
 	
 	KeyEvent a = new KeyEvent(null, 0, 0, 0, 'a', java.awt.event.KeyEvent.VK_A);
 	KeyEvent d = new KeyEvent(null, 0, 0, 0, 'd', java.awt.event.KeyEvent.VK_D);
@@ -64,7 +64,7 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testGravity() {
-		assertEquals(new PlayerHitbox().vel, p.vel);
+		assertEquals(new Player().vel, p.vel);
 		p.jump();
 		assertEquals(new Vector(0, -16, 0), p.vel);
 		p.update(); // updates twice to make sure player is "in the air"
@@ -74,7 +74,7 @@ class SubwaySurfersTest {
 	
 	@Test 
 	void testJump() {
-		assertEquals(new PlayerHitbox().vel, p.vel);
+		assertEquals(new Player().vel, p.vel);
 		p.jump();
 		assertEquals(new Vector(0, -16, 0), p.vel);
 	}
@@ -82,7 +82,7 @@ class SubwaySurfersTest {
 	@Test // since the player has not been moved updating it should be the same as doing nothing to it
 	void testPlayerUpdate() {
 		p.update();
-		assertEquals(new PlayerHitbox(), p);
+		assertEquals(new Player(), p);
 	}
 
 	
