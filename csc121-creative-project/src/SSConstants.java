@@ -19,6 +19,7 @@ public class SSConstants {
 	public static final int TRAIN_HEIGHT = 305;
 	public static final int TRAIN_INITIAL_Z = -3000;
 	public static final int TRAIN_Y = 655;
+	public static final int TRAIN_TOP = floorLvl - TRAIN_HEIGHT;
 	
 	public static final int OBSTACLE_WIDTH = 260;
 	

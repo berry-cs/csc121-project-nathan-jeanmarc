@@ -9,14 +9,15 @@ class Player {
 	Vector pos; // represents the position of the center of the player sprite
 	Vector vel = new Vector(0, 0, 0);
 	Vector gravity = new Vector(0, 0.75f, 0);
-	
+
 	int width = 75; // width of player sprite (in px)
 	int height = 125; // height of player sprite (in px)
 	Bounds bounds;
-	
+
 	int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
-	
+
 	boolean hasCollided = false; // whether or not the player has collided with an obstacle
+	boolean onTrain = false;
 
 	public Player() {
 		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
@@ -25,7 +26,7 @@ class Player {
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
 	}
-	
+
 	PApplet draw(PApplet c) {
 		c.pushMatrix();
 		c.translate(0, 0, pos.z);
@@ -38,18 +39,24 @@ class Player {
 
 	/* updates this player */
 	public void update() {
+		if (onTrain) {
+			floorLvl = SSConstants.TRAIN_TOP;
+		} else {
+			floorLvl = SSConstants.floorLvl;
+		}
+
 		bounds = bounds.update(pos);
 		pos = pos.translate(vel);
-		
+
 		if (pos.x < SSConstants.tracks[currentTrack - 1].getX() - 40) {
 			pos = pos.translate(new Vector(40, 0, 0));
-		} else if (pos.x > SSConstants.tracks[currentTrack-1].getX() + 40) {
+		} else if (pos.x > SSConstants.tracks[currentTrack - 1].getX() + 40) {
 			pos = pos.translate(new Vector(-40, 0, 0));
-		} else pos = pos.newX(SSConstants.tracks[currentTrack-1].getX());
-		
+		} else
+			pos = pos.newX(SSConstants.tracks[currentTrack - 1].getX());
+
 		gravity();
 	}
-	
 
 	/* moves the player */
 	public void move(KeyEvent kev) {
@@ -65,31 +72,31 @@ class Player {
 			jump();
 		}
 	}
-	
+
 	/**
 	 * Gives the player an upward change in velocity to simulate jumping
 	 */
 	public void jump() {
-		if (bounds.bBound >= SSConstants.floorLvl) {
+		if (bounds.bBound >= floorLvl) {
 			vel = new Vector(0, -16, 0);
 		}
 	}
-	
+
 	/**
 	 * Update this sprite's position based on gravity
 	 */
 	public void gravity() {
-		if (bounds.bBound < SSConstants.floorLvl) {
+		if (bounds.bBound < floorLvl) {
 			vel = vel.translate(gravity);
-		} else if (bounds.bBound > SSConstants.floorLvl) {
+		} else if (bounds.bBound > floorLvl) {
 			vel = new Vector(0, 0, 0);
-			pos = new Vector(pos.x, SSConstants.floorLvl - height / 2, SSConstants.PLAYER_Z);
+			pos = new Vector(pos.x, floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bounds, currentTrack, floorLvl, gravity, hasCollided, height, pos, vel, width);
+		return Objects.hash(bounds, currentTrack, floorLvl, gravity, hasCollided, height, onTrain, pos, vel, width);
 	}
 
 	@Override
@@ -103,7 +110,7 @@ class Player {
 		Player other = (Player) obj;
 		return Objects.equals(bounds, other.bounds) && currentTrack == other.currentTrack && floorLvl == other.floorLvl
 				&& Objects.equals(gravity, other.gravity) && hasCollided == other.hasCollided && height == other.height
-				&& Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel)
+				&& onTrain == other.onTrain && Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel)
 				&& width == other.width;
 	}
 
