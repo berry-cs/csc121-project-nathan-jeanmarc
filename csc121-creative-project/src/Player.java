@@ -1,5 +1,4 @@
 import java.util.Objects;
-
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -22,6 +21,7 @@ class Player {
 	public Player() {
 		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
+		
 
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
