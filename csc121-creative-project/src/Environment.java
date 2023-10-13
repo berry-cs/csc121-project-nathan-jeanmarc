@@ -34,14 +34,14 @@ class Environment {
 		
 	}
 
-	PApplet draw(PApplet c) {
+	PApplet draw(PApplet c) {		
 		c.pushMatrix();			// draws the ground plane
 		c.rotateX(c.PI/2f);
 		c.translate(0, 0, -900);
 		c.fill(0, 80, 0);
 		c.rectMode(3);       
 		c.rect(pos.x, pos.y, width, height, 25);
-		c.popMatrix();
+		c.popMatrix(); 
 		
 		drawTracks(c);
 		drawSides(c);
