@@ -35,13 +35,13 @@ class TrackBoards {
 	}
 	
 	void update() {
-		pos = pos.newZ(pos.z + SSConstants.gameSpd);
+		pos.newZ(pos.z + SSConstants.gameSpd);
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
 	}
 	
 	void reset() {
 		if (offScreen) {
-			pos = pos.newZ(SSConstants.BOARD_INITIAL_Z);
+			pos.newZ(SSConstants.BOARD_INITIAL_Z);
 			offScreen = false;
 		}
 	}

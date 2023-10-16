@@ -46,14 +46,14 @@ class Player {
 		}
 
 		bounds = bounds.update(pos);
-		pos = pos.translate(vel);
+		pos.translate(vel);
 
 		if (pos.x < SSConstants.tracks[currentTrack - 1].getX() - 40) {
-			pos = pos.translate(new Vector(40, 0, 0));
+			pos.translate(new Vector(40, 0, 0));
 		} else if (pos.x > SSConstants.tracks[currentTrack - 1].getX() + 40) {
-			pos = pos.translate(new Vector(-40, 0, 0));
+			pos.translate(new Vector(-40, 0, 0));
 		} else
-			pos = pos.newX(SSConstants.tracks[currentTrack - 1].getX());
+			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
 
 		gravity();
 	}
@@ -87,7 +87,7 @@ class Player {
 	 */
 	public void gravity() {
 		if (bounds.bBound < floorLvl) {
-			vel = vel.translate(gravity);
+			vel.translate(gravity);
 		} else if (bounds.bBound > floorLvl) {
 			vel = new Vector(0, 0, 0);
 			pos = new Vector(pos.x, floorLvl - height / 2, SSConstants.PLAYER_Z);

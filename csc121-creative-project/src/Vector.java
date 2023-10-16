@@ -15,7 +15,11 @@ class Vector {
 	
 	/* returns a new posn that is the sum of this and that posn */
 	Vector translate(Vector that) {
-		return new Vector(this.x + that.x, this.y + that.y, this.z + that.z);
+		//return new Vector(this.x + that.x, this.y + that.y, this.z + that.z);
+		this.x += that.x;
+		this.y += that.y;
+		this.z += that.z;
+		return this;
 	}
 	
 	/* returns true if this posn is equal to that posn */
@@ -25,16 +29,22 @@ class Vector {
 	
 	/* returns this posn with the new x value */
 	Vector newX(float i) {
-		return new Vector(i, this.y, this.z);
+		//return new Vector(i, this.y, this.z);
+		this.x = i;
+		return this;
 	}
 	
 	/* returns this posn with the new y value */
 	Vector newY(float i) {
-		return new Vector(this.x, i, this.z);
+		//return new Vector(this.x, i, this.z);
+		this.y = i;
+		return this;
 	}
 	
 	Vector newZ(float i) {
-		return new Vector(this.x, this.y, i);
+		//return new Vector(this.x, this.y, i);
+		this.z = i;
+		return this;
 	}
 	
 	public int hashCode() {

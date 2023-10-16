@@ -27,7 +27,7 @@ class Obstacle {
 	}
 	
 	void update() {
-		pos = pos.newZ(pos.z + SSConstants.gameSpd);
+		pos.newZ(pos.z + SSConstants.gameSpd);
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
 		
 		bounds = bounds.update(pos);

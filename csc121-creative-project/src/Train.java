@@ -121,7 +121,7 @@ public class Train {
 	 * bounds
 	 */
 	void update() {
-		pos = pos.newZ(pos.z + vel.z);
+		pos.newZ(pos.z + vel.z);
 		bounds = bounds.update(pos);
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;

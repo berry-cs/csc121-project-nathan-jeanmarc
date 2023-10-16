@@ -19,7 +19,7 @@ class Building {
 		this.size = size;
 		this.onRight = onRight;
 		choosePos();
-		pos = pos.newZ(z);
+		pos.newZ(z);
 	}
 
 	void draw(PApplet c) {
@@ -33,14 +33,14 @@ class Building {
 	/** updates the building position and offScreen boolean, 
 	 * if it is offscreen then sets the building back at the beginning with a random height */
 	void update() {
-		pos = pos.newZ(pos.z + SSConstants.gameSpd);
+		pos.newZ(pos.z + SSConstants.gameSpd);
 		
 		offScreen = pos.z >= SSConstants.DELETE_POINT;
 		
 		if (offScreen) {
 			size = SSConstants.rgen.nextInt(3);
 			choosePos();
-			pos = pos.newZ(spawnPoint);
+			pos.newZ(spawnPoint);
 		}
 	}
 
@@ -50,15 +50,15 @@ class Building {
 		switch(size) {
 		case 0:
 			height = 850;
-			pos = pos.newY(425);
+			pos.newY(425);
 			break;
 		case 1:
 			height = 1050;
-			pos = pos.newY(325);
+			pos.newY(325);
 			break;
 		case 2:
 			height = 1200;
-			pos = pos.newY(250);
+			pos.newY(250);
 			break;
 		}
 		
