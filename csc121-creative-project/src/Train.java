@@ -122,7 +122,7 @@ public class Train {
 	 */
 	void update() {
 		pos.newZ(pos.getZ() + vel.getZ());
-		bounds = bounds.update(pos);
+		bounds.update(pos);
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;
 		

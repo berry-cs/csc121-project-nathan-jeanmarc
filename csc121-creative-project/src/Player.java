@@ -77,7 +77,7 @@ class Player {
 	 * Gives the player an upward change in velocity to simulate jumping
 	 */
 	public void jump() {
-		if (bounds.bBound >= floorLvl) {
+		if (bounds.getbBound() >= floorLvl) {
 			vel = new Vector(0, -16, 0);
 		}
 	}
@@ -86,9 +86,9 @@ class Player {
 	 * Update this sprite's position based on gravity
 	 */
 	public void gravity() {
-		if (bounds.bBound < floorLvl) {
+		if (bounds.getbBound() < floorLvl) {
 			vel.translate(gravity);
-		} else if (bounds.bBound > floorLvl) {
+		} else if (bounds.getbBound() > floorLvl) {
 			vel = new Vector(0, 0, 0);
 			pos = new Vector(pos.getX(), floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}

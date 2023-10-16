@@ -4,15 +4,15 @@ import java.util.Objects;
 
 class Bounds {
 	
-	float tBound;
-	float bBound;
-	float rBound;
-	float lBound;
+	private float tBound;
+	private float bBound;
+	private float rBound;
+	private float lBound;
 	
-	Vector pos;
+	private Vector pos;
 	
-	int width;
-	int height;
+	private int width;
+	private int height;
 	
 	
 	Bounds(Vector pos, int width, int height) {
@@ -43,6 +43,22 @@ class Bounds {
 		this.lBound = pos.getX() - width/2;
 		
 		return this;
+	}
+
+	public float gettBound() {
+		return tBound;
+	}
+
+	public float getbBound() {
+		return bBound;
+	}
+
+	public float getrBound() {
+		return rBound;
+	}
+
+	public float getlBound() {
+		return lBound;
 	}
 
 	public int hashCode() {
