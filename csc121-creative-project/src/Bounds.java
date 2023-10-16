@@ -29,13 +29,7 @@ class Bounds {
 	/* produces an updated version of this Bounds */
 	Bounds update(Vector p) {
 		//return new Bounds(p, width, height);
-		this.pos = p;
-		this.tBound = pos.y - height/2;
-		this.bBound = pos.y + height/2;
-		this.rBound = pos.x + width/2;
-		this.lBound = pos.x - width/2;
-		
-		return this;
+		return this.update(p, width, height);
 	}
 	
 	Bounds update(Vector p, int width, int height) {
