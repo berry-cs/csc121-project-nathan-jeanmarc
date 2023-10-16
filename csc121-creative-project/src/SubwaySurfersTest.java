@@ -135,11 +135,15 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testBoundsUpdate() {
-		assertEquals(new Bounds(new Vector(100, 200, 300), 100, 200), b1.update(new Vector(100, 200, 300)));
-		assertEquals(new Bounds(new Vector(10, 300, 0), 400, 500), b2.update(new Vector(10, 300, 0)));
+		b1.update(new Vector(100, 200, 300));
+		assertEquals(new Bounds(new Vector(100, 200, 300), 100, 200), b1);
+		b2.update(new Vector(10, 300, 0));
+		assertEquals(new Bounds(new Vector(10, 300, 0), 400, 500), b2);
 		
-		assertEquals(new Bounds(new Vector(100, 200, 300), 150, 400), b1.update(new Vector(100, 200, 300), 150, 400));
-		assertEquals(new Bounds(new Vector(100, 200, 300), 10, 20), b2.update(new Vector(100, 200, 300), 10, 20));
+		b1.update(new Vector(100, 200, 300), 150, 400);
+		assertEquals(new Bounds(new Vector(100, 200, 300), 150, 400), b1);
+		b2.update(new Vector(100, 200, 300), 10, 20);
+		assertEquals(new Bounds(new Vector(100, 200, 300), 10, 20), b2);
 	}
 	
 	// Vector Tests
@@ -152,9 +156,10 @@ class SubwaySurfersTest {
 
 	@Test
 	void testTranslate() {
-		assertEquals(new Vector(-20, 60, 1040), v1.translate(v2));
-		assertEquals(new Vector(70, 20, 600), v2.translate(v3));
-		//assertEquals(new Vector(110, 0, -360), v1.translate(v3));
+		v1.translate(v2);
+		assertEquals(new Vector(-20, 60, 1040), v1);
+		v2.translate(v3);
+		assertEquals(new Vector(70, 20, 600), v2);
 	}
 	
 	@Test
@@ -165,23 +170,32 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testNewX() {
-		assertEquals(new Vector(100, 20, 40), v1.newX(100));
-		assertEquals(new Vector(0, 40, 1000), v2.newX(0));
-		assertEquals(new Vector(-40, -20, -400), v3.newX(-40));
+		v1.newX(100);
+		assertEquals(new Vector(100, 20, 40), v1);
+		v2.newX(0);
+		assertEquals(new Vector(0, 40, 1000), v2);
+		v3.newX(-40);
+		assertEquals(new Vector(-40, -20, -400), v3);
 	}
 	
 	@Test
 	void testNewY() {
-		assertEquals(new Vector(10, 10, 40), v1.newY(10));
-		assertEquals(new Vector(-30, 0, 1000), v2.newY(0));
-		assertEquals(new Vector(100, -40, -400), v3.newY(-40));
+		v1.newY(10);
+		assertEquals(new Vector(10, 10, 40), v1);
+		v2.newY(0);
+		assertEquals(new Vector(-30, 0, 1000), v2);
+		v3.newY(-40);
+		assertEquals(new Vector(100, -40, -400), v3);
 	}
 	
 	@Test
 	void testNewZ() {
-		assertEquals(new Vector(10, 20, 10), v1.newZ(10));
-		assertEquals(new Vector(-30, 40, 00), v2.newZ(0));
-		assertEquals(new Vector(100, -20, -40), v3.newZ(-40));
+		v1.newZ(10);
+		assertEquals(new Vector(10, 20, 10), v1);
+		v2.newZ(0);
+		assertEquals(new Vector(-30, 40, 00), v2);
+		v3.newZ(-40);
+		assertEquals(new Vector(100, -20, -40), v3);
 	}
 
 }
