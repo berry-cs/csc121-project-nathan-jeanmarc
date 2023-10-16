@@ -13,15 +13,15 @@ class SubwaySurfersTest {
 	@Test // tests every testable method
 	void testTrackBoards() {
 		tb1.update();
-		assertEquals(SSConstants.BOARD_INITIAL_Z+SSConstants.gameSpd, tb1.pos.z);
+		assertEquals(SSConstants.BOARD_INITIAL_Z+SSConstants.gameSpd, tb1.pos.getZ());
 		assertFalse(tb1.offScreen);
 
 		assertFalse(tb2.offScreen);
-		assertEquals(SSConstants.DELETE_POINT-SSConstants.gameSpd, tb2.pos.z);
+		assertEquals(SSConstants.DELETE_POINT-SSConstants.gameSpd, tb2.pos.getZ());
 		tb2.update(); // pushes the board past the delete point
 		assertTrue(tb2.offScreen);
 		tb2.reset();
-		assertEquals(SSConstants.BOARD_INITIAL_Z, tb2.pos.z);
+		assertEquals(SSConstants.BOARD_INITIAL_Z, tb2.pos.getZ());
 		
 	}
 	
@@ -31,9 +31,9 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testTrainUpdate() {
-		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2 ,t.pos.z);
+		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2 ,t.pos.getZ());
 		t.update();
-		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2+t.vel.z, t.pos.z);
+		assertEquals(SSConstants.TRAIN_INITIAL_Z-t.length/2+t.vel.getZ(), t.pos.getZ());
 	}
 	
 	// Player Tests

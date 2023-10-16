@@ -27,8 +27,8 @@ class Obstacle {
 	}
 	
 	void update() {
-		pos.newZ(pos.z + SSConstants.gameSpd);
-		offScreen = pos.z >= SSConstants.DELETE_POINT;
+		pos.newZ(pos.getZ() + SSConstants.gameSpd);
+		offScreen = pos.getZ() >= SSConstants.DELETE_POINT;
 		
 		bounds = bounds.update(pos);
 		rearZ = bounds.backZ;
@@ -38,7 +38,7 @@ class Obstacle {
 	void draw(PApplet c) {
 		c.pushMatrix();
 		c.fill(70);
-		c.translate(pos.x, pos.y, pos.z);
+		c.translate(pos.getX(), pos.getY(), pos.getZ());
 		c.box(width, 20, depth); // draws the base
 		
 		c.pushMatrix();

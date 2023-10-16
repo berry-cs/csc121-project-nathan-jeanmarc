@@ -25,7 +25,7 @@ class Building {
 	void draw(PApplet c) {
 		c.fill(60);
 		c.pushMatrix();
-		c.translate(pos.x, pos.y, pos.z);
+		c.translate(pos.getX(), pos.getY(), pos.getZ());
 		c.box(width, height, depth);
 		c.popMatrix();
 	}
@@ -33,9 +33,9 @@ class Building {
 	/** updates the building position and offScreen boolean, 
 	 * if it is offscreen then sets the building back at the beginning with a random height */
 	void update() {
-		pos.newZ(pos.z + SSConstants.gameSpd);
+		pos.newZ(pos.getZ() + SSConstants.gameSpd);
 		
-		offScreen = pos.z >= SSConstants.DELETE_POINT;
+		offScreen = pos.getZ() >= SSConstants.DELETE_POINT;
 		
 		if (offScreen) {
 			size = SSConstants.rgen.nextInt(3);

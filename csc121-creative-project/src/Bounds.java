@@ -20,10 +20,10 @@ class Bounds {
 		this.width = width;
 		this.height = height;
 		
-		this.tBound = pos.y - height/2;
-		this.bBound = pos.y + height/2;
-		this.rBound = pos.x + width/2;
-		this.lBound = pos.x - width/2;
+		this.tBound = pos.getY() - height/2;
+		this.bBound = pos.getY() + height/2;
+		this.rBound = pos.getX() + width/2;
+		this.lBound = pos.getX() - width/2;
 	}
 	
 	/* produces an updated version of this Bounds */
@@ -37,10 +37,10 @@ class Bounds {
 		this.pos = p;
 		this.width = width;
 		this.height = height;
-		this.tBound = pos.y - height/2;
-		this.bBound = pos.y + height/2;
-		this.rBound = pos.x + width/2;
-		this.lBound = pos.x - width/2;
+		this.tBound = pos.getY() - height/2;
+		this.bBound = pos.getY() + height/2;
+		this.rBound = pos.getX() + width/2;
+		this.lBound = pos.getX() - width/2;
 		
 		return this;
 	}

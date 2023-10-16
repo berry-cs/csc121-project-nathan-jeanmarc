@@ -18,18 +18,18 @@ class Environment {
 		boards.add(new TrackBoards(SSConstants.BOARD_INITIAL_Z));
 		
 		for (int i = 1; i < 30; i++) {
-			boards.add(new TrackBoards(boards.get(i-1).pos.z+200));
+			boards.add(new TrackBoards(boards.get(i-1).pos.getZ() + 200));
 		} 
 		
 		// adds the buildings
 		buildings = new ArrayList<Building>();
 		buildings.add(new Building(Building.spawnPoint, 1, false));
 		for (int i = 0; i < 6; i++) {
-			buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, SSConstants.rgen.nextInt(3), false));
+			buildings.add(new Building(buildings.get(buildings.size()-1).pos.getZ() + 800, SSConstants.rgen.nextInt(3), false));
 		}
 		buildings.add(new Building(Building.spawnPoint, 2, true));
 		for (int i = 0; i < 6; i++) {
-			buildings.add(new Building(buildings.get(buildings.size()-1).pos.z + 800, SSConstants.rgen.nextInt(3), true));
+			buildings.add(new Building(buildings.get(buildings.size()-1).pos.getZ() + 800, SSConstants.rgen.nextInt(3), true));
 		}
 		
 	}
@@ -40,7 +40,7 @@ class Environment {
 		c.translate(0, 0, -900);
 		c.fill(0, 80, 0);
 		c.rectMode(3);       
-		c.rect(pos.x, pos.y, width, height, 25);
+		c.rect(pos.getX(), pos.getY(), width, height, 25);
 		c.popMatrix(); 
 		
 		drawTracks(c);

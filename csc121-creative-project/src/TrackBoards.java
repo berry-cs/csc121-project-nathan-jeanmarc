@@ -17,17 +17,17 @@ class TrackBoards {
 		c.fill(40, 20, 0);
 		
 		c.pushMatrix();
-		c.translate(100, pos.y, pos.z);
+		c.translate(100, pos.getY(), pos.getZ());
 		c.box(width, height, depth);
 		c.popMatrix();
 		
 		c.pushMatrix();
-		c.translate(600, pos.y, pos.z);
+		c.translate(600, pos.getY(), pos.getZ());
 		c.box(width, height, depth);
 		c.popMatrix();
 		
 		c.pushMatrix();
-		c.translate(1100, pos.y, pos.z);
+		c.translate(1100, pos.getY(), pos.getZ());
 		c.box(width, height, depth);
 		c.popMatrix();
 		
@@ -35,8 +35,8 @@ class TrackBoards {
 	}
 	
 	void update() {
-		pos.newZ(pos.z + SSConstants.gameSpd);
-		offScreen = pos.z >= SSConstants.DELETE_POINT;
+		pos.newZ(pos.getZ() + SSConstants.gameSpd);
+		offScreen = pos.getZ() >= SSConstants.DELETE_POINT;
 	}
 	
 	void reset() {

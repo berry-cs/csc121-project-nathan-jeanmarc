@@ -43,7 +43,7 @@ public class Train {
 			c.fill(100, 0, 0);
 			c.pushMatrix();
 
-			c.translate(pos.x, pos.y, pos.z); // draws train body
+			c.translate(pos.getX(), pos.getY(), pos.getZ()); // draws train body
 			c.box(width, height, length);
 
 			c.pushMatrix(); // draws front bumper
@@ -121,7 +121,7 @@ public class Train {
 	 * bounds
 	 */
 	void update() {
-		pos.newZ(pos.z + vel.z);
+		pos.newZ(pos.getZ() + vel.getZ());
 		bounds = bounds.update(pos);
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;

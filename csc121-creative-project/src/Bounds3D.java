@@ -18,8 +18,8 @@ class Bounds3D {
 		this.height = height;
 		this.depth = depth;
 		
-		this.frontZ = pos.z + depth/2;
-		this.backZ = pos.z - depth/2;
+		this.frontZ = pos.getZ() + depth/2;
+		this.backZ = pos.getZ() - depth/2;
 		this.top = SSConstants.floorLvl - height;
 	}
 	

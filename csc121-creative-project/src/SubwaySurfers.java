@@ -44,8 +44,8 @@ public class SubwaySurfers {
 		ph.draw(c);
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-		c.camera(ph.pos.x, SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - ph.bounds.bBound), SSConstants.CAMERA_Z,
-				ph.pos.x, SSConstants.HEIGHT - (SSConstants.floorLvl - ph.bounds.bBound), 0, 0, 1, 0);
+		c.camera(ph.pos.getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - ph.bounds.bBound), SSConstants.CAMERA_Z,
+				ph.pos.getX(), SSConstants.HEIGHT - (SSConstants.floorLvl - ph.bounds.bBound), 0, 0, 1, 0);
 		g.draw(c);
 
 		return c;
@@ -57,7 +57,7 @@ public class SubwaySurfers {
 	public SubwaySurfers update() {
 		ph.update();
 
-		trains.removeIf(train -> (train.pos.z - train.length) >= SSConstants.DELETE_POINT); // removes trains that are
+		trains.removeIf(train -> (train.pos.getZ() - train.length) >= SSConstants.DELETE_POINT); // removes trains that are
 																							// off the screen
 		trains.forEach(train -> train.update());
 
@@ -102,7 +102,7 @@ public class SubwaySurfers {
 	   for (int t = 0; t < trains.size(); t++) {
 		   Train tr = trains.get(t);
 		   
-		   if (tr.frontZ >= ph.pos.z && tr.rearZ <= ph.pos.z && ph.bounds.bBound > tr.bounds.top && tr.track == ph.currentTrack) {
+		   if (tr.frontZ >= ph.pos.getZ() && tr.rearZ <= ph.pos.getZ() && ph.bounds.bBound > tr.bounds.top && tr.track == ph.currentTrack) {
 			   if (!tr.hasRamp) {
 				   return true;
 			   } else {
@@ -115,8 +115,8 @@ public class SubwaySurfers {
 	   for (int o = 0; 0 < obstacles.size(); o++) {
 		   Obstacle ob = obstacles.get(o);
 		      
-		   return (ob.frontZ >= ph.pos.z && 
-				   ob.rearZ <= ph.pos.z && 
+		   return (ob.frontZ >= ph.pos.getZ() && 
+				   ob.rearZ <= ph.pos.getZ() && 
 				   ob.bounds.top <= ph.bounds.bBound &&
 				   ob.track == ph.currentTrack);
 	   }
