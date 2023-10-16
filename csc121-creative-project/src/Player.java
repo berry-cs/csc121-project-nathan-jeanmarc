@@ -45,7 +45,7 @@ class Player {
 			floorLvl = SSConstants.floorLvl;
 		}
 
-		bounds = bounds.update(pos);
+		bounds.update(pos);
 		pos.translate(vel);
 
 		if (pos.x < SSConstants.tracks[currentTrack - 1].getX() - 40) {
