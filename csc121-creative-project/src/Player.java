@@ -29,10 +29,10 @@ class Player {
 
 	PApplet draw(PApplet c) {
 		c.pushMatrix();
-		c.translate(0, 0, pos.z);
+		c.translate(0, 0, pos.getZ());
 		c.fill(50, 0, 80);
 		c.rectMode(3); // rectangle is placed with (x,y) at center
-		c.rect(pos.x, pos.y, width, height, 25);
+		c.rect(pos.getX(), pos.getY(), width, height, 25);
 		c.popMatrix();
 		return c;
 	}
@@ -48,9 +48,9 @@ class Player {
 		bounds.update(pos);
 		pos.translate(vel);
 
-		if (pos.x < SSConstants.tracks[currentTrack - 1].getX() - 40) {
+		if (pos.getX() < SSConstants.tracks[currentTrack - 1].getX() - 40) {
 			pos.translate(new Vector(40, 0, 0));
-		} else if (pos.x > SSConstants.tracks[currentTrack - 1].getX() + 40) {
+		} else if (pos.getX() > SSConstants.tracks[currentTrack - 1].getX() + 40) {
 			pos.translate(new Vector(-40, 0, 0));
 		} else
 			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
@@ -90,7 +90,7 @@ class Player {
 			vel.translate(gravity);
 		} else if (bounds.bBound > floorLvl) {
 			vel = new Vector(0, 0, 0);
-			pos = new Vector(pos.x, floorLvl - height / 2, SSConstants.PLAYER_Z);
+			pos = new Vector(pos.getX(), floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
 	}
 

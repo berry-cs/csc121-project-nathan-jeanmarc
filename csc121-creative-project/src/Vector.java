@@ -3,9 +3,9 @@
 import java.util.Objects;
 
 class Vector {
-	float x;
-	float y;
-	float z;
+	private float x;
+	private float y;
+	private float z;
 	
 	Vector(float x, float y, float z) {
 		this.x = x;
@@ -22,31 +22,44 @@ class Vector {
 		return this;
 	}
 	
-	/* returns true if this posn is equal to that posn */
+	/* returns true if this vector is equal to that vector */
 	Boolean equalTo(Vector that) {
 		return (this.x == that.x && this.y == that.y && this.z == that.z);
 	}
 	
-	/* returns this posn with the new x value */
+	/* assigns a new x value to this vector */
 	Vector newX(float i) {
 		//return new Vector(i, this.y, this.z);
 		this.x = i;
 		return this;
 	}
 	
-	/* returns this posn with the new y value */
+	/* assigns a new y value to this vector */
 	Vector newY(float i) {
 		//return new Vector(this.x, i, this.z);
 		this.y = i;
 		return this;
 	}
 	
+	/* assigns a new z value to this vector */
 	Vector newZ(float i) {
 		//return new Vector(this.x, this.y, i);
 		this.z = i;
 		return this;
 	}
 	
+	public float getX() {
+		return x;
+	}
+
+	public float getY() {
+		return y;
+	}
+
+	public float getZ() {
+		return z;
+	}
+
 	public int hashCode() {
 		return Objects.hash(x, y, z);
 	}
