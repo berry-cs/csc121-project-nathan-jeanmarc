@@ -121,11 +121,15 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testBounds3DUpdate() {
-		assertEquals(new Bounds3D(new Vector(100, 200, 300), 100, 200, 400), b3d1.update(new Vector(100, 200, 300)));
-		assertEquals(new Bounds3D(new Vector(10, 300, 0), 400, 500, 20), b3d2.update(new Vector(10, 300, 0)));
+		b3d1.update(new Vector(100, 200, 300));
+		assertEquals(new Bounds3D(new Vector(100, 200, 300), 100, 200, 400), b3d1);
+		b3d2.update(new Vector(10, 300, 0));
+		assertEquals(new Bounds3D(new Vector(10, 300, 0), 400, 500, 20), b3d2);
 		
-		assertEquals(new Bounds3D(new Vector(100, 200, 300), 10, 20, 30), b3d1.update(new Vector(100, 200, 300), 10, 20, 30));
-		assertEquals(new Bounds3D(new Vector(10, 300, 0), 20, 200, 4000), b3d2.update(new Vector(10, 300, 0), 20, 200, 4000));
+		b3d1.update(new Vector(100, 200, 300), 10, 20, 30);
+		assertEquals(new Bounds3D(new Vector(100, 200, 300), 10, 20, 30), b3d1);
+		b3d2.update(new Vector(10, 300, 0), 20, 200, 4000);
+		assertEquals(new Bounds3D(new Vector(10, 300, 0), 20, 200, 4000), b3d2);
 	}
 	
 	// Bounds Tests
