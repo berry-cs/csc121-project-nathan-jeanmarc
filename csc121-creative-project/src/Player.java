@@ -115,9 +115,9 @@ class Player {
 	public Vector getGravity() {
 		return gravity;
 	}
-	
-	public boolean isOnTrain() {
-		return onTrain;
+
+	public void setOnTrain(boolean onTrain) {
+		this.onTrain = onTrain;
 	}
 
 	@Override

@@ -46,37 +46,37 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testMove() {
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[0].getX(), SSConstants.tracks[p.currentTrack-1].getX());
+		assertEquals(SSConstants.tracks[0].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[2].getX(), SSConstants.tracks[p.currentTrack-1].getX());
+		assertEquals(SSConstants.tracks[2].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.currentTrack-1].getX());
+		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
 
 	}
 	
 	@Test
 	void testGravity() {
-		assertEquals(new Player().vel, p.vel);
+		assertEquals(new Player().getVel(), p.getVel());
 		p.jump();
-		assertEquals(new Vector(0, -16, 0), p.vel);
+		assertEquals(new Vector(0, -16, 0), p.getVel());
 		p.update(); // updates twice to make sure player is "in the air"
 		p.update();
-		assertEquals(new Vector(0, -16, 0).translate(p.gravity), p.vel);
+		assertEquals(new Vector(0, -16, 0).translate(p.getGravity()), p.getVel());
 	}
 	
 	@Test 
 	void testJump() {
-		assertEquals(new Player().vel, p.vel);
+		assertEquals(new Player().getVel(), p.getVel());
 		p.jump();
-		assertEquals(new Vector(0, -16, 0), p.vel);
+		assertEquals(new Vector(0, -16, 0), p.getVel());
 	}
 	
 	@Test // since the player has not been moved updating it should be the same as doing nothing to it
