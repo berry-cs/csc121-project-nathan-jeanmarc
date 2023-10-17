@@ -40,6 +40,7 @@ public class SubwaySurfers {
 	public PApplet draw(PApplet c) {
 		// colors the canvas background
 		c.background(45, 160, 230);
+		//c.lights();  // this is where lights functions go, needs tweaking to work. look at documentation
 		trains.forEach(train -> train.draw(c));
 		obstacles.forEach(obstacle -> obstacle.draw(c));
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
