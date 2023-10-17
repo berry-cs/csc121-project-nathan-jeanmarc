@@ -4,19 +4,20 @@ import processing.event.KeyEvent;
 
 /** represents a player's hitbox in Subway Surfers */
 class Player {
-	int currentTrack = 2; // stores which track the player is on (one of 1, 2, 3)
-	Vector pos; // represents the position of the center of the player sprite
-	Vector vel = new Vector(0, 0, 0);
-	Vector gravity = new Vector(0, 0.75f, 0);
+	
+	private int currentTrack = 2; // stores which track the player is on (one of 1, 2, 3)
+	private Vector pos; // represents the position of the center of the player sprite
+	private Vector vel = new Vector(0, 0, 0);
+	private Vector gravity = new Vector(0, 0.75f, 0);
 
-	int width = 90; // width of player sprite (in px)
-	int height = 180; // height of player sprite (in px)
-	Bounds bounds;
+	private int width = 90; // width of player sprite (in px)
+	private int height = 180; // height of player sprite (in px)
+	private Bounds bounds;
 
-	int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
+	private int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
-	boolean hasCollided = false; // whether or not the player has collided with an obstacle
-	boolean onTrain = false;
+	private boolean hasCollided = false; // whether or not the player has collided with an obstacle
+	private boolean onTrain = false;
 	
 
 	public Player() {
@@ -93,6 +94,30 @@ class Player {
 			vel = new Vector(0, 0, 0);
 			pos = new Vector(pos.getX(), floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
+	}
+
+	public Vector getPos() {
+		return pos;
+	}
+
+	public Vector getVel() {
+		return vel;
+	}
+
+	public Bounds getBounds() {
+		return bounds;
+	}
+
+	public int getCurrentTrack() {
+		return currentTrack;
+	}
+
+	public Vector getGravity() {
+		return gravity;
+	}
+	
+	public boolean isOnTrain() {
+		return onTrain;
 	}
 
 	@Override
