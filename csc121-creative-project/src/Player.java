@@ -9,19 +9,19 @@ class Player {
 	Vector vel = new Vector(0, 0, 0);
 	Vector gravity = new Vector(0, 0.75f, 0);
 
-	int width = 75; // width of player sprite (in px)
-	int height = 125; // height of player sprite (in px)
+	int width = 90; // width of player sprite (in px)
+	int height = 180; // height of player sprite (in px)
 	Bounds bounds;
 
 	int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
 	boolean hasCollided = false; // whether or not the player has collided with an obstacle
 	boolean onTrain = false;
+	
 
 	public Player() {
 		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
-		
 
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
@@ -31,8 +31,9 @@ class Player {
 		c.pushMatrix();
 		c.translate(0, 0, pos.getZ());
 		c.fill(50, 0, 80);
-		c.rectMode(3); // rectangle is placed with (x,y) at center
-		c.rect(pos.getX(), pos.getY(), width, height, 25);
+		c.imageMode(3); // rectangle is placed with (x,y) at center
+		//c.rect(pos.getX(), pos.getY(), width, height, 25);
+		SSConstants.playerSprite.display(pos.getX(), pos.getY(), width, height);
 		c.popMatrix();
 		return c;
 	}

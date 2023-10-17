@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import processing.core.PApplet;
+import processing.core.*;
 import processing.event.KeyEvent;
 
 public class SubwaySurfers {
-	Player ph;
+	private Player ph;
 
-	Environment g;
+	private Environment g;
 
-	ArrayList<Train> trains;
+	private ArrayList<Train> trains;
 
-	ArrayList<Obstacle> obstacles;
-
+	private ArrayList<Obstacle> obstacles;
+	
 	/*
 	 * Create new game with player at given x, y and train on the left track
 	 */
@@ -21,6 +21,7 @@ public class SubwaySurfers {
 		this.trains = new ArrayList<Train>();
 		this.obstacles = new ArrayList<Obstacle>();
 		this.g = new Environment();
+		
 	}
 
 	/*
@@ -41,13 +42,12 @@ public class SubwaySurfers {
 		c.background(45, 160, 230);
 		trains.forEach(train -> train.draw(c));
 		obstacles.forEach(obstacle -> obstacle.draw(c));
-		ph.draw(c);
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
 		c.camera(ph.pos.getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - ph.bounds.getbBound()), SSConstants.CAMERA_Z,
 				ph.pos.getX(), SSConstants.HEIGHT - (SSConstants.floorLvl - ph.bounds.getbBound()), 0, 0, 1, 0);
 		g.draw(c);
-
+		ph.draw(c);
 		return c;
 	}
 

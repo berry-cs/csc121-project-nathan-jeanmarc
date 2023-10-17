@@ -1,4 +1,5 @@
 import java.util.Random;
+import processing.core.*;
 
 /**
  * Stores constants related to Subway Surfers
@@ -35,5 +36,8 @@ public class SSConstants {
 	
 	
     public static final Random rgen = new Random();
+    
+    public static PImage[] playerImgs = new PImage[9];
+    public static Animation playerSprite;
 
 }
