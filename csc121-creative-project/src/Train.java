@@ -135,11 +135,30 @@ public class Train {
 	}
 
 	/**
-	 * checks collision with the given player and handles it correctly depending on
-	 * if the train has a ramp or does not
+	 * Handles interaction between the given player and this train 
+	 * Reacts differently if train has a ramp or does not
 	 */
 	Boolean handleCollision(Player ph) {
+		
+		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
+				&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack()) {
+					if (!hasRamp) {
+						return true;
+					} else if (frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()) {
+						ph.isOnTrain();
+						return false;
+					} else {
+						return true;
+					}
+					
+				}
+		
+		if (ph.checkOnTrain() && rearZ >= ph.getPos().getZ() || ph.getCurrentTrack() != track) {
+			ph.isOffTrain();
+		}
+				return false;
 
+		/*
 		if (!hasRamp) {
 			return (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
 					&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack());
@@ -152,7 +171,7 @@ public class Train {
 				return false;
 			} 
 		
-		return false;
+		return false; */
 
 	}
 

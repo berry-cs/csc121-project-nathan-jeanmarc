@@ -19,7 +19,6 @@ class Player {
 	private boolean hasCollided = false; // whether or not the player has collided with an obstacle
 	private boolean onTrain = false;
 	
-
 	public Player() {
 		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
@@ -27,13 +26,12 @@ class Player {
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
 	}
-
+	
 	PApplet draw(PApplet c) {
 		c.pushMatrix();
 		c.translate(0, 0, pos.getZ());
 		c.fill(50, 0, 80);
-		c.imageMode(3); // rectangle is placed with (x,y) at center
-		//c.rect(pos.getX(), pos.getY(), width, height, 25);
+		c.imageMode(3);
 		SSConstants.playerSprite.display(pos.getX(), pos.getY(), width, height);
 		c.popMatrix();
 		return c;
@@ -90,11 +88,26 @@ class Player {
 		}
 	}
 	
+	/**
+	 *  returns the variable that tracks whether or not the player is on a train
+	 */
+	public Boolean checkOnTrain() {
+		return this.onTrain;
+	}
+	
+	/**
+	 * changes the floor level to be the top of the train and sets the
+	 * boolean to reflect that  
+	 */
 	public void isOnTrain() {
 		this.onTrain = true;
 		floorLvl = SSConstants.TRAIN_TOP;
 	}
 	
+	/**
+	 * changes the floor level to be the ground and sets the
+	 * boolean to reflect that  
+	 */
 	public void isOffTrain() {
 		this.onTrain = false;
 		floorLvl = SSConstants.floorLvl;
