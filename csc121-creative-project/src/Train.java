@@ -128,6 +128,22 @@ public class Train {
 		
 		if (hasRamp) {frontZ += 200;}; //changes the front z for ramp trains to be closer to the front of the ramp
 	}
+	
+	Boolean handleCollision(Player ph) {
+		if (frontZ >= ph.getPos().getZ() && 
+				   rearZ <= ph.getPos().getZ() && 
+				   ph.getBounds().getbBound() > bounds.top && 
+				   track == ph.getCurrentTrack()) {
+			   if (!hasRamp) {
+				   return true;
+			   } else {
+				   ph.setOnTrain(true);
+				   return false;
+			   }
+		   }
+		
+		return false;
+	}
 
 	@Override
 	public int hashCode() {

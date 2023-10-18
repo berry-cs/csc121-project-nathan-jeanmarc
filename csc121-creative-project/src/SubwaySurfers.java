@@ -65,7 +65,7 @@ public class SubwaySurfers {
 		obstacles.removeIf(obstacle -> obstacle.offScreen); // removes trains that are off the screen
 		obstacles.forEach(obstacle -> obstacle.update());
 
-		if (collision()) {
+		if ( checkCollision() ) {
 			System.out.println("bruh!!!");
 		}
 
@@ -99,30 +99,17 @@ public class SubwaySurfers {
 		return new SubwaySurfers(ph, trains, g, obstacles);
 	}
 
-	boolean collision() {
+	boolean checkCollision() {
 	   for (int t = 0; t < trains.size(); t++) {
 		   Train tr = trains.get(t);
 		   
-		   if (tr.frontZ >= ph.getPos().getZ() && 
-				   tr.rearZ <= ph.getPos().getZ() && 
-				   ph.getBounds().getbBound() > tr.bounds.top && 
-				   tr.track == ph.getCurrentTrack()) {
-			   if (!tr.hasRamp) {
-				   return true;
-			   } else {
-				   ph.setOnTrain(true);
-				   return false;
-			   }
-		   }
+		   return tr.handleCollision(ph);
 	   }
 	   
 	   for (int o = 0; 0 < obstacles.size(); o++) {
 		   Obstacle ob = obstacles.get(o);
 		      
-		   return (ob.frontZ >= ph.getPos().getZ() && 
-				   ob.rearZ <= ph.getPos().getZ() && 
-				   ob.bounds.top <= ph.getBounds().getbBound() &&
-				   ob.track == ph.getCurrentTrack());
+		   return ob.handleCollision(ph);
 	   }
 	   
 	   return false;

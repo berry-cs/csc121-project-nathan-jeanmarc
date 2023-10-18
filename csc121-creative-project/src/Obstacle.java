@@ -89,6 +89,13 @@ class Obstacle {
 		c.popMatrix();
 	}
 	
+	Boolean handleCollision(Player ph) {
+		return (frontZ >= ph.getPos().getZ() && 
+				   rearZ <= ph.getPos().getZ() && 
+				   bounds.top <= ph.getBounds().getbBound() &&
+				   track == ph.getCurrentTrack());
+	}
+	
 	public int hashCode() {
 		return Objects.hash(bounds, depth, frontZ, gameSpd, height, offScreen, pos, rearZ, track, width);
 	}
