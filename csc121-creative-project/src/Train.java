@@ -157,22 +157,6 @@ public class Train {
 			ph.isOffTrain();
 		}
 				return false;
-
-		/*
-		if (!hasRamp) {
-			return (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
-					&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack());
-
-		} else if ((frontZ >= ph.getPos().getZ() && frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()
-				&& rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.top
-				&& track == ph.getCurrentTrack())) {
-
-				ph.isOnTrain();
-				return false;
-			} 
-		
-		return false; */
-
 	}
 
 	@Override
