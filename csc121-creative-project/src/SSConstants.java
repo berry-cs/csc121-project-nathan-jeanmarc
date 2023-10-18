@@ -37,7 +37,6 @@ public class SSConstants {
 	
     public static final Random rgen = new Random();
     
-    public static PImage[] playerImgs = new PImage[9];
     public static Animation playerSprite;
 
 }
