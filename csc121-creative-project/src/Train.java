@@ -17,7 +17,7 @@ public class Train {
 
 	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up
 
-	Vector vel; 
+	Vector vel;
 
 	Vector pos;
 
@@ -129,7 +129,7 @@ public class Train {
 		rearZ = bounds.backZ;
 
 		if (hasRamp) {
-			frontZ += 200;
+			frontZ += SSConstants.RAMP_LENGTH; // accounts for the length of the ramp
 		}
 		; // changes the front z for ramp trains to be closer to the front of the ramp
 	}
@@ -144,13 +144,16 @@ public class Train {
 			return (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
 					&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack());
 
-		} else if ((frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
-				&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack())) {
-			ph.isOnTrain();
-			return true;
-		}
+		} else if ((frontZ >= ph.getPos().getZ() && frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()
+				&& rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.top
+				&& track == ph.getCurrentTrack())) {
 
+				ph.isOnTrain();
+				return false;
+			} 
+		
 		return false;
+
 	}
 
 	@Override
