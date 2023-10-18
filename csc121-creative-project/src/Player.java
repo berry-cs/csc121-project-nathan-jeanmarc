@@ -41,12 +41,6 @@ class Player {
 
 	/* updates this player */
 	public void update() {
-		if (onTrain) {
-			floorLvl = SSConstants.TRAIN_TOP;
-		} else {
-			floorLvl = SSConstants.floorLvl;
-		}
-
 		bounds.update(pos);
 		pos.translate(vel);
 
@@ -95,6 +89,16 @@ class Player {
 			pos = new Vector(pos.getX(), floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
 	}
+	
+	public void isOnTrain() {
+		this.onTrain = true;
+		floorLvl = SSConstants.TRAIN_TOP;
+	}
+	
+	public void isOffTrain() {
+		this.onTrain = false;
+		floorLvl = SSConstants.floorLvl;
+	}
 
 	public Vector getPos() {
 		return pos;
@@ -114,10 +118,6 @@ class Player {
 
 	public Vector getGravity() {
 		return gravity;
-	}
-
-	public void setOnTrain(boolean onTrain) {
-		this.onTrain = onTrain;
 	}
 
 	@Override

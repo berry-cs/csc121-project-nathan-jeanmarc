@@ -23,6 +23,10 @@ public class SSConstants {
 	public static final int TRAIN_TOP = floorLvl - TRAIN_HEIGHT;
 	
 	public static final int OBSTACLE_WIDTH = 260;
+	public static final int OBSTACLE_HEIGHT = 150;
+	public static final int OBSTACLE_DEPTH = 60;
+
+
 	
 
 	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };

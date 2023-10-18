@@ -9,14 +9,16 @@ import processing.core.PApplet;
  * behind each other
  */
 public class Train {
-	int track;
+	int track; // the track that the train will be on
 
 	int length; // length of the train
 	int width = SSConstants.TRAIN_WIDTH;
 	int height = SSConstants.TRAIN_HEIGHT;
-	Vector vel;
-	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up (has
-	// no speed)
+
+	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up
+
+	Vector vel; 
+
 	Vector pos;
 
 	Bounds3D bounds;
@@ -40,78 +42,78 @@ public class Train {
 	 * Renders the train on the given scene by drawing each of its frames
 	 */
 	PApplet draw(PApplet c) {
-			c.fill(100, 0, 0);
-			c.pushMatrix();
+		c.fill(100, 0, 0);
+		c.pushMatrix();
 
-			c.translate(pos.getX(), pos.getY(), pos.getZ()); // draws train body
-			c.box(width, height, length);
+		c.translate(pos.getX(), pos.getY(), pos.getZ()); // draws train body
+		c.box(width, height, length);
 
-			c.pushMatrix(); // draws front bumper
-			c.fill(60);
-			c.translate(0, height - 185, length / 2);
-			c.box(width + 10, 60, 50);
+		c.pushMatrix(); // draws front bumper
+		c.fill(60);
+		c.translate(0, height - 185, length / 2);
+		c.box(width + 10, 60, 50);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws right headlight
+		c.fill(255, 255, 100);
+		c.translate(width / 2 - 40, height - 250, length / 2 + 1);
+		c.circle(0, 0, 50);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws left headlight
+		c.fill(255, 255, 100);
+		c.translate(-width / 2 + 40, height - 250, length / 2 + 1);
+		c.circle(0, 0, 50);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws bottom middle headlight
+		c.fill(255, 255, 100);
+		c.translate(0, height - 260, length / 2 + 1);
+		c.circle(0, 0, 35);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws top middle headlight
+		c.fill(255, 255, 100);
+		c.translate(0, 0, length / 2 + 1);
+		c.circle(0, 0, 35);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws left window pane
+		c.fill(0, 60, 100);
+		c.translate(-width / 2 + 64, -75, length / 2 + 1);
+		c.rect(0, 0, (width - 10) / 2, 75);
+		c.popMatrix();
+
+		c.pushMatrix(); // draws right window pane
+		c.fill(0, 60, 100);
+		c.translate(width / 2 - 64, -75, length / 2 + 1);
+		c.rect(0, 0, (width - 10) / 2, 75);
+		c.popMatrix();
+
+		if (hasRamp) {
+			c.pushMatrix(); // draws the ramp
+			c.fill(50, 30, 10);
+			c.translate(0, 0, length / 2 + 125);
+			c.rotateX(10.1f);
+			c.rect(0, 0, width, height + 70);
 			c.popMatrix();
 
-			c.pushMatrix(); // draws right headlight
-			c.fill(255, 255, 100);
-			c.translate(width / 2 - 40, height - 250, length / 2 + 1);
-			c.circle(0, 0, 50);
+			c.pushMatrix(); // draws right rail
+			c.fill(40);
+			c.translate(width / 2 - 20, 0, length / 2 + 125);
+			c.rotateX(10.1f);
+			c.box(40, height + 70, 35);
 			c.popMatrix();
 
-			c.pushMatrix(); // draws left headlight
-			c.fill(255, 255, 100);
-			c.translate(-width / 2 + 40, height - 250, length / 2 + 1);
-			c.circle(0, 0, 50);
+			c.pushMatrix(); // draws left rail
+			c.fill(40);
+			c.translate(-width / 2 + 20, 0, length / 2 + 125);
+			c.rotateX(10.1f);
+			c.box(40, height + 70, 35);
 			c.popMatrix();
+		}
 
-			c.pushMatrix(); // draws bottom middle headlight
-			c.fill(255, 255, 100);
-			c.translate(0, height - 260, length / 2 + 1);
-			c.circle(0, 0, 35);
-			c.popMatrix();
-
-			c.pushMatrix(); // draws top middle headlight
-			c.fill(255, 255, 100);
-			c.translate(0, 0, length / 2 + 1);
-			c.circle(0, 0, 35);
-			c.popMatrix();
-
-			c.pushMatrix(); // draws left window pane
-			c.fill(0, 60, 100);
-			c.translate(-width / 2 + 64, -75, length / 2 + 1);
-			c.rect(0, 0, (width - 10) / 2, 75);
-			c.popMatrix();
-
-			c.pushMatrix(); // draws right window pane
-			c.fill(0, 60, 100);
-			c.translate(width / 2 - 64, -75, length / 2 + 1);
-			c.rect(0, 0, (width - 10) / 2, 75);
-			c.popMatrix();
-			
-			if (hasRamp) {
-				c.pushMatrix();	// draws the ramp
-				c.fill(50, 30, 10);
-				c.translate(0 ,0, length/2+125);
-				c.rotateX(10.1f);
-				c.rect(0, 0, width, height+70);
-				c.popMatrix();
-				
-				c.pushMatrix();	// draws right rail
-				c.fill(40);
-				c.translate(width/2-20 ,0, length/2+125);
-				c.rotateX(10.1f);
-				c.box(40, height+70, 35);
-				c.popMatrix();
-				
-				c.pushMatrix();	// draws left rail
-				c.fill(40);
-				c.translate(-width/2+20 ,0, length/2+125);
-				c.rotateX(10.1f);
-				c.box(40, height+70, 35);
-				c.popMatrix();
-			}
-
-			c.popMatrix();
+		c.popMatrix();
 
 		return c;
 	}
@@ -125,23 +127,29 @@ public class Train {
 		bounds.update(pos);
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;
-		
-		if (hasRamp) {frontZ += 200;}; //changes the front z for ramp trains to be closer to the front of the ramp
+
+		if (hasRamp) {
+			frontZ += 200;
+		}
+		; // changes the front z for ramp trains to be closer to the front of the ramp
 	}
-	
+
+	/**
+	 * checks collision with the given player and handles it correctly depending on
+	 * if the train has a ramp or does not
+	 */
 	Boolean handleCollision(Player ph) {
-		if (frontZ >= ph.getPos().getZ() && 
-				   rearZ <= ph.getPos().getZ() && 
-				   ph.getBounds().getbBound() > bounds.top && 
-				   track == ph.getCurrentTrack()) {
-			   if (!hasRamp) {
-				   return true;
-			   } else {
-				   ph.setOnTrain(true);
-				   return false;
-			   }
-		   }
-		
+
+		if (!hasRamp) {
+			return (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
+					&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack());
+
+		} else if ((frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
+				&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack())) {
+			ph.isOnTrain();
+			return true;
+		}
+
 		return false;
 	}
 
