@@ -5,7 +5,7 @@ import processing.event.*;
  * Provides the scaffolding to launch a Processing application
  */
 public class SSApp extends PApplet {
-	SubwaySurfers w;
+	private SubwaySurfers w;
 
 	public void settings() {
 		this.size(SSConstants.WIDTH, SSConstants.HEIGHT, P3D);

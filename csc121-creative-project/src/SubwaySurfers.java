@@ -103,7 +103,10 @@ public class SubwaySurfers {
 	   for (int t = 0; t < trains.size(); t++) {
 		   Train tr = trains.get(t);
 		   
-		   if (tr.frontZ >= ph.getPos().getZ() && tr.rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > tr.bounds.top && tr.track == ph.getCurrentTrack()) {
+		   if (tr.frontZ >= ph.getPos().getZ() && 
+				   tr.rearZ <= ph.getPos().getZ() && 
+				   ph.getBounds().getbBound() > tr.bounds.top && 
+				   tr.track == ph.getCurrentTrack()) {
 			   if (!tr.hasRamp) {
 				   return true;
 			   } else {
