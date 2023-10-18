@@ -13,7 +13,7 @@ public class SSApp extends PApplet {
 
 	public void setup() {
 		loadImages();
-		
+
 		w = new SubwaySurfers();
 	}
 
@@ -31,11 +31,13 @@ public class SSApp extends PApplet {
 	}
 
 	void loadImages() {
-		for (int i = 0; i < SSConstants.playerImgs.length; i++) {
-			SSConstants.playerImgs[i] = loadImage("subwaysurfer" + i + ".png");
+		PImage[] playerImgs = new PImage[9];
+
+		for (int i = 0; i < playerImgs.length; i++) {
+			playerImgs[i] = loadImage("subwaysurfer" + i + ".png");
 		}
-		
-		SSConstants.playerSprite = new Animation(SSConstants.playerImgs, 75, this);
+
+		SSConstants.playerSprite = new Animation(playerImgs, 75, this);
 	}
 
 }
