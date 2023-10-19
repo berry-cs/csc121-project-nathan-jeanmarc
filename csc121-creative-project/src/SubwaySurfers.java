@@ -57,21 +57,21 @@ public class SubwaySurfers {
 	 */
 	public SubwaySurfers update() {
 		ph.update();
-
-		trains.removeIf(train -> (train.pos.getZ() - train.length) >= SSConstants.DELETE_POINT); // removes trains that are
-																							// off the screen
-		trains.forEach(train -> train.update());
-
-		obstacles.removeIf(obstacle -> obstacle.offScreen); // removes trains that are off the screen
-		obstacles.forEach(obstacle -> obstacle.update());
-
+		
 		if ( checkCollision() ) {
 			System.out.println("bruh!!!");
 			gameOver();
 		}
 
-		return new SubwaySurfers(ph, trains, g, obstacles);
+		trains.removeIf(train -> train.offScreen); // removes trains that are																				// off the screen
+		trains.forEach(train -> train.update());
 
+		obstacles.removeIf(obstacle -> obstacle.offScreen); // removes trains that are off the screen
+		obstacles.forEach(obstacle -> obstacle.update());
+
+		
+
+		return new SubwaySurfers(ph, trains, g, obstacles);
 	}
 
 	/**

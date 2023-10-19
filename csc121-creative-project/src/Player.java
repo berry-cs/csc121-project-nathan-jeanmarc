@@ -16,7 +16,6 @@ class Player {
 
 	private int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
-	private boolean hasCollided = false; // whether or not the player has collided with an obstacle
 	private boolean onTrain = false;
 	
 	public Player() {
@@ -135,7 +134,7 @@ class Player {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bounds, currentTrack, floorLvl, gravity, hasCollided, height, onTrain, pos, vel, width);
+		return Objects.hash(bounds, currentTrack, floorLvl, gravity, height, onTrain, pos, vel, width);
 	}
 
 	@Override
@@ -148,9 +147,10 @@ class Player {
 			return false;
 		Player other = (Player) obj;
 		return Objects.equals(bounds, other.bounds) && currentTrack == other.currentTrack && floorLvl == other.floorLvl
-				&& Objects.equals(gravity, other.gravity) && hasCollided == other.hasCollided && height == other.height
-				&& onTrain == other.onTrain && Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel)
-				&& width == other.width;
+				&& Objects.equals(gravity, other.gravity) && height == other.height && onTrain == other.onTrain
+				&& Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel) && width == other.width;
 	}
+
+	
 
 }

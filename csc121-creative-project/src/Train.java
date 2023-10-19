@@ -26,6 +26,8 @@ public class Train {
 	float rearZ; // z for the rear of the train
 	float frontZ; // z for the front of the train
 
+	boolean offScreen = false; // boolean for when the obstacle has moved off the screen
+
 	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
@@ -127,36 +129,40 @@ public class Train {
 		bounds.update(pos);
 		frontZ = bounds.frontZ;
 		rearZ = bounds.backZ;
-
-		if (hasRamp) {
-			frontZ += SSConstants.RAMP_LENGTH; // accounts for the length of the ramp
+		
+		if (hasRamp) { // changes the front z for ramp trains to account for the length of the ramp
+			frontZ += SSConstants.RAMP_LENGTH;
 		}
-		; // changes the front z for ramp trains to be closer to the front of the ramp
+
+		offScreen = rearZ >= SSConstants.DELETE_POINT;
 	}
 
 	/**
-	 * Handles interaction between the given player and this train 
-	 * Reacts differently if train has a ramp or does not
+	 * Handles interaction between the given player and this train Reacts
+	 * differently if train has a ramp or does not
 	 */
 	Boolean handleCollision(Player ph) {
-		
-		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ()
-				&& ph.getBounds().getbBound() > bounds.top && track == ph.getCurrentTrack()) {
-					if (!hasRamp) {
-						return true;
-					} else if (frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()) {
-						ph.isOnTrain();
-						return false;
-					} else {
-						return true;
-					}
-					
-				}
-		
-		if (ph.checkOnTrain() && rearZ >= ph.getPos().getZ() || ph.getCurrentTrack() != track) {
-			ph.isOffTrain();
-		}
+
+		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.top
+				&& track == ph.getCurrentTrack()) {
+			System.out.println("cuzzo");
+			if (!hasRamp) {
+				return true;
+			} else if (frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()) {
+				ph.isOnTrain();
 				return false;
+			} else {
+				return true;
+			}
+
+		}
+
+		if (ph.checkOnTrain() && rearZ >= ph.getPos().getZ() || ph.checkOnTrain() && ph.getCurrentTrack() != track) {
+			ph.isOffTrain();
+			System.out.println("bitch");
+		}
+		
+		return false;
 	}
 
 	@Override
