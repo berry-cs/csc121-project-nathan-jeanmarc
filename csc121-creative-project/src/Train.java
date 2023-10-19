@@ -4,11 +4,8 @@ import processing.core.PApplet;
 
 /**
  * Represents a train obstacle that moves toward the player
- * 
- * A Train is made up of a list of TrainSprites (frames) that are rendered
- * behind each other
  */
-public class Train {
+public class Train implements IObstacle {
 	int track; // the track that the train will be on
 
 	int length; // length of the train
@@ -43,7 +40,7 @@ public class Train {
 	/**
 	 * Renders the train on the given scene by drawing each of its frames
 	 */
-	PApplet draw(PApplet c) {
+	public void draw(PApplet c) {
 		c.fill(100, 0, 0);
 		c.pushMatrix();
 
@@ -117,14 +114,13 @@ public class Train {
 
 		c.popMatrix();
 
-		return c;
 	}
 
 	/**
 	 * Updates the position of the train by adding the velocity, also updates the
 	 * bounds
 	 */
-	void update() {
+	public void update() {
 		pos.newZ(pos.getZ() + vel.getZ());
 		bounds.update(pos);
 		frontZ = bounds.frontZ;
@@ -141,7 +137,7 @@ public class Train {
 	 * Handles interaction between the given player and this train Reacts
 	 * differently if train has a ramp or does not
 	 */
-	Boolean handleCollision(Player ph) {
+	public Boolean handleCollision(Player ph) {
 
 		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.top
 				&& track == ph.getCurrentTrack()) {

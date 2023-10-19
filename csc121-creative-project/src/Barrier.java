@@ -2,7 +2,10 @@ import java.util.Objects;
 
 import processing.core.PApplet;
 
-class Obstacle {
+/**
+ * Represents a barrier obstacle that moves toward the player
+ */
+class Barrier implements IObstacle {
 
 	Vector pos;
 	int width = SSConstants.OBSTACLE_WIDTH;
@@ -20,7 +23,7 @@ class Obstacle {
 
 	float gameSpd; // the speed of the game (how fast the obstacle will move
 
-	Obstacle(int track) {
+	Barrier(int track) {
 		this.track = track;
 		pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.ENVIRONMENT_Y - 30,
 				SSConstants.TRAIN_INITIAL_Z);
@@ -30,7 +33,7 @@ class Obstacle {
 	/**
 	 * updates the obstacles position and bounds
 	 */
-	void update() {
+	public void update() {
 		pos.newZ(pos.getZ() + SSConstants.gameSpd);
 		offScreen = rearZ >= SSConstants.DELETE_POINT;
 
@@ -40,7 +43,7 @@ class Obstacle {
 		frontZ = bounds.frontZ;
 	}
 
-	void draw(PApplet c) {
+	public void draw(PApplet c) {
 		c.pushMatrix();
 		c.fill(70);
 		c.translate(pos.getX(), pos.getY(), pos.getZ());
@@ -97,9 +100,9 @@ class Obstacle {
 	/**
 	 * handles collision with the given player, returns true if bounds intersect
 	 */
-	Boolean handleCollision(Player ph) {
-		return (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && bounds.top <= ph.getBounds().getbBound()
-				&& track == ph.getCurrentTrack());
+	public Boolean handleCollision(Player p) {
+		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.top <= p.getBounds().getbBound()
+				&& track == p.getCurrentTrack());
 	}
 
 	public int hashCode() {
@@ -113,7 +116,7 @@ class Obstacle {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Obstacle other = (Obstacle) obj;
+		Barrier other = (Barrier) obj;
 		return Objects.equals(bounds, other.bounds) && depth == other.depth
 				&& Float.floatToIntBits(frontZ) == Float.floatToIntBits(other.frontZ)
 				&& Float.floatToIntBits(gameSpd) == Float.floatToIntBits(other.gameSpd) && height == other.height

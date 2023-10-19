@@ -5,33 +5,24 @@ import processing.core.*;
 import processing.event.KeyEvent;
 
 public class SubwaySurfers {
-	private Player ph;
+	private Player p;
 
 	private Environment g;
-
-	//private ArrayList<Train> trains;
-
-	private ArrayList<Obstacle> obstacles;
-	
-	
+		
 	/*
 	 * Create new game with player at given x, y and train on the left track
 	 */
 	public SubwaySurfers() {
-		this.ph = new Player();
-		//this.trains = new ArrayList<Train>();
-		this.obstacles = new ArrayList<Obstacle>();
+		this.p = new Player();
 		this.g = new Environment();	
 	}
 
 	/*
 	 * Create new object with given player and train list
 	 */
-	public SubwaySurfers(Player ph, /*ArrayList<Train> t,*/ Environment g, ArrayList<Obstacle> o) {
-		this.ph = ph;
-		//this.trains = t;
+	public SubwaySurfers(Player ph,Environment g) {
+		this.p = ph;
 		this.g = g;
-		this.obstacles = o;
 	}
 
 	/**
@@ -41,14 +32,15 @@ public class SubwaySurfers {
 		// colors the canvas background
 		c.background(45, 160, 230);
 		//c.lights();  // this is where lights functions go, needs tweaking to work. look at documentation
-		Spawner.getAllTrains().forEach(train -> train.draw(c));
-		obstacles.forEach(obstacle -> obstacle.draw(c));
+		
+		Spawner.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
+		
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-		c.camera(ph.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - ph.getBounds().getbBound()), SSConstants.CAMERA_Z,
-				ph.getPos().getX(), SSConstants.HEIGHT - (SSConstants.floorLvl - ph.getBounds().getbBound()), 0, 0, 1, 0);
+		c.camera(p.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - p.getBounds().getbBound()), SSConstants.CAMERA_Z,
+				p.getPos().getX(), SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
 		g.draw(c);
-		ph.draw(c);
+		p.draw(c);
 		return c;
 	}
 
@@ -56,7 +48,7 @@ public class SubwaySurfers {
 	 * Produces an updated world where the player and obstacles move if needed
 	 */
 	public SubwaySurfers update() {
-		ph.update();
+		p.update();
 		
 		Spawner.spawn();
 		
@@ -65,14 +57,9 @@ public class SubwaySurfers {
 			gameOver();
 		}
 
-		Spawner.updateTrains(); // updates all trains
+		Spawner.updateObstacles(); // updates all trains
 
-		obstacles.removeIf(obstacle -> obstacle.offScreen); // removes trains that are off the screen
-		obstacles.forEach(obstacle -> obstacle.update());
-
-		
-
-		return new SubwaySurfers(ph, /*trains,*/ g, obstacles);
+		return new SubwaySurfers(p, g);
 	}
 
 	/**
@@ -82,7 +69,7 @@ public class SubwaySurfers {
 	 * @return the updated game
 	 */
 	public SubwaySurfers keyPressed(KeyEvent kev) {
-		ph.move(kev);
+		p.move(kev);
 
 		if (kev.getKey() == '1') {
 			Spawner.addTrain(1);
@@ -91,27 +78,21 @@ public class SubwaySurfers {
 		} else if (kev.getKey() == '3') {
 			Spawner.addTrain(3);
 		} else if (kev.getKey() == '4') {
-			obstacles.add(new Obstacle(1));
+			Spawner.addBarrier(1);
 		} else if (kev.getKey() == '5') {
-			obstacles.add(new Obstacle(2));
+			Spawner.addBarrier(2);
 		} else if (kev.getKey() == '6') {
-			obstacles.add(new Obstacle(3));
+			Spawner.addBarrier(3);
 		}
 
-		return new SubwaySurfers(ph, /*trains,*/ g, obstacles);
+		return new SubwaySurfers(p, g);
 	}
 
 	boolean checkCollision() {
-	   for (int t = 0; t < Spawner.getAllTrains().size(); t++) {
-		   Train tr = Spawner.getAllTrains().get(t);
+	   for (int t = 0; t < Spawner.getAllObstacles().size(); t++) {
+		   IObstacle ob = Spawner.getAllObstacles().get(t);
 		   
-		   return tr.handleCollision(ph);
-	   }
-	   
-	   for (int o = 0; 0 < obstacles.size(); o++) {
-		   Obstacle ob = obstacles.get(o);
-		      
-		   return ob.handleCollision(ph);
+		   return ob.handleCollision(p);
 	   }
 	   
 	   return false;

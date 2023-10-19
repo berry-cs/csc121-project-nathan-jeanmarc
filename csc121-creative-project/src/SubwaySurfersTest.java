@@ -88,9 +88,9 @@ class SubwaySurfersTest {
 	
 	// Obstacle Tests
 	
-	Obstacle o1 = new Obstacle(1);
-	Obstacle o2 = new Obstacle(2);
-	Obstacle o3 = new Obstacle(3);
+	Barrier o1 = new Barrier(1);
+	Barrier o2 = new Barrier(2);
+	Barrier o3 = new Barrier(3);
 	
 	@Test
 	void testObstacleUpdate() {

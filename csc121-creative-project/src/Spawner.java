@@ -6,26 +6,70 @@ public class Spawner {
 	static ArrayList<Train> t2Trains = new ArrayList<Train>(); // trains on track 2
 	static ArrayList<Train> t3Trains = new ArrayList<Train>(); // trains on track 3
 
-	static ArrayList<Train> allTrains = new ArrayList<Train>(); // combined list of all trains
+	static ArrayList<Barrier> t1Barriers = new ArrayList<Barrier>(); // trains on track 1
+	static ArrayList<Barrier> t2Barriers = new ArrayList<Barrier>(); // trains on track 2
+	static ArrayList<Barrier> t3Barriers = new ArrayList<Barrier>(); // trains on track 3
+
+	static ArrayList<IObstacle> allObstacles = new ArrayList<IObstacle>(); // combined list of all trains
 
 	static double chance;
+	static double barrierChance;
 
+	/**
+	 * If the chance falls below the spawn threshold, attempts to spawn trains based
+	 * on individual track thresholds
+	 */
 	static void spawn() {
 		chance = SSConstants.rgen.nextDouble();
-		
+
 		if (chance <= SSConstants.overallSpawnRate) {
-			
-			chance = SSConstants.rgen.nextDouble();
-			
-			if (chance <= SSConstants.t1SpawnRate) {
-				addTrain(1);
+
+			chance = SSConstants.rgen.nextDouble(); // can be removed or left, just adds more variability
+
+			if (chance <= SSConstants.t1SpawnRate && chance > SSConstants.t2SpawnRate) {
+				barrierChance = SSConstants.rgen.nextDouble();
+				
+				if (barrierChance <= SSConstants.barrierRate) {
+					addBarrier(1);
+				} else {
+					addTrain(1);
+				}
 			}
 			if (chance <= SSConstants.t2SpawnRate) {
-				addTrain(2);
+				barrierChance = SSConstants.rgen.nextDouble();
+				
+				if (barrierChance <= SSConstants.barrierRate) {
+					addBarrier(2);
+				} else {
+					addTrain(2);
+				}
 			}
-			if (chance <= SSConstants.t3SpawnRate) {
-				addTrain(3);
+			if (chance <= SSConstants.t3SpawnRate && chance > SSConstants.t2SpawnRate) {
+				barrierChance = SSConstants.rgen.nextDouble(); 
+				
+				if (barrierChance <= SSConstants.barrierRate) {
+					addBarrier(3);
+				} else {
+					addTrain(3);
+				}
 			}
+		}
+	}
+
+	/**
+	 * Adds a barrier to the given track
+	 */
+	static void addBarrier(int track) {
+		switch (track) {
+		case 1:
+			t1Barriers.add(new Barrier(1));
+			break;
+		case 2:
+			t2Barriers.add(new Barrier(1));
+			break;
+		case 3:
+			t3Barriers.add(new Barrier(1));
+			break;
 		}
 	}
 
@@ -50,30 +94,42 @@ public class Spawner {
 	}
 
 	/**
-	 * Returns a combined list of all the trains in the three track arrays
+	 * Returns a combined list of all the obstacles in the three track arrays
 	 */
-	static ArrayList<Train> getAllTrains() {
-		if (allTrains.size() > 0) {
-			allTrains.clear();
+	static ArrayList<IObstacle> getAllObstacles() {
+		if (allObstacles.size() > 0) {
+			allObstacles.clear();
 		}
-		allTrains.addAll(t1Trains);
-		allTrains.addAll(t2Trains);
-		allTrains.addAll(t3Trains);
-		return allTrains;
+		allObstacles.addAll(t1Trains);
+		allObstacles.addAll(t2Trains);
+		allObstacles.addAll(t3Trains);
+		allObstacles.addAll(t1Barriers);
+		allObstacles.addAll(t2Barriers);
+		allObstacles.addAll(t3Barriers);
+		return allObstacles;
 	}
 
 	/**
 	 * Updates all the trains in each track
 	 */
-	static void updateTrains() {
-		t1Trains.removeIf(train -> train.offScreen); // off the screen
-		t1Trains.forEach(train -> train.update());
+	static void updateObstacles() {
+		t1Trains.removeIf(ob -> ob.offScreen); // off the screen
+		t1Trains.forEach(ob -> ob.update());
 
-		t2Trains.removeIf(train -> train.offScreen); // off the screen
-		t2Trains.forEach(train -> train.update());
+		t2Trains.removeIf(ob -> ob.offScreen); // off the screen
+		t2Trains.forEach(ob -> ob.update());
 
-		t3Trains.removeIf(train -> train.offScreen); // off the screen
-		t3Trains.forEach(train -> train.update());
+		t3Trains.removeIf(ob -> ob.offScreen); // off the screen
+		t3Trains.forEach(ob -> ob.update());
+		
+		t1Barriers.removeIf(ob -> ob.offScreen); // off the screen
+		t1Barriers.forEach(ob -> ob.update());
+
+		t2Barriers.removeIf(ob -> ob.offScreen); // off the screen
+		t2Barriers.forEach(ob -> ob.update());
+
+		t3Barriers.removeIf(ob -> ob.offScreen); // off the screen
+		t3Barriers.forEach(ob -> ob.update());
 	}
 
 }

@@ -31,10 +31,11 @@ public class SSConstants {
 	
 
 	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };
-	public static final double overallSpawnRate = 0.25;
-	public static final double t1SpawnRate = 0.009; 
-	public static final double t2SpawnRate = 0.005; 
-	public static final double t3SpawnRate = 0.006; 
+	public static final double overallSpawnRate = 0.85;
+	public static final double t1SpawnRate = 0.01; 
+	public static final double t2SpawnRate = 0.005; // needs to be the lowest out of the three
+	public static final double t3SpawnRate = 0.0085; 
+	public static final double barrierRate = 0.5; // chance that a barrier is spawned instead of a train
 
 	
 	
