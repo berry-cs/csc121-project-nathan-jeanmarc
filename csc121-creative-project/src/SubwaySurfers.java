@@ -58,6 +58,8 @@ public class SubwaySurfers {
 	public SubwaySurfers update() {
 		ph.update();
 		
+		Spawner.spawn();
+		
 		if ( checkCollision() ) {
 			System.out.println("bruh!!!");
 			gameOver();

@@ -31,6 +31,11 @@ public class SSConstants {
 	
 
 	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };
+	public static final double overallSpawnRate = 0.25;
+	public static final double t1SpawnRate = 0.009; 
+	public static final double t2SpawnRate = 0.006; 
+	public static final double t3SpawnRate = 0.005; 
+
 	
 	
 	public static final int ENVIRONMENT_Y = 820;
