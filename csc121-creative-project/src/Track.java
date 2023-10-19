@@ -1,18 +1,18 @@
 import java.util.Objects;
 
 public class Track {
-    int xPos;
+	private int xPos;
 
-    public Track(int xPos) {
-        this.xPos = xPos;
-    }
+	Track(int xPos) {
+		this.xPos = xPos;
+	}
 
-    /**
-     * @return the xPos
-     */
-    public int getX() {
-        return xPos;
-    }
+	/**
+	 * @return the xPos
+	 */
+	public int getX() {
+		return xPos;
+	}
 
 	@Override
 	public int hashCode() {
@@ -31,4 +31,3 @@ public class Track {
 		return xPos == other.xPos;
 	}
 }
-

@@ -2,18 +2,18 @@ import processing.core.PApplet;
 
 class Building {
 
-	int size;
+	private int size;
 
-	int width = 600;
-	int height;
-	int depth = 600;
+	private int width = 600;
+	private int height;
+	private int depth = 600;
 
-	boolean onRight;
-	boolean offScreen;
+	private boolean onRight;
+	private boolean offScreen;
 	
-	static int spawnPoint = SSConstants.TRAIN_INITIAL_Z - 1000;
+	private static int spawnPoint = SSConstants.TRAIN_INITIAL_Z - 1000;
 
-	Vector pos;
+	private Vector pos;
 
 	Building(float z, int size, boolean onRight) {
 		this.size = size;
@@ -67,5 +67,9 @@ class Building {
 		} else {
 			pos = pos.newX(-800);
 		}
+	}
+
+	public Vector getPos() {
+		return pos;
 	}
 }

@@ -1,13 +1,13 @@
 import processing.core.PApplet;
 
 class TrackBoards {
-	int width = 200;
-	int height = 15;
-	int depth = 50;
+	private int width = 200;
+	private int height = 15;
+	private int depth = 50;
 	
-	Vector pos;
+	private Vector pos;
 	
-	boolean offScreen = false;
+	private boolean offScreen = false;
 	
 	TrackBoards(float z) {
 		pos = new Vector(0, SSConstants.ENVIRONMENT_Y, z);
@@ -45,5 +45,15 @@ class TrackBoards {
 			offScreen = false;
 		}
 	}
+
+	public Vector getPos() {
+		return pos;
+	}
+
+	public boolean isOffScreen() {
+		return offScreen;
+	}
+	
+	
 
 }

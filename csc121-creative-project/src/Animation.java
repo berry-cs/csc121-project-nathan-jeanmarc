@@ -2,22 +2,17 @@ import processing.core.*;
 
 class Animation {
 	// creates an image array and variable
-	PImage[] imgs;
-	PImage displayImg;
+	private PImage[] imgs;
+	private PImage displayImg;
 
 	// variables for controlling animation
-	int imgNum;
-	int index;
+	private int imgNum;
+	private int index;
 
 	// variables for the timer
-	float startTime;
-	float endTime;
-	float interval;
-
-	// variables for the position and size
-	float xPos;
-	float yPos;
-	float size;
+	private float startTime;
+	private float endTime;
+	private float interval;
 
 	// controls when the animation is running
 	boolean isAnimating = true;
@@ -35,10 +30,10 @@ class Animation {
 		startTime = c.millis();
 	}
 
-// takes in x and y positions and a size
+// takes in x and y positions and a dimensions
 	void display(float x, float y, int width, int height) {
 		index = imgs.length;
-		PImage displayImg = imgs[imgNum];
+		displayImg = imgs[imgNum];
 		displayImg.resize(width, height);
 		endTime = c.millis();
 

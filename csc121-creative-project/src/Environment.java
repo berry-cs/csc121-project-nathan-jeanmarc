@@ -3,13 +3,13 @@ import processing.core.PApplet;
 
 class Environment {
 
-	int width = 12000;
-	int height = 9500; 
+	private int width = 12000;
+	private int height = 9500; 
 
-	Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
+	private Vector pos = new Vector(SSConstants.WIDTH/2, SSConstants.HEIGHT/2, 200);
 	
-	ArrayList<TrackBoards> boards;
-	ArrayList<Building> buildings;
+	private ArrayList<TrackBoards> boards;
+	private ArrayList<Building> buildings;
 	
 	Environment() {
 		
@@ -18,18 +18,18 @@ class Environment {
 		boards.add(new TrackBoards(SSConstants.BOARD_INITIAL_Z));
 		
 		for (int i = 1; i < 30; i++) {
-			boards.add(new TrackBoards(boards.get(i-1).pos.getZ() + 200));
+			boards.add(new TrackBoards(boards.get(i-1).getPos().getZ() + 200));
 		} 
 		
 		// adds the buildings
 		buildings = new ArrayList<Building>();
-		buildings.add(new Building(Building.spawnPoint, 1, false));
+		buildings.add(new Building(SSConstants.BUILDING_SPAWNPOINT, 1, false));
 		for (int i = 0; i < 6; i++) {
-			buildings.add(new Building(buildings.get(buildings.size()-1).pos.getZ() + 800, SSConstants.rgen.nextInt(3), false));
+			buildings.add(new Building(buildings.get(buildings.size()-1).getPos().getZ() + 800, SSConstants.rgen.nextInt(3), false));
 		}
-		buildings.add(new Building(Building.spawnPoint, 2, true));
+		buildings.add(new Building(SSConstants.BUILDING_SPAWNPOINT, 2, true));
 		for (int i = 0; i < 6; i++) {
-			buildings.add(new Building(buildings.get(buildings.size()-1).pos.getZ() + 800, SSConstants.rgen.nextInt(3), true));
+			buildings.add(new Building(buildings.get(buildings.size()-1).getPos().getZ() + 800, SSConstants.rgen.nextInt(3), true));
 		}
 		
 	}

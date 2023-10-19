@@ -6,24 +6,24 @@ import processing.core.PApplet;
  * Represents a train obstacle that moves toward the player
  */
 public class Train implements IObstacle {
-	int track; // the track that the train will be on
+	private int track; // the track that the train will be on
 
-	int length; // length of the train
-	int width = SSConstants.TRAIN_WIDTH;
-	int height = SSConstants.TRAIN_HEIGHT;
+	private int length; // length of the train
+	private int width = SSConstants.TRAIN_WIDTH;
+	private int height = SSConstants.TRAIN_HEIGHT;
 
-	boolean hasRamp; // whether or not the train has a ramp on the front the player can run up
+	private boolean hasRamp; // whether or not the train has a ramp on the front the player can run up
 
-	Vector vel;
+	private Vector vel;
 
-	Vector pos;
+	private Vector pos;
 
-	Bounds3D bounds;
+	private Bounds3D bounds;
 
-	float rearZ; // z for the rear of the train
-	float frontZ; // z for the front of the train
+	private float rearZ; // z for the rear of the train
+	private float frontZ; // z for the front of the train
 
-	boolean offScreen = false; // boolean for when the obstacle has moved off the screen
+	private boolean offScreen = false; // boolean for when the obstacle has moved off the screen
 
 	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
@@ -123,8 +123,8 @@ public class Train implements IObstacle {
 	public void update() {
 		pos.newZ(pos.getZ() + vel.getZ());
 		bounds.update(pos);
-		frontZ = bounds.frontZ;
-		rearZ = bounds.backZ;
+		frontZ = bounds.getFrontZ();
+		rearZ = bounds.getBackZ();
 		
 		if (hasRamp) { // changes the front z for ramp trains to account for the length of the ramp
 			frontZ += SSConstants.RAMP_LENGTH;
@@ -139,7 +139,7 @@ public class Train implements IObstacle {
 	 */
 	public Boolean handleCollision(Player ph) {
 
-		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.top
+		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.getTop()
 				&& track == ph.getCurrentTrack()) {
 			System.out.println("cuzzo");
 			if (!hasRamp) {
@@ -159,6 +159,22 @@ public class Train implements IObstacle {
 		}
 		
 		return false;
+	}
+
+	public int getLength() {
+		return length;
+	}
+
+	public Vector getPos() {
+		return pos;
+	}
+	
+	public Vector getVel() {
+		return vel;
+	}
+
+	public boolean isOffScreen() {
+		return offScreen;
 	}
 
 	@Override

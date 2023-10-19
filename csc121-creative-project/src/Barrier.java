@@ -7,21 +7,22 @@ import processing.core.PApplet;
  */
 class Barrier implements IObstacle {
 
-	Vector pos;
-	int width = SSConstants.OBSTACLE_WIDTH;
-	int height = SSConstants.OBSTACLE_HEIGHT;
-	int depth = SSConstants.OBSTACLE_DEPTH;
+	private Vector pos;
+	
+	private int width = SSConstants.OBSTACLE_WIDTH;
+	private int height = SSConstants.OBSTACLE_HEIGHT;
+	private int depth = SSConstants.OBSTACLE_DEPTH;
 
-	Bounds3D bounds;
+	private Bounds3D bounds;
 
-	float rearZ;  // z value for the rear of the obstacle
-	float frontZ; // z value for the front of the obstacle
+	private float rearZ;  // z value for the rear of the obstacle
+	private float frontZ; // z value for the front of the obstacle
 
-	boolean offScreen = false;  // boolean for when the obstacle has moved off the screen
+	private boolean offScreen = false;  // boolean for when the obstacle has moved off the screen
 
-	int track;  // the track that the obstacle will be on
+	private int track;  // the track that the obstacle will be on
 
-	float gameSpd; // the speed of the game (how fast the obstacle will move
+	private float gameSpd; // the speed of the game (how fast the obstacle will move
 
 	Barrier(int track) {
 		this.track = track;
@@ -39,8 +40,8 @@ class Barrier implements IObstacle {
 
 		bounds.update(pos);
 		
-		rearZ = bounds.backZ;
-		frontZ = bounds.frontZ;
+		rearZ = bounds.getBackZ();
+		frontZ = bounds.getFrontZ();
 	}
 
 	public void draw(PApplet c) {
@@ -101,8 +102,16 @@ class Barrier implements IObstacle {
 	 * handles collision with the given player, returns true if bounds intersect
 	 */
 	public Boolean handleCollision(Player p) {
-		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.top <= p.getBounds().getbBound()
+		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.getTop() <= p.getBounds().getbBound()
 				&& track == p.getCurrentTrack());
+	}
+
+	public Vector getPos() {
+		return pos;
+	}
+
+	public boolean isOffScreen() {
+		return offScreen;
 	}
 
 	public int hashCode() {

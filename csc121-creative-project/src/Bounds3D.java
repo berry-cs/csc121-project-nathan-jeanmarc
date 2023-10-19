@@ -1,15 +1,16 @@
 import java.util.Objects;
 
 class Bounds3D {
-	float frontZ;
-	float backZ;
-	float top;
 	
-	Vector pos;
+	private float frontZ;
+	private float backZ;
+	private float top;
 	
-	int width;
-	int height;
-	int depth;
+	private Vector pos;
+	
+	private int width;
+	private int height;
+	private int depth;
 	
 	
 	Bounds3D(Vector pos, int width, int height, int depth) {
@@ -42,6 +43,18 @@ class Bounds3D {
 		this.top = SSConstants.floorLvl - height;
 		
 		return this;
+	}
+
+	public float getFrontZ() {
+		return frontZ;
+	}
+
+	public float getBackZ() {
+		return backZ;
+	}
+
+	public float getTop() {
+		return top;
 	}
 
 	public int hashCode() {

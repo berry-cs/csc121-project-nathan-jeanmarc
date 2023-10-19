@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.Random;
-
 import processing.core.*;
 import processing.event.KeyEvent;
 
