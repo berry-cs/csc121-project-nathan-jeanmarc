@@ -67,6 +67,7 @@ public class SubwaySurfers {
 
 		if ( checkCollision() ) {
 			System.out.println("bruh!!!");
+			gameOver();
 		}
 
 		return new SubwaySurfers(ph, trains, g, obstacles);
@@ -114,4 +115,8 @@ public class SubwaySurfers {
 	   
 	   return false;
    }
+	
+	void gameOver() {
+		SSConstants.gameSpd = 0;
+	}
 }
