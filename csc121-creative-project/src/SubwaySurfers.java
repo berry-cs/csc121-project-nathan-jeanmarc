@@ -9,27 +9,27 @@ public class SubwaySurfers {
 
 	private Environment g;
 
-	private ArrayList<Train> trains;
+	//private ArrayList<Train> trains;
 
 	private ArrayList<Obstacle> obstacles;
+	
 	
 	/*
 	 * Create new game with player at given x, y and train on the left track
 	 */
 	public SubwaySurfers() {
 		this.ph = new Player();
-		this.trains = new ArrayList<Train>();
+		//this.trains = new ArrayList<Train>();
 		this.obstacles = new ArrayList<Obstacle>();
-		this.g = new Environment();
-		
+		this.g = new Environment();	
 	}
 
 	/*
 	 * Create new object with given player and train list
 	 */
-	public SubwaySurfers(Player ph, ArrayList<Train> t, Environment g, ArrayList<Obstacle> o) {
+	public SubwaySurfers(Player ph, /*ArrayList<Train> t,*/ Environment g, ArrayList<Obstacle> o) {
 		this.ph = ph;
-		this.trains = t;
+		//this.trains = t;
 		this.g = g;
 		this.obstacles = o;
 	}
@@ -41,7 +41,7 @@ public class SubwaySurfers {
 		// colors the canvas background
 		c.background(45, 160, 230);
 		//c.lights();  // this is where lights functions go, needs tweaking to work. look at documentation
-		trains.forEach(train -> train.draw(c));
+		Spawner.getAllTrains().forEach(train -> train.draw(c));
 		obstacles.forEach(obstacle -> obstacle.draw(c));
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
@@ -63,15 +63,14 @@ public class SubwaySurfers {
 			gameOver();
 		}
 
-		trains.removeIf(train -> train.offScreen); // removes trains that are																				// off the screen
-		trains.forEach(train -> train.update());
+		Spawner.updateTrains(); // updates all trains
 
 		obstacles.removeIf(obstacle -> obstacle.offScreen); // removes trains that are off the screen
 		obstacles.forEach(obstacle -> obstacle.update());
 
 		
 
-		return new SubwaySurfers(ph, trains, g, obstacles);
+		return new SubwaySurfers(ph, /*trains,*/ g, obstacles);
 	}
 
 	/**
@@ -84,11 +83,11 @@ public class SubwaySurfers {
 		ph.move(kev);
 
 		if (kev.getKey() == '1') {
-			trains.add(new Train(2000, 1, 10, true));
+			Spawner.addTrain(1);
 		} else if (kev.getKey() == '2') {
-			trains.add(new Train(600, 2, 10, true));
+			Spawner.addTrain(2);
 		} else if (kev.getKey() == '3') {
-			trains.add(new Train(700, 3, 25, false));
+			Spawner.addTrain(3);
 		} else if (kev.getKey() == '4') {
 			obstacles.add(new Obstacle(1));
 		} else if (kev.getKey() == '5') {
@@ -97,12 +96,12 @@ public class SubwaySurfers {
 			obstacles.add(new Obstacle(3));
 		}
 
-		return new SubwaySurfers(ph, trains, g, obstacles);
+		return new SubwaySurfers(ph, /*trains,*/ g, obstacles);
 	}
 
 	boolean checkCollision() {
-	   for (int t = 0; t < trains.size(); t++) {
-		   Train tr = trains.get(t);
+	   for (int t = 0; t < Spawner.getAllTrains().size(); t++) {
+		   Train tr = Spawner.getAllTrains().get(t);
 		   
 		   return tr.handleCollision(ph);
 	   }
