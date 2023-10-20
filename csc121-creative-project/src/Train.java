@@ -25,7 +25,7 @@ public class Train implements IObstacle {
 
 	private boolean offScreen = false; // boolean for when the obstacle has moved off the screen
 
-	public Train(int length, int track, float speed, boolean hasRamp, int z) {
+	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
 		this.pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.TRAIN_Y,
