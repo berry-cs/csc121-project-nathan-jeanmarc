@@ -90,7 +90,7 @@ class Player {
 	/**
 	 *  returns the variable that tracks whether or not the player is on a train
 	 */
-	public Boolean checkOnTrain() {
+	public Boolean isOnTrain() {
 		return this.onTrain;
 	}
 	
@@ -98,7 +98,7 @@ class Player {
 	 * changes the floor level to be the top of the train and sets the
 	 * boolean to reflect that  
 	 */
-	public void isOnTrain() {
+	public void onTrain() {
 		this.onTrain = true;
 		floorLvl = SSConstants.TRAIN_TOP;
 	}
@@ -107,7 +107,7 @@ class Player {
 	 * changes the floor level to be the ground and sets the
 	 * boolean to reflect that  
 	 */
-	public void isOffTrain() {
+	public void offTrain() {
 		this.onTrain = false;
 		floorLvl = SSConstants.floorLvl;
 	}
@@ -122,6 +122,10 @@ class Player {
 
 	public Bounds getBounds() {
 		return bounds;
+	}
+	
+	public int getFloorLvl() {
+		return floorLvl;
 	}
 
 	public int getCurrentTrack() {

@@ -124,7 +124,7 @@ public class Train implements IObstacle {
 		pos.newZ(pos.getZ() + vel.getZ());
 		bounds.update(pos);
 		frontZ = bounds.getFrontZ();
-		rearZ = bounds.getBackZ();
+		rearZ = bounds.getRearZ();
 		
 		if (hasRamp) { // changes the front z for ramp trains to account for the length of the ramp
 			frontZ += SSConstants.RAMP_LENGTH;
@@ -137,26 +137,33 @@ public class Train implements IObstacle {
 	 * Handles interaction between the given player and this train Reacts
 	 * differently if train has a ramp or does not
 	 */
-	public Boolean handleCollision(Player ph) {
-
-		if (frontZ >= ph.getPos().getZ() && rearZ <= ph.getPos().getZ() && ph.getBounds().getbBound() > bounds.getTop()
-				&& track == ph.getCurrentTrack()) {
-			System.out.println("cuzzo");
-			if (!hasRamp) {
-				return true;
-			} else if (frontZ - SSConstants.RAMP_LENGTH < ph.getPos().getZ()) {
-				ph.isOnTrain();
+	public boolean handleCollision(Player p) {
+		if (p.isOnTrain() && rearZ > SSConstants.PLAYER_Z || p.isOnTrain() && p.getCurrentTrack() != track) {
+			p.offTrain();
+			return false;
+		} else if (track == p.getCurrentTrack() && frontZ >= SSConstants.PLAYER_Z && rearZ <= SSConstants.PLAYER_Z) {
+			// the player is inside a train's z bounds and is on the floor
+			if (hasRamp) {
+				p.onTrain();
 				return false;
-			} else {
-				return true;
-			}
-
+			} else return false;
 		}
 
-		if (ph.checkOnTrain() && rearZ >= ph.getPos().getZ() || ph.checkOnTrain() && ph.getCurrentTrack() != track) {
-			ph.isOffTrain();
-			System.out.println("bitch");
-		}
+//		if (track == p.getCurrentTrack() && frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && p.getFloorLvl() > bounds.getTop()) {
+//			if (!hasRamp) {
+//				return true;
+//			} else if (frontZ - SSConstants.RAMP_LENGTH < p.getPos().getZ()) {
+//				p.onTrain();
+//				return false;
+//			} else {
+//				return true;
+//			}
+//
+//		}
+
+//		if (p.checkOnTrain() && rearZ >= p.getPos().getZ() || p.checkOnTrain() && p.getCurrentTrack() != track) {
+//			p.offTrain();
+//		}
 		
 		return false;
 	}
@@ -172,9 +179,17 @@ public class Train implements IObstacle {
 	public Vector getVel() {
 		return vel;
 	}
+	
+	public void setVel(Vector newVel) {
+		vel = newVel;
+	}
 
 	public boolean isOffScreen() {
 		return offScreen;
+	}
+	
+	public String getType() {
+		return "train";
 	}
 
 	@Override

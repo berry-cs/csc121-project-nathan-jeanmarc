@@ -18,6 +18,11 @@ public interface IObstacle {
 	/**
 	 * handles collision with the given player, returns true if bounds intersect
 	 */
-	Boolean handleCollision(Player p);
+	boolean handleCollision(Player p);
+	
+	/**
+	 * Returns a string representing the type of obstacle this obstacle is
+	 */
+	String getType();
 
 }

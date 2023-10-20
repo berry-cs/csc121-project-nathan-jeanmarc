@@ -49,7 +49,7 @@ class Bounds3D {
 		return frontZ;
 	}
 
-	public float getBackZ() {
+	public float getRearZ() {
 		return backZ;
 	}
 

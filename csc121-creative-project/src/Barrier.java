@@ -40,7 +40,7 @@ class Barrier implements IObstacle {
 
 		bounds.update(pos);
 		
-		rearZ = bounds.getBackZ();
+		rearZ = bounds.getRearZ();
 		frontZ = bounds.getFrontZ();
 	}
 
@@ -101,7 +101,7 @@ class Barrier implements IObstacle {
 	/**
 	 * handles collision with the given player, returns true if bounds intersect
 	 */
-	public Boolean handleCollision(Player p) {
+	public boolean handleCollision(Player p) {
 		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.getTop() <= p.getBounds().getbBound()
 				&& track == p.getCurrentTrack());
 	}
@@ -112,6 +112,10 @@ class Barrier implements IObstacle {
 
 	public boolean isOffScreen() {
 		return offScreen;
+	}
+	
+	public String getType() {
+		return "barrier";
 	}
 
 	public int hashCode() {

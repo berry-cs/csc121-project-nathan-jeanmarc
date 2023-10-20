@@ -5,6 +5,8 @@ public class SubwaySurfers {
 	private Player p;
 
 	private Environment g;
+	
+	private boolean isGameOver;
 		
 	/*
 	 * Create new game with player at given x, y and train on the left track
@@ -17,9 +19,10 @@ public class SubwaySurfers {
 	/*
 	 * Create new object with given player and train list
 	 */
-	public SubwaySurfers(Player ph,Environment g) {
+	public SubwaySurfers(Player ph, Environment g, boolean isGameOver) {
 		this.p = ph;
 		this.g = g;
+		this.isGameOver = isGameOver;
 	}
 
 	/**
@@ -45,18 +48,20 @@ public class SubwaySurfers {
 	 * Produces an updated world where the player and obstacles move if needed
 	 */
 	public SubwaySurfers update() {
-		p.update();
-		
-		Spawner.spawn();
-		
-		if ( checkCollision() ) {
-			System.out.println("bruh!!!");
-			gameOver();
+		if (!isGameOver) {
+			p.update();
+			
+			//Spawner.spawn();
+			
+			if ( checkCollision() ) {
+				System.out.println("bruh!!!");
+				gameOver();
+			}
+	
+			Spawner.updateObstacles(); // updates all trains
 		}
-
-		Spawner.updateObstacles(); // updates all trains
-
-		return new SubwaySurfers(p, g);
+		
+		return new SubwaySurfers(p, g, isGameOver);
 	}
 
 	/**
@@ -69,11 +74,11 @@ public class SubwaySurfers {
 		p.move(kev);
 
 		if (kev.getKey() == '1') {
-			Spawner.addTrain(1);
+			Spawner.addTrain(1, true);
 		} else if (kev.getKey() == '2') {
-			Spawner.addTrain(2);
+			Spawner.addTrain(2, false);
 		} else if (kev.getKey() == '3') {
-			Spawner.addTrain(3);
+			Spawner.addTrain(3, false);
 		} else if (kev.getKey() == '4') {
 			Spawner.addBarrier(1);
 		} else if (kev.getKey() == '5') {
@@ -82,14 +87,14 @@ public class SubwaySurfers {
 			Spawner.addBarrier(3);
 		}
 
-		return new SubwaySurfers(p, g);
+		return new SubwaySurfers(p, g, isGameOver);
 	}
 
 	boolean checkCollision() {
 	   for (int t = 0; t < Spawner.getAllObstacles().size(); t++) {
 		   IObstacle ob = Spawner.getAllObstacles().get(t);
 		   
-		   return ob.handleCollision(p);
+		   if (ob.handleCollision(p)) return true;
 	   }
 	   
 	   return false;
@@ -97,5 +102,14 @@ public class SubwaySurfers {
 	
 	void gameOver() {
 		SSConstants.gameSpd = 0;
+		SSConstants.playerSprite.isAnimating = false;
+		
+		for (int i = 0; i < Spawner.getAllObstacles().size(); i++) {
+			IObstacle ob = Spawner.getAllObstacles().get(i);
+			if (ob.getType().equals("train")) ((Train) ob).setVel(new Vector(0,0,0));
+		}
+		
+		isGameOver = true;
+		System.out.println("the game is over: " + isGameOver);
 	}
 }

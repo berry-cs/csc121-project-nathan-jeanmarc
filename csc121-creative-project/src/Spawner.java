@@ -20,55 +20,55 @@ public class Spawner {
 	 * on individual track thresholds
 	 */
 	static void spawn() {
-		chance = SSConstants.rgen.nextDouble();
-
-		if (chance <= SSConstants.overallSpawnRate) {
-
-			chance = SSConstants.rgen.nextDouble(); // can be removed or left, just adds more variability
-
-			if (chance <= SSConstants.t1SpawnRate && chance > SSConstants.t2SpawnRate) {
-				barrierChance = SSConstants.rgen.nextDouble();
-				
-				if (barrierChance <= SSConstants.barrierRate) {
-					addBarrier(1);
-				} else {
-					addTrain(1);
+			chance = SSConstants.rgen.nextDouble();
+	
+				//chance = SSConstants.rgen.nextDouble(); // can be removed or left, just adds more variability
+	
+				if (chance <= SSConstants.t1SpawnRate && chance > SSConstants.t2SpawnRate) {
+					barrierChance = SSConstants.rgen.nextDouble();
+					
+					if (barrierChance <= SSConstants.barrierRate) {
+						addBarrier(1);
+					} else {
+						int rampChance = SSConstants.rgen.nextInt(2);
+						if (rampChance == 1) addTrain(1, true);
+						else addTrain(1, false);
+					}
 				}
-			}
-			if (chance <= SSConstants.t2SpawnRate) {
-				barrierChance = SSConstants.rgen.nextDouble();
-				
-				if (barrierChance <= SSConstants.barrierRate) {
-					addBarrier(2);
-				} else {
-					addTrain(2);
+				if (chance <= SSConstants.t2SpawnRate) {
+					barrierChance = SSConstants.rgen.nextDouble();
+					
+					if (barrierChance <= SSConstants.barrierRate) {
+						addBarrier(2);
+					} else {
+						addTrain(2, false);
+					}
 				}
-			}
-			if (chance <= SSConstants.t3SpawnRate && chance > SSConstants.t2SpawnRate) {
-				barrierChance = SSConstants.rgen.nextDouble(); 
-				
-				if (barrierChance <= SSConstants.barrierRate) {
-					addBarrier(3);
-				} else {
-					addTrain(3);
+				if (chance <= SSConstants.t3SpawnRate && chance > SSConstants.t2SpawnRate) {
+					barrierChance = SSConstants.rgen.nextDouble(); 
+					
+					if (barrierChance <= SSConstants.barrierRate) {
+						addBarrier(3);
+					} else {
+						addTrain(3, false);
+					}
 				}
-			}
-		}
 	}
 
 	/**
 	 * Adds a barrier to the given track
 	 */
 	static void addBarrier(int track) {
+		Barrier b = new Barrier(track);
 		switch (track) {
 		case 1:
-			t1Barriers.add(new Barrier(1));
+			t1Barriers.add(b);
 			break;
 		case 2:
-			t2Barriers.add(new Barrier(1));
+			t2Barriers.add(b);
 			break;
 		case 3:
-			t3Barriers.add(new Barrier(1));
+			t3Barriers.add(b);
 			break;
 		}
 	}
@@ -76,19 +76,19 @@ public class Spawner {
 	/**
 	 * Adds a train with a random length and speed to the given track
 	 */
-	static void addTrain(int track) {
+	static void addTrain(int track, boolean hasRamp) {
 		switch (track) {
 		case 1:
 			t1Trains.add(new Train(SSConstants.rgen.nextInt(3001 - 600) + 600, track,
-					SSConstants.rgen.nextInt(20 - 5) + 5, false));
+					SSConstants.rgen.nextInt(20 - 5) + 5, hasRamp));
 			break;
 		case 2:
 			t2Trains.add(new Train(SSConstants.rgen.nextInt(3001 - 600) + 600, track,
-					SSConstants.rgen.nextInt(20 - 5) + 5, false));
+					SSConstants.rgen.nextInt(20 - 5) + 5, hasRamp));
 			break;
 		case 3:
 			t3Trains.add(new Train(SSConstants.rgen.nextInt(3001 - 600) + 600, track,
-					SSConstants.rgen.nextInt(20 - 5) + 5, false));
+					SSConstants.rgen.nextInt(20 - 5) + 5, hasRamp));
 			break;
 		}
 	}
