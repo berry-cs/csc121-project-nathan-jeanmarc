@@ -102,8 +102,7 @@ class Barrier implements IObstacle {
 	 * handles collision with the given player, returns true if bounds intersect
 	 */
 	public boolean handleCollision(Player p) {
-		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.getTop() <= p.getBounds().getbBound()
-				&& track == p.getCurrentTrack());
+		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.getTop() <= p.getBounds().getbBound());
 	}
 
 	public Vector getPos() {

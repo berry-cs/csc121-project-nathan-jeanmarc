@@ -2,24 +2,34 @@ import java.util.ArrayList;
 
 public class Spawner {
 
-	private static ArrayList<Train> t1Trains = new ArrayList<Train>(); // trains on track 1
-	private static ArrayList<Train> t2Trains = new ArrayList<Train>(); // trains on track 2
-	private static ArrayList<Train> t3Trains = new ArrayList<Train>(); // trains on track 3
+	private ArrayList<Train> t1Trains;// trains on track 1
+	private ArrayList<Train> t2Trains; // trains on track 2
+	private ArrayList<Train> t3Trains; // trains on track 3
 
-	private static ArrayList<Barrier> t1Barriers = new ArrayList<Barrier>(); // trains on track 1
-	private static ArrayList<Barrier> t2Barriers = new ArrayList<Barrier>(); // trains on track 2
-	private static ArrayList<Barrier> t3Barriers = new ArrayList<Barrier>(); // trains on track 3
+	private ArrayList<Barrier> t1Barriers; // trains on track 1
+	private ArrayList<Barrier> t2Barriers; // trains on track 2
+	private ArrayList<Barrier> t3Barriers; // trains on track 3
 
-	private static ArrayList<IObstacle> allObstacles = new ArrayList<IObstacle>(); // combined list of all trains
+	private ArrayList<IObstacle> allObstacles = new ArrayList<IObstacle>(); // combined list of all trains
 
-	private static double chance;
-	private static double barrierChance;
+	private double chance;
+	private double barrierChance;
 
+	public Spawner() {
+		t1Trains = new ArrayList<Train>();
+		t2Trains = new ArrayList<Train>();
+		t3Trains = new ArrayList<Train>();
+		
+		t1Barriers = new ArrayList<Barrier>();
+		t2Barriers = new ArrayList<Barrier>();
+		t3Barriers = new ArrayList<Barrier>();
+	}
+	
 	/**
 	 * If the chance falls below the spawn threshold, attempts to spawn trains based
 	 * on individual track thresholds
 	 */
-	static void spawn() {
+	public void spawn() {
 			chance = SSConstants.rgen.nextDouble();
 	
 				//chance = SSConstants.rgen.nextDouble(); // can be removed or left, just adds more variability
@@ -58,7 +68,7 @@ public class Spawner {
 	/**
 	 * Adds a barrier to the given track
 	 */
-	static void addBarrier(int track) {
+	 public void addBarrier(int track) {
 		Barrier b = new Barrier(track);
 		switch (track) {
 		case 1:
@@ -76,7 +86,7 @@ public class Spawner {
 	/**
 	 * Adds a train with a random length and speed to the given track
 	 */
-	static void addTrain(int track, boolean hasRamp) {
+	public void addTrain(int track, boolean hasRamp) {
 		switch (track) {
 		case 1:
 			t1Trains.add(new Train(SSConstants.rgen.nextInt(3001 - 600) + 600, track,
@@ -96,10 +106,11 @@ public class Spawner {
 	/**
 	 * Returns a combined list of all the obstacles in the three track arrays
 	 */
-	static ArrayList<IObstacle> getAllObstacles() {
+	public ArrayList<IObstacle> getAllObstacles() {
 		if (allObstacles.size() > 0) {
 			allObstacles.clear();
 		}
+		
 		allObstacles.addAll(t1Trains);
 		allObstacles.addAll(t2Trains);
 		allObstacles.addAll(t3Trains);
@@ -108,11 +119,43 @@ public class Spawner {
 		allObstacles.addAll(t3Barriers);
 		return allObstacles;
 	}
+	
+	public ArrayList<Train> getTrainsOn(int track) {
+		ArrayList<Train> out = new ArrayList<Train>();
+		switch (track) {
+		case 1:
+			out.addAll(t1Trains);
+			break;
+		case 2:
+			out.addAll(t2Trains);
+			break;
+		case 3:
+			out.addAll(t3Trains);
+			break;
+		}
+		return out;
+	}
+	
+	public ArrayList<Barrier> getBarriersOn(int track) {
+		ArrayList<Barrier> out = new ArrayList<Barrier>();
+		switch (track) {
+		case 1:
+			out.addAll(t1Barriers);
+			break;
+		case 2:
+			out.addAll(t2Barriers);
+			break;
+		case 3:
+			out.addAll(t3Barriers);
+			break;
+		}
+		return out;
+	}
 
 	/**
 	 * Updates all the trains in each track
 	 */
-	static void updateObstacles() {
+	public void updateObstacles() {
 		t1Trains.removeIf(ob -> ob.isOffScreen()); // off the screen
 		t1Trains.forEach(ob -> ob.update());
 
@@ -130,6 +173,8 @@ public class Spawner {
 
 		t3Barriers.removeIf(ob -> ob.isOffScreen()); // off the screen
 		t3Barriers.forEach(ob -> ob.update());
+		
+		System.out.println(t1Trains.size());
 	}
 
 }

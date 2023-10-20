@@ -1,12 +1,12 @@
-import processing.core.*;
+import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class SubwaySurfers {
 	private Player p;
-
+	private static Spawner s;
 	private Environment g;
 	
-	private boolean isGameOver;
+	private static boolean isGameOver;
 		
 	/*
 	 * Create new game with player at given x, y and train on the left track
@@ -14,15 +14,17 @@ public class SubwaySurfers {
 	public SubwaySurfers() {
 		this.p = new Player();
 		this.g = new Environment();	
+		SubwaySurfers.s = new Spawner();
 	}
 
 	/*
 	 * Create new object with given player and train list
 	 */
-	public SubwaySurfers(Player ph, Environment g, boolean isGameOver) {
-		this.p = ph;
+	public SubwaySurfers(Player p, Spawner sp, Environment g, boolean go) {
+		this.p = p;
 		this.g = g;
-		this.isGameOver = isGameOver;
+		s = sp;
+		isGameOver = go;
 	}
 
 	/**
@@ -33,7 +35,7 @@ public class SubwaySurfers {
 		c.background(45, 160, 230);
 		//c.lights();  // this is where lights functions go, needs tweaking to work. look at documentation
 		
-		Spawner.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
+		s.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
 		
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
@@ -53,15 +55,12 @@ public class SubwaySurfers {
 			
 			//Spawner.spawn();
 			
-			if ( checkCollision() ) {
-				System.out.println("bruh!!!");
-				gameOver();
-			}
-	
-			Spawner.updateObstacles(); // updates all trains
+			s.updateObstacles(); // updates all trains
+			
+			checkCollision();
 		}
 		
-		return new SubwaySurfers(p, g, isGameOver);
+		return new SubwaySurfers(p, s, g, isGameOver);
 	}
 
 	/**
@@ -74,42 +73,37 @@ public class SubwaySurfers {
 		p.move(kev);
 
 		if (kev.getKey() == '1') {
-			Spawner.addTrain(1, true);
+			s.addTrain(1, true);
 		} else if (kev.getKey() == '2') {
-			Spawner.addTrain(2, false);
+			s.addTrain(2, false);
 		} else if (kev.getKey() == '3') {
-			Spawner.addTrain(3, false);
+			s.addTrain(3, false);
 		} else if (kev.getKey() == '4') {
-			Spawner.addBarrier(1);
+			s.addBarrier(1);
 		} else if (kev.getKey() == '5') {
-			Spawner.addBarrier(2);
+			s.addBarrier(2);
 		} else if (kev.getKey() == '6') {
-			Spawner.addBarrier(3);
+			s.addBarrier(3);
 		}
 
-		return new SubwaySurfers(p, g, isGameOver);
+		return new SubwaySurfers(p, s, g, isGameOver);
 	}
 
-	boolean checkCollision() {
-	   for (int t = 0; t < Spawner.getAllObstacles().size(); t++) {
-		   IObstacle ob = Spawner.getAllObstacles().get(t);
-		   
-		   if (ob.handleCollision(p)) return true;
-	   }
-	   
-	   return false;
+	void checkCollision() {
+		int pTrack = p.getCurrentTrack();
+		p.hasCollided(s.getTrainsOn(pTrack), s.getBarriersOn(pTrack));
    }
 	
-	void gameOver() {
+	public static void gameOver() {
 		SSConstants.gameSpd = 0;
 		SSConstants.playerSprite.isAnimating = false;
 		
-		for (int i = 0; i < Spawner.getAllObstacles().size(); i++) {
-			IObstacle ob = Spawner.getAllObstacles().get(i);
+		for (int i = 0; i < s.getAllObstacles().size(); i++) {
+			IObstacle ob = s.getAllObstacles().get(i);
 			if (ob.getType().equals("train")) ((Train) ob).setVel(new Vector(0,0,0));
 		}
 		
 		isGameOver = true;
-		System.out.println("the game is over: " + isGameOver);
+		System.out.println("game over");
 	}
 }

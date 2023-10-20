@@ -25,7 +25,7 @@ public class Train implements IObstacle {
 
 	private boolean offScreen = false; // boolean for when the obstacle has moved off the screen
 
-	public Train(int length, int track, float speed, boolean hasRamp) {
+	public Train(int length, int track, float speed, boolean hasRamp, int z) {
 		this.track = track;
 		this.length = length;
 		this.pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.TRAIN_Y,
@@ -138,16 +138,11 @@ public class Train implements IObstacle {
 	 * differently if train has a ramp or does not
 	 */
 	public boolean handleCollision(Player p) {
-		if (p.isOnTrain() && rearZ > SSConstants.PLAYER_Z || p.isOnTrain() && p.getCurrentTrack() != track) {
-			p.offTrain();
-			return false;
-		} else if (track == p.getCurrentTrack() && frontZ >= SSConstants.PLAYER_Z && rearZ <= SSConstants.PLAYER_Z) {
-			// the player is inside a train's z bounds and is on the floor
-			if (hasRamp) {
-				p.onTrain();
-				return false;
-			} else return false;
+		if (p.isOnTrain()) return false;
+		else if (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ()) {
+			return true;
 		}
+		return false;
 
 //		if (track == p.getCurrentTrack() && frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && p.getFloorLvl() > bounds.getTop()) {
 //			if (!hasRamp) {
@@ -164,8 +159,6 @@ public class Train implements IObstacle {
 //		if (p.checkOnTrain() && rearZ >= p.getPos().getZ() || p.checkOnTrain() && p.getCurrentTrack() != track) {
 //			p.offTrain();
 //		}
-		
-		return false;
 	}
 
 	public int getLength() {
@@ -180,6 +173,24 @@ public class Train implements IObstacle {
 		return vel;
 	}
 	
+	public int getTrack() {
+		return track;
+	}
+	
+	public boolean hasRamp() {
+		return hasRamp;
+	}
+
+	public float getRearZ() {
+		return rearZ;
+	}
+
+	public float getFrontZ() {
+		return frontZ;
+	}
+	
+	
+
 	public void setVel(Vector newVel) {
 		vel = newVel;
 	}

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Objects;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
@@ -49,6 +50,8 @@ class Player {
 			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
 
 		gravity();
+		
+		if (bounds.getbBound() > SSConstants.TRAIN_HEIGHT + 20) onTrain = false;
 	}
 
 	/* moves the player */
@@ -90,16 +93,55 @@ class Player {
 	/**
 	 *  returns the variable that tracks whether or not the player is on a train
 	 */
-	public Boolean isOnTrain() {
+	public boolean isOnTrain() {
 		return this.onTrain;
 	}
+	
+	/**
+	 * Checks whether this player has collided with the given any of the given list of obstacles on the same track as the player
+	 */
+	public void hasCollided(ArrayList<Train> trains, ArrayList<Barrier> barriers) {
+		for (int i = 0; i < trains.size(); i++) {
+			Train t = trains.get(i);
+			
+			if (t.getTrack() != currentTrack) return;
+			else if (t.getFrontZ() - 10 >= pos.getZ() && t.getRearZ() <= pos.getZ()) {
+				if (onTrain && bounds.getbBound() < SSConstants.TRAIN_TOP + 20) { 
+					onTrain();
+					return;
+				}
+				else if (t.hasRamp() && t.getFrontZ() - SSConstants.RAMP_LENGTH < pos.getZ()) {
+					onTrain();
+					return;
+				}
+				else if (!onTrain && bounds.getbBound() > SSConstants.TRAIN_TOP) {
+					SubwaySurfers.gameOver();
+					return;
+				}
+			} else if (t.getRearZ() > pos.getZ()) {
+				offTrain();
+			}
+
+//			else if (t.getFrontZ() - 10 >= pos.getZ() && t.getRearZ() <= pos.getZ()) {
+//				if (!onTrain && !t.hasRamp()) {System.out.println("onTrain: " + onTrain + "\nhasRamp: " + t.hasRamp()); return true;}
+//				else if (t.getFrontZ() - SSConstants.RAMP_LENGTH < pos.getZ()) {
+//					onTrain();
+//				}
+//			} else if (i == 0 && onTrain && t.getRearZ() > pos.getZ()) {
+//				offTrain();
+//				System.out.println("onTrain: false");
+//			}
+		}
+	}
+	
+	
 	
 	/**
 	 * changes the floor level to be the top of the train and sets the
 	 * boolean to reflect that  
 	 */
 	public void onTrain() {
-		this.onTrain = true;
+		onTrain = true;
 		floorLvl = SSConstants.TRAIN_TOP;
 	}
 	
@@ -108,7 +150,6 @@ class Player {
 	 * boolean to reflect that  
 	 */
 	public void offTrain() {
-		this.onTrain = false;
 		floorLvl = SSConstants.floorLvl;
 	}
 
