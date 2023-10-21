@@ -1,4 +1,4 @@
-import processing.core.PApplet;
+import processing.core.*;
 
 class Building {
 
@@ -14,6 +14,8 @@ class Building {
 	private static int spawnPoint = SSConstants.TRAIN_INITIAL_Z - 1000;
 
 	private Vector pos;
+	
+	private PShape box2; // creates a texturable box shape
 
 	Building(float z, int size, boolean onRight) {
 		this.size = size;
@@ -22,10 +24,14 @@ class Building {
 		pos.newZ(z);
 	}
 
+	// commented out code lets the building have texture but causes lag
 	void draw(PApplet c) {
 		c.fill(60);
 		c.pushMatrix();
 		c.translate(pos.getX(), pos.getY(), pos.getZ());
+		//box2 = c.createShape(c.BOX, width, height, depth); 
+		//box2.setTexture(SSConstants.buildingTexture);
+		//c.shape(box2);
 		c.box(width, height, depth);
 		c.popMatrix();
 	}

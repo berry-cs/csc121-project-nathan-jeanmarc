@@ -50,5 +50,7 @@ public class SSConstants {
     public static final Random rgen = new Random();
     
     public static Animation playerSprite;
+    
+    public static PImage buildingTexture;
 
 }

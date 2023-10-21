@@ -38,6 +38,7 @@ public class SSApp extends PApplet {
 		}
 
 		SSConstants.playerSprite = new Animation(playerImgs, 75, this);
+		SSConstants.buildingTexture = loadImage("buildingTexture.png");
 	}
 
 }
