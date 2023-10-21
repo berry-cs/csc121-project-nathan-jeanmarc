@@ -26,13 +26,10 @@ class Bounds3D {
 	
 	/* produces an updated version of this Bounds */
 	Bounds3D update(Vector p) {
-		//return new Bounds3D(p, width, height, depth);
-		
 		return this.update(p, width, height, depth);
 	}
 	
 	Bounds3D update(Vector p, int width, int height, int depth) {
-		//return new Bounds3D(p, width, height, depth);
 		this.pos = p;
 		this.width = width;
 		this.height = height;

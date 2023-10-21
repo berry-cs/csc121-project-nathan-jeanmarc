@@ -5,15 +5,15 @@ public class SubwaySurfers {
 	private Player p;
 	private static Spawner s;
 	private Environment g;
-	
+
 	private static boolean isGameOver;
-		
+
 	/*
 	 * Create new game with player at given x, y and train on the left track
 	 */
 	public SubwaySurfers() {
 		this.p = new Player();
-		this.g = new Environment();	
+		this.g = new Environment();
 		SubwaySurfers.s = new Spawner();
 	}
 
@@ -33,14 +33,16 @@ public class SubwaySurfers {
 	public PApplet draw(PApplet c) {
 		// colors the canvas background
 		c.background(45, 160, 230);
-		//c.lights();  // this is where lights functions go, needs tweaking to work. look at documentation
-		
+		// c.lights(); // this is where lights functions go, needs tweaking to work.
+		// look at documentation
+
 		s.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
-		
+
 		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
 		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
-		c.camera(p.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - p.getBounds().getbBound()), SSConstants.CAMERA_Z,
-				p.getPos().getX(), SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
+		c.camera(p.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - p.getBounds().getbBound()),
+				SSConstants.CAMERA_Z, p.getPos().getX(),
+				SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
 		g.draw(c);
 		p.draw(c);
 		return c;
@@ -52,14 +54,14 @@ public class SubwaySurfers {
 	public SubwaySurfers update() {
 		if (!isGameOver) {
 			p.update();
-			
-			//Spawner.spawn();
-			
+
+			s.spawn();
+
 			s.updateObstacles(); // updates all trains
-			
+
 			checkCollision();
 		}
-		
+
 		return new SubwaySurfers(p, s, g, isGameOver);
 	}
 
@@ -91,18 +93,25 @@ public class SubwaySurfers {
 
 	void checkCollision() {
 		int pTrack = p.getCurrentTrack();
-		p.hasCollided(s.getTrainsOn(pTrack), s.getBarriersOn(pTrack));
-   }
-	
+		if (p.hasCollided(s.getTrainsOn(pTrack), s.getBarriersOn(pTrack))) {
+			gameOver();
+		}
+
+	}
+
+	/**
+	 * Ends the game
+	 */
 	public static void gameOver() {
 		SSConstants.gameSpd = 0;
 		SSConstants.playerSprite.isAnimating = false;
-		
+
 		for (int i = 0; i < s.getAllObstacles().size(); i++) {
 			IObstacle ob = s.getAllObstacles().get(i);
-			if (ob.getType().equals("train")) ((Train) ob).setVel(new Vector(0,0,0));
+			if (ob.getType().equals("train"))
+				((Train) ob).setVel(new Vector(0, 0, 0));
 		}
-		
+
 		isGameOver = true;
 		System.out.println("game over");
 	}

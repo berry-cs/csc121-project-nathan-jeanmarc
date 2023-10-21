@@ -98,15 +98,20 @@ class Barrier implements IObstacle {
 		c.popMatrix();
 	}
 
-	/**
-	 * handles collision with the given player, returns true if bounds intersect
-	 */
-	public boolean handleCollision(Player p) {
-		return (frontZ >= p.getPos().getZ() && rearZ <= p.getPos().getZ() && bounds.getTop() <= p.getBounds().getbBound());
-	}
-
 	public Vector getPos() {
 		return pos;
+	}
+	
+	public float getFrontZ() {
+		return frontZ;
+	}
+	
+	public float getRearZ() {
+		return rearZ;
+	}
+	
+	public float getTop() {
+		return bounds.getTop();
 	}
 
 	public boolean isOffScreen() {

@@ -5,7 +5,7 @@ import processing.event.KeyEvent;
 
 /** represents a player's hitbox in Subway Surfers */
 class Player {
-	
+
 	private int currentTrack = 2; // stores which track the player is on (one of 1, 2, 3)
 	private Vector pos; // represents the position of the center of the player sprite
 	private Vector vel = new Vector(0, 0, 0);
@@ -17,8 +17,6 @@ class Player {
 
 	private int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
-	private boolean onTrain = false;
-	
 	public Player() {
 		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
@@ -26,7 +24,7 @@ class Player {
 		// defines the edges of the player box
 		this.bounds = new Bounds(pos, width, height);
 	}
-	
+
 	PApplet draw(PApplet c) {
 		c.pushMatrix();
 		c.translate(0, 0, pos.getZ());
@@ -50,8 +48,7 @@ class Player {
 			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
 
 		gravity();
-		
-		if (bounds.getbBound() > SSConstants.TRAIN_HEIGHT + 20) onTrain = false;
+
 	}
 
 	/* moves the player */
@@ -89,65 +86,73 @@ class Player {
 			pos = new Vector(pos.getX(), floorLvl - height / 2, SSConstants.PLAYER_Z);
 		}
 	}
-	
+
 	/**
-	 *  returns the variable that tracks whether or not the player is on a train
+	 * returns true if the player is still on top of any train in the list
 	 */
-	public boolean isOnTrain() {
-		return this.onTrain;
+	public boolean isOnTrain(ArrayList<Train> trains) {
+		// return this.onTrain;
+		return (trains.stream().anyMatch(t -> pos.getZ() <= t.getFrontZ() && pos.getZ() >= t.getRearZ()
+				&& bounds.getbBound() <= t.getTop() + 30));
 	}
-	
+
 	/**
-	 * Checks whether this player has collided with the given any of the given list of obstacles on the same track as the player
+	 * returns whether is player has collided with the given obstacle
 	 */
-	public void hasCollided(ArrayList<Train> trains, ArrayList<Barrier> barriers) {
+	public boolean collidedWith(IObstacle o) {
+		// return this.onTrain;
+		return (bounds.getbBound() >= o.getTop() && pos.getZ() <= o.getFrontZ() && pos.getZ() >= o.getRearZ());
+	}
+
+	/**
+	 * Returns true if this player has collided with the given any of the given
+	 * lists of obstacles on the same track as the player
+	 */
+	public boolean hasCollided(ArrayList<Train> trains, ArrayList<Barrier> barriers) {
+
+		if (barriers.stream().anyMatch(b -> collidedWith(b))) {
+			return true;
+		}
+
+		if (isOnTrain(trains)) {
+			onTrain();
+			return false;
+		} else {
+			offTrain();
+		}
+
 		for (int i = 0; i < trains.size(); i++) {
 			Train t = trains.get(i);
-			
-			if (t.getTrack() != currentTrack) return;
-			else if (t.getFrontZ() - 10 >= pos.getZ() && t.getRearZ() <= pos.getZ()) {
-				if (onTrain && bounds.getbBound() < SSConstants.TRAIN_TOP + 20) { 
+			float zPos = pos.getZ();
+
+			if (collidedWith(t)) {
+				if (!t.hasRamp() && !isOnTrain(trains)) {
+					return true;
+				} else if (zPos >= t.getFrontZ() - SSConstants.RAMP_LENGTH) {
 					onTrain();
-					return;
+					return false;
+				} else {
+					return true;
 				}
-				else if (t.hasRamp() && t.getFrontZ() - SSConstants.RAMP_LENGTH < pos.getZ()) {
-					onTrain();
-					return;
-				}
-				else if (!onTrain && bounds.getbBound() > SSConstants.TRAIN_TOP) {
-					SubwaySurfers.gameOver();
-					return;
-				}
-			} else if (t.getRearZ() > pos.getZ()) {
-				offTrain();
 			}
 
-//			else if (t.getFrontZ() - 10 >= pos.getZ() && t.getRearZ() <= pos.getZ()) {
-//				if (!onTrain && !t.hasRamp()) {System.out.println("onTrain: " + onTrain + "\nhasRamp: " + t.hasRamp()); return true;}
-//				else if (t.getFrontZ() - SSConstants.RAMP_LENGTH < pos.getZ()) {
-//					onTrain();
-//				}
-//			} else if (i == 0 && onTrain && t.getRearZ() > pos.getZ()) {
-//				offTrain();
-//				System.out.println("onTrain: false");
-//			}
 		}
+
+		return false;
+
 	}
-	
-	
-	
+
 	/**
-	 * changes the floor level to be the top of the train and sets the
-	 * boolean to reflect that  
+	 * changes the floor level to be the top of the train and sets the boolean to
+	 * reflect that
 	 */
 	public void onTrain() {
-		onTrain = true;
+		// onTrain = true;
 		floorLvl = SSConstants.TRAIN_TOP;
 	}
-	
+
 	/**
-	 * changes the floor level to be the ground and sets the
-	 * boolean to reflect that  
+	 * changes the floor level to be the ground and sets the boolean to reflect that
 	 */
 	public void offTrain() {
 		floorLvl = SSConstants.floorLvl;
@@ -164,7 +169,7 @@ class Player {
 	public Bounds getBounds() {
 		return bounds;
 	}
-	
+
 	public int getFloorLvl() {
 		return floorLvl;
 	}
@@ -179,7 +184,7 @@ class Player {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(bounds, currentTrack, floorLvl, gravity, height, onTrain, pos, vel, width);
+		return Objects.hash(bounds, currentTrack, floorLvl, gravity, height, pos, vel, width);
 	}
 
 	@Override
@@ -192,10 +197,10 @@ class Player {
 			return false;
 		Player other = (Player) obj;
 		return Objects.equals(bounds, other.bounds) && currentTrack == other.currentTrack && floorLvl == other.floorLvl
-				&& Objects.equals(gravity, other.gravity) && height == other.height && onTrain == other.onTrain
-				&& Objects.equals(pos, other.pos) && Objects.equals(vel, other.vel) && width == other.width;
+				&& Objects.equals(gravity, other.gravity) && height == other.height && Objects.equals(pos, other.pos)
+				&& Objects.equals(vel, other.vel) && width == other.width;
 	}
 
-	
+
 
 }

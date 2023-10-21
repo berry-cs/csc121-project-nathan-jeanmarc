@@ -12,8 +12,8 @@ public class Spawner {
 
 	private ArrayList<IObstacle> allObstacles = new ArrayList<IObstacle>(); // combined list of all trains
 
-	private double chance;
-	private double barrierChance;
+	private double chance; // variable used for spawning trains
+	private double barrierChance; // variable used for spawning obstacles
 
 	public Spawner() {
 		t1Trains = new ArrayList<Train>();
@@ -120,6 +120,9 @@ public class Spawner {
 		return allObstacles;
 	}
 	
+	/**
+	 * Returns a combined list of all the Trains on the requested track
+	 */
 	public ArrayList<Train> getTrainsOn(int track) {
 		ArrayList<Train> out = new ArrayList<Train>();
 		switch (track) {
@@ -136,6 +139,9 @@ public class Spawner {
 		return out;
 	}
 	
+	/**
+	 * Returns a combined list of all the Barriers on the requested track
+	 */
 	public ArrayList<Barrier> getBarriersOn(int track) {
 		ArrayList<Barrier> out = new ArrayList<Barrier>();
 		switch (track) {
@@ -153,7 +159,7 @@ public class Spawner {
 	}
 
 	/**
-	 * Updates all the trains in each track
+	 * Updates all the obstacles on each track
 	 */
 	public void updateObstacles() {
 		t1Trains.removeIf(ob -> ob.isOffScreen()); // off the screen
@@ -173,8 +179,6 @@ public class Spawner {
 
 		t3Barriers.removeIf(ob -> ob.isOffScreen()); // off the screen
 		t3Barriers.forEach(ob -> ob.update());
-		
-		System.out.println(t1Trains.size());
 	}
 
 }

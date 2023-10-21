@@ -16,9 +16,19 @@ public interface IObstacle {
 	void draw(PApplet c);
 	
 	/**
-	 * handles collision with the given player, returns true if bounds intersect
+	 * returns the frontZ of the IObstacle
 	 */
-	boolean handleCollision(Player p);
+	float getFrontZ();
+	
+	/**
+	 * returns the rearZ of the IObstacle
+	 */
+	float getRearZ();
+	
+	/**
+	 * returns the topY of the IObstacle
+	 */
+	float getTop();
 	
 	/**
 	 * Returns a string representing the type of obstacle this obstacle is
