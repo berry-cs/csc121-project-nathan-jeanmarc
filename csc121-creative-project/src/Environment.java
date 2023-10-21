@@ -37,11 +37,18 @@ class Environment {
 	PApplet draw(PApplet c) {		
 		c.pushMatrix();			// draws the ground plane
 		c.rotateX(c.PI/2f);
-		c.translate(0, 0, -900);
+		c.translate(0, 0, -850);
 		c.fill(0, 80, 0);
 		c.rectMode(3);       
 		c.rect(pos.getX(), pos.getY(), width, height, 25);
 		c.popMatrix(); 
+		
+		c.pushMatrix();			// draws the sky
+		c.fill(45, 160, 230);
+		c.translate(0, 0, SSConstants.TRAIN_INITIAL_Z-500);
+		c.rectMode(3);
+		c.rect(pos.getX(), pos.getY(), width, height);
+		c.popMatrix();
 		
 		drawTracks(c);
 		drawSides(c);
