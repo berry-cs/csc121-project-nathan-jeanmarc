@@ -31,6 +31,16 @@ public interface IObstacle {
 	float getTop();
 	
 	/**
+	 * returns the rightBound of the IObstacle
+	 */
+	float getRight();
+	
+	/**
+	 * returns the leftBound of the IObstacle
+	 */
+	float getLeft();
+	
+	/**
 	 * Returns a string representing the type of obstacle this obstacle is
 	 */
 	String getType();

@@ -113,6 +113,14 @@ class Barrier implements IObstacle {
 	public float getTop() {
 		return bounds.getTop();
 	}
+	
+	public float getRight() {
+		return bounds.getRBound();
+	}
+	
+	public float getLeft() {
+		return bounds.getLBound();
+	}
 
 	public boolean isOffScreen() {
 		return offScreen;

@@ -167,6 +167,13 @@ public class Train implements IObstacle {
 		return top;
 	}
 	
+	public float getRight() {
+		return bounds.getRBound();
+	}
+	
+	public float getLeft() {
+		return bounds.getLBound();
+	}
 	
 	public void setVel(Vector newVel) {
 		vel = newVel;

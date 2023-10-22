@@ -4,6 +4,8 @@ class Bounds3D {
 	
 	private float frontZ;
 	private float backZ;
+	private float rBound;
+	private float lBound;
 	private float top;
 	
 	private Vector pos;
@@ -21,6 +23,8 @@ class Bounds3D {
 		
 		this.frontZ = pos.getZ() + depth/2;
 		this.backZ = pos.getZ() - depth/2;
+		this.rBound = pos.getX() + width/2;
+		this.lBound = pos.getX() - width/2;
 		this.top = SSConstants.floorLvl - height;
 	}
 	
@@ -37,6 +41,8 @@ class Bounds3D {
 		
 		this.frontZ = pos.getZ() + depth/2;
 		this.backZ = pos.getZ() - depth/2;
+		this.rBound = pos.getX() + width/2;
+		this.lBound = pos.getX() - width/2;
 		this.top = SSConstants.floorLvl - height;
 		
 		return this;
@@ -48,6 +54,14 @@ class Bounds3D {
 
 	public float getRearZ() {
 		return backZ;
+	}
+	
+	public float getRBound() {
+		return rBound;
+	}
+	
+	public float getLBound() {
+		return lBound;
 	}
 
 	public float getTop() {

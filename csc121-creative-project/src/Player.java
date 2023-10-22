@@ -101,7 +101,7 @@ class Player {
 	 */
 	public boolean collidedWith(IObstacle o) {
 		// return this.onTrain;
-		return (bounds.getbBound() >= o.getTop() && pos.getZ() <= o.getFrontZ() && pos.getZ() >= o.getRearZ());
+		return (bounds.getbBound() >= o.getTop() && pos.getZ() <= o.getFrontZ() && pos.getZ() >= o.getRearZ() && bounds.getlBound() <= o.getRight() && bounds.getrBound() >= o.getLeft());
 	}
 
 	/**
