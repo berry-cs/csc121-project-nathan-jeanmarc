@@ -51,7 +51,7 @@ class Player {
 
 		gravity();
 		
-		if (!Sounds.runSound.isPlaying() && bounds.getbBound() >= floorLvl) {
+		if (!Sounds.runSound.isPlaying() && vel.getY() == 0) {
 			Sounds.runSound.play();
 		} 
 

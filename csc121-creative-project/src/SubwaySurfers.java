@@ -60,7 +60,13 @@ public class SubwaySurfers {
 			s.updateObstacles(); // updates all trains
 
 			checkCollision();
+			
 		}
+		
+		if (!Sounds.mainTheme.isPlaying() && !isGameOver) {
+			Sounds.mainTheme.play();
+		}
+		
 
 		return new SubwaySurfers(p, s, g, isGameOver);
 	}
@@ -111,6 +117,8 @@ public class SubwaySurfers {
 			if (ob.getType().equals("train"))
 				((Train) ob).setVel(new Vector(0, 0, 0));
 		}
+		
+		Sounds.mainTheme.stop();
 
 		isGameOver = true;
 		System.out.println("game over");

@@ -45,7 +45,11 @@ public class SSApp extends PApplet {
 	
 	void loadSounds() {
 		Sounds.jumpSound = new SoundFile(this, "jumpSound.mp3");
-		Sounds.runSound = new SoundFile(this, "jumpSound.mp3"); // cannot get it to load running sound for some reason
+		//Sounds.jumpSound.amp(2.0f);
+		Sounds.runSound = new SoundFile(this, "runSound.wav");
+		//Sounds.runSound.amp(0.5f);
+		Sounds.mainTheme = new SoundFile(this, "mainTheme.wav");
+		Sounds.mainTheme.amp(0.15f);
 	}
 
 }
