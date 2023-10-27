@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.Objects;
 import processing.core.PApplet;
 import processing.event.KeyEvent;
+import processing.sound.*;
+
 
 /** represents a player's hitbox in Subway Surfers */
 class Player {
@@ -48,6 +50,10 @@ class Player {
 			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
 
 		gravity();
+		
+		if (!Sounds.runSound.isPlaying() && bounds.getbBound() >= floorLvl) {
+			Sounds.runSound.play();
+		} 
 
 	}
 
@@ -72,6 +78,8 @@ class Player {
 	public void jump() {
 		if (bounds.getbBound() >= floorLvl) {
 			vel = new Vector(0, -16, 0);
+			Sounds.jumpSound.play();
+			Sounds.runSound.stop();
 		}
 	}
 

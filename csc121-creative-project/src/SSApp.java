@@ -1,5 +1,6 @@
 import processing.core.*;
 import processing.event.*;
+import processing.sound.SoundFile;
 
 /**
  * Provides the scaffolding to launch a Processing application
@@ -9,11 +10,12 @@ public class SSApp extends PApplet {
 
 	public void settings() {
 		this.size(SSConstants.WIDTH, SSConstants.HEIGHT, P3D);
+		loadImages();
+		loadSounds();
 	}
 
 	public void setup() {
-		loadImages();
-
+		
 		w = new SubwaySurfers();
 	}
 
@@ -39,6 +41,11 @@ public class SSApp extends PApplet {
 
 		SSConstants.playerSprite = new Animation(playerImgs, 75, this);
 		SSConstants.buildingTexture = loadImage("buildingTexture.png");
+	}
+	
+	void loadSounds() {
+		Sounds.jumpSound = new SoundFile(this, "jumpSound.mp3");
+		Sounds.runSound = new SoundFile(this, "jumpSound.mp3"); // cannot get it to load running sound for some reason
 	}
 
 }
