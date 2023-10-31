@@ -26,7 +26,7 @@ class Barrier implements IObstacle {
 
 	Barrier(int track) {
 		this.track = track;
-		pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.ENVIRONMENT_Y - 30,
+		pos = new Vector(SSConstants.tracks[track - 1], SSConstants.ENVIRONMENT_Y - 30,
 				SSConstants.TRAIN_INITIAL_Z);
 		this.bounds = new Bounds3D(pos, width, height, depth);
 	}

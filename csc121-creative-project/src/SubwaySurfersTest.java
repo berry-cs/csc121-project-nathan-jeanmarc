@@ -46,19 +46,19 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testMove() {
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
+		assertEquals(SSConstants.tracks[1], SSConstants.tracks[p.getCurrentTrack()-1]);
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[0].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
+		assertEquals(SSConstants.tracks[0], SSConstants.tracks[p.getCurrentTrack()-1]);
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
+		assertEquals(SSConstants.tracks[1], SSConstants.tracks[p.getCurrentTrack()-1]);
 		p.move(d);
 		p.update();
-		assertEquals(SSConstants.tracks[2].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
+		assertEquals(SSConstants.tracks[2], SSConstants.tracks[p.getCurrentTrack()-1]);
 		p.move(a);
 		p.update();
-		assertEquals(SSConstants.tracks[1].getX(), SSConstants.tracks[p.getCurrentTrack()-1].getX());
+		assertEquals(SSConstants.tracks[1], SSConstants.tracks[p.getCurrentTrack()-1]);
 
 	}
 	
@@ -94,22 +94,22 @@ class SubwaySurfersTest {
 	
 	@Test
 	void testObstacleUpdate() {
-		assertEquals(new Vector(SSConstants.tracks[0].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+		assertEquals(new Vector(SSConstants.tracks[0], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
 				o1.getPos());
 		o1.update();
-		assertEquals(new Vector(SSConstants.tracks[0].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+		assertEquals(new Vector(SSConstants.tracks[0], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
 				o1.getPos());
 		
-		assertEquals(new Vector(SSConstants.tracks[1].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+		assertEquals(new Vector(SSConstants.tracks[1], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
 				o2.getPos());
 		o2.update();
-		assertEquals(new Vector(SSConstants.tracks[1].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+		assertEquals(new Vector(SSConstants.tracks[1], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
 				o2.getPos());
 		
-		assertEquals(new Vector(SSConstants.tracks[2].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
+		assertEquals(new Vector(SSConstants.tracks[2], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z), 
 				o3.getPos());
 		o3.update();
-		assertEquals(new Vector(SSConstants.tracks[2].getX(), SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
+		assertEquals(new Vector(SSConstants.tracks[2], SSConstants.ENVIRONMENT_Y-30, SSConstants.TRAIN_INITIAL_Z+SSConstants.gameSpd), 
 				o3.getPos());
 	}
 	

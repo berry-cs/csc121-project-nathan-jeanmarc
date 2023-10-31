@@ -11,7 +11,7 @@ public class SSConstants {
 	public static final int HEIGHT = 800;
 	public static final int CAMERA_Z = 2000;
 	
-	public static float gameSpd = 20;
+	public static float gameSpd;
 	
 	public static final int PLAYER_Z = 1500;
 	public static int floorLvl = HEIGHT;
@@ -30,7 +30,7 @@ public class SSConstants {
 
 	
 
-	public static final Track[] tracks = { new Track(100), new Track(600), new Track(1100) };
+	public static final int[] tracks = {100, 600, 1100};
 	public static final double overallSpawnRate = 0.9;
 	public static final double t1SpawnRate = 0.01; 
 	public static final double t2SpawnRate = 0.005; // needs to be the lowest out of the three
@@ -52,5 +52,7 @@ public class SSConstants {
     public static Animation playerSprite;
     
     public static PImage buildingTexture;
+    
+    public static PFont font;
 
 }

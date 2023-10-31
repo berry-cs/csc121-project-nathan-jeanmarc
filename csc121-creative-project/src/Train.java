@@ -29,7 +29,7 @@ public class Train implements IObstacle {
 	public Train(int length, int track, float speed, boolean hasRamp) {
 		this.track = track;
 		this.length = length;
-		this.pos = new Vector(SSConstants.tracks[track - 1].getX(), SSConstants.TRAIN_Y,
+		this.pos = new Vector(SSConstants.tracks[track - 1], SSConstants.TRAIN_Y,
 				SSConstants.TRAIN_INITIAL_Z - length / 2);
 
 		this.hasRamp = hasRamp;

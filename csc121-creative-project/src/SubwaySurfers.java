@@ -5,26 +5,29 @@ public class SubwaySurfers {
 	private Player p;
 	private static Spawner s;
 	private Environment g;
+	private int score;
 
 	private static boolean isGameOver;
 
 	/*
-	 * Create new game with player at given x, y and train on the left track
+	 * Creates a brand new version of the game
 	 */
 	public SubwaySurfers() {
 		this.p = new Player();
 		this.g = new Environment();
 		SubwaySurfers.s = new Spawner();
+		score = 0;
 	}
 
 	/*
-	 * Create new object with given player and train list
+	 * Creates a version of the game with the given inputs
 	 */
-	public SubwaySurfers(Player p, Spawner sp, Environment g, boolean go) {
+	public SubwaySurfers(Player p, Spawner sp, Environment g, boolean go, int score) {
 		this.p = p;
 		this.g = g;
 		s = sp;
 		isGameOver = go;
+		this.score = score;
 	}
 
 	/**
@@ -45,6 +48,10 @@ public class SubwaySurfers {
 				SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
 		g.draw(c);
 		p.draw(c);
+		
+		c.textSize(100);
+		c.textFont(SSConstants.font);
+		c.text("Score: " + score, p.getPos().getX() - 180, p.getPos().getY() - 800);
 		return c;
 	}
 
@@ -61,14 +68,19 @@ public class SubwaySurfers {
 
 			checkCollision();
 			
+			score ++;
+			
+			SSConstants.gameSpd = 20 + (float) (Math.floorDiv(score, 1000) * 0.1);
+			
+			System.out.println(SSConstants.gameSpd);
+			
 		}
 		
 		if (!Sounds.mainTheme.isPlaying() && !isGameOver) {
 			Sounds.mainTheme.play();
 		}
 		
-
-		return new SubwaySurfers(p, s, g, isGameOver);
+		return new SubwaySurfers(p, s, g, isGameOver, score);
 	}
 
 	/**
@@ -94,7 +106,7 @@ public class SubwaySurfers {
 			s.addBarrier(3);
 		}
 
-		return new SubwaySurfers(p, s, g, isGameOver);
+		return new SubwaySurfers(p, s, g, isGameOver, score);
 	}
 
 	void checkCollision() {

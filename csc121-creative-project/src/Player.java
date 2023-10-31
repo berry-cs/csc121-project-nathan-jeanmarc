@@ -20,7 +20,7 @@ class Player {
 	private int floorLvl = SSConstants.floorLvl; // will change when jumping on top of trains
 
 	public Player() {
-		this.pos = new Vector(SSConstants.tracks[currentTrack - 1].getX(), SSConstants.floorLvl - height / 2,
+		this.pos = new Vector(SSConstants.tracks[currentTrack - 1], SSConstants.floorLvl - height / 2,
 				SSConstants.PLAYER_Z);
 
 		// defines the edges of the player box
@@ -42,12 +42,12 @@ class Player {
 		bounds.update(pos);
 		pos.translate(vel);
 
-		if (pos.getX() < SSConstants.tracks[currentTrack - 1].getX() - 40) {
+		if (pos.getX() < SSConstants.tracks[currentTrack - 1] - 40) {
 			pos.translate(new Vector(40, 0, 0));
-		} else if (pos.getX() > SSConstants.tracks[currentTrack - 1].getX() + 40) {
+		} else if (pos.getX() > SSConstants.tracks[currentTrack - 1] + 40) {
 			pos.translate(new Vector(-40, 0, 0));
 		} else
-			pos.newX(SSConstants.tracks[currentTrack - 1].getX());
+			pos.newX(SSConstants.tracks[currentTrack - 1]);
 
 		gravity();
 		

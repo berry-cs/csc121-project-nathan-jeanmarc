@@ -15,8 +15,8 @@ public class SSApp extends PApplet {
 	}
 
 	public void setup() {
-		
 		w = new SubwaySurfers();
+		SSConstants.font = createFont("Gemstone.ttf", 100);
 	}
 
 	public void draw() {
