@@ -12,9 +12,6 @@ public class Spawner {
 
 	private ArrayList<IObstacle> allObstacles = new ArrayList<IObstacle>(); // combined list of all trains
 
-	private double chance; // variable used for spawning trains
-	private double barrierChance; // variable used for spawning obstacles
-
 	public Spawner() {
 		t1Trains = new ArrayList<Train>();
 		t2Trains = new ArrayList<Train>();
@@ -30,39 +27,22 @@ public class Spawner {
 	 * on individual track thresholds
 	 */
 	public void spawn() {
-			chance = SSConstants.rgen.nextDouble();
-	
-				//chance = SSConstants.rgen.nextDouble(); // can be removed or left, just adds more variability
-	
-				if (chance <= SSConstants.t1SpawnRate && chance > SSConstants.t2SpawnRate) {
-					barrierChance = SSConstants.rgen.nextDouble();
-					
-					if (barrierChance <= SSConstants.barrierRate) {
-						addBarrier(1);
-					} else {
-						int rampChance = SSConstants.rgen.nextInt(2);
-						if (rampChance == 1) addTrain(1, true);
-						else addTrain(1, false);
-					}
-				}
-				if (chance <= SSConstants.t2SpawnRate) {
-					barrierChance = SSConstants.rgen.nextDouble();
-					
-					if (barrierChance <= SSConstants.barrierRate) {
-						addBarrier(2);
-					} else {
-						addTrain(2, false);
-					}
-				}
-				if (chance <= SSConstants.t3SpawnRate && chance > SSConstants.t2SpawnRate) {
-					barrierChance = SSConstants.rgen.nextDouble(); 
-					
-					if (barrierChance <= SSConstants.barrierRate) {
-						addBarrier(3);
-					} else {
-						addTrain(3, false);
-					}
-				}
+		double chance = SSConstants.rgen.nextDouble();
+		
+		// something needs to be spawned
+		if (chance <= SSConstants.OBSTACLE_SPAWN_RATE) {
+			// which track to put an obstacle on
+			int trackToSpawn = SSConstants.rgen.nextInt(1, 4);
+			// whether or not the obstacle is a barrier
+			boolean isBarrier = SSConstants.rgen.nextDouble() < SSConstants.BARRIER_SPAWN_RATE;
+			
+			if (isBarrier) addBarrier(trackToSpawn);
+			else {
+				// 1 in 2 chance a train has a barrier
+				boolean hasRamp = SSConstants.rgen.nextInt(2) == 1;
+				addTrain(trackToSpawn, hasRamp);
+			}
+		}
 	}
 
 	/**

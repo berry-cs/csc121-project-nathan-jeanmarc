@@ -6,7 +6,7 @@ import processing.sound.SoundFile;
  * Provides the scaffolding to launch a Processing application
  */
 public class SSApp extends PApplet {
-	private SubwaySurfers w;
+	private IWorld w;
 
 	public void settings() {
 		this.size(SSConstants.WIDTH, SSConstants.HEIGHT, P3D);

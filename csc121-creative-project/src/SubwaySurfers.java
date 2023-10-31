@@ -1,7 +1,7 @@
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
-public class SubwaySurfers {
+public class SubwaySurfers implements IWorld {
 	private Player p;
 	private static Spawner s;
 	private Environment g;
@@ -58,7 +58,7 @@ public class SubwaySurfers {
 	/**
 	 * Produces an updated world where the player and obstacles move if needed
 	 */
-	public SubwaySurfers update() {
+	public IWorld update() {
 		if (!isGameOver) {
 			p.update();
 
@@ -68,19 +68,20 @@ public class SubwaySurfers {
 
 			checkCollision();
 			
-			score ++;
+			score++;
 			
-			SSConstants.gameSpd = 20 + (float) (Math.floorDiv(score, 1000) * 0.1);
+			SSConstants.gameSpd = 20 + score / 250;
 			
 			System.out.println(SSConstants.gameSpd);
 			
+			if (!Sounds.mainTheme.isPlaying()) {
+				Sounds.mainTheme.play();
+			}
+			
+			return new SubwaySurfers(p, s, g, isGameOver, score);
+		} else {
+			return new GameOverScreen(score);
 		}
-		
-		if (!Sounds.mainTheme.isPlaying() && !isGameOver) {
-			Sounds.mainTheme.play();
-		}
-		
-		return new SubwaySurfers(p, s, g, isGameOver, score);
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class SubwaySurfers {
 	 * @param kev - the KeyEvent to be processed
 	 * @return the updated game
 	 */
-	public SubwaySurfers keyPressed(KeyEvent kev) {
+	public IWorld keyPressed(KeyEvent kev) {
 		p.move(kev);
 
 		if (kev.getKey() == '1') {
@@ -121,17 +122,6 @@ public class SubwaySurfers {
 	 * Ends the game
 	 */
 	public static void gameOver() {
-		SSConstants.gameSpd = 0;
-		SSConstants.playerSprite.isAnimating = false;
-
-		for (int i = 0; i < s.getAllObstacles().size(); i++) {
-			IObstacle ob = s.getAllObstacles().get(i);
-			if (ob.getType().equals("train"))
-				((Train) ob).setVel(new Vector(0, 0, 0));
-		}
-		
-		Sounds.mainTheme.stop();
-
 		isGameOver = true;
 		System.out.println("game over");
 	}
