@@ -51,7 +51,9 @@ public class SubwaySurfers implements IWorld {
 		
 		c.textSize(100);
 		c.textFont(SSConstants.font);
-		c.text("Score: " + score, p.getPos().getX() - 180, p.getPos().getY() - 800);
+		c.textAlign(3);
+		c.fill(0);
+		c.text("Score: " + score, p.getPos().getX(), p.getPos().getY() - 800);
 		return c;
 	}
 
@@ -65,8 +67,6 @@ public class SubwaySurfers implements IWorld {
 			s.spawn();
 
 			s.updateObstacles(); // updates all trains
-
-			checkCollision();
 			
 			score++;
 			
@@ -77,6 +77,8 @@ public class SubwaySurfers implements IWorld {
 			if (!Sounds.mainTheme.isPlaying()) {
 				Sounds.mainTheme.play();
 			}
+			
+			checkCollision();
 			
 			return new SubwaySurfers(p, s, g, isGameOver, score);
 		} else {
@@ -124,5 +126,7 @@ public class SubwaySurfers implements IWorld {
 	public static void gameOver() {
 		isGameOver = true;
 		System.out.println("game over");
+		Sounds.mainTheme.stop();
+		Sounds.runSound.stop();
 	}
 }
