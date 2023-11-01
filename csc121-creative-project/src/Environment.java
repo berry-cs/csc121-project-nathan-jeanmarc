@@ -42,7 +42,7 @@ class Environment {
 		c.rectMode(3);       
 		c.rect(pos.getX(), pos.getY(), width, height, 25);
 		c.popMatrix(); 
-		
+
 		c.pushMatrix();			// draws the sky
 		c.fill(45, 160, 230);
 		c.translate(0, 0, SSConstants.TRAIN_INITIAL_Z-500);

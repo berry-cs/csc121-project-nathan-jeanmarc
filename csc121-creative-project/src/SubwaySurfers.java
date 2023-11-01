@@ -16,7 +16,9 @@ public class SubwaySurfers implements IWorld {
 		this.p = new Player();
 		this.g = new Environment();
 		SubwaySurfers.s = new Spawner();
+		isGameOver = false;
 		score = 0;
+		Sounds.guardSound.play();
 	}
 
 	/*
@@ -34,25 +36,27 @@ public class SubwaySurfers implements IWorld {
 	 * Renders a picture of the player and obstacles on the window
 	 */
 	public PApplet draw(PApplet c) {
-		// colors the canvas background
-		c.background(45, 160, 230);
-		// c.lights(); // this is where lights functions go, needs tweaking to work.
-		// look at documentation
-
-		s.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
-
-		// positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
-		// SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
+		/*
+		 * positions the camera at (x1,y1,z1) looking toward (x2,y2,z2)
+		 * SSConstants.HEIGHT/2 + (SSConstants.HEIGHT/2 - p.pos.y)/2
+		 */
 		c.camera(p.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - p.getBounds().getbBound()),
 				SSConstants.CAMERA_Z, p.getPos().getX(),
 				SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
+		
+		// colors the canvas background
+		c.background(45, 160, 230);
+		// c.lights(); //lights would go here or in any draw function
+
+		s.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
+
 		g.draw(c);
 		p.draw(c);
-		
-		c.textSize(100);
+
 		c.textFont(SSConstants.font);
 		c.textAlign(3);
 		c.fill(0);
+		c.textSize(150);
 		c.text("Score: " + score, p.getPos().getX(), p.getPos().getY() - 800);
 		return c;
 	}
@@ -67,19 +71,15 @@ public class SubwaySurfers implements IWorld {
 			s.spawn();
 
 			s.updateObstacles(); // updates all trains
-			
+
 			score++;
-			
+
 			SSConstants.gameSpd = 20 + score / 250;
-			
+
 			System.out.println(SSConstants.gameSpd);
-			
-			if (!Sounds.mainTheme.isPlaying()) {
-				Sounds.mainTheme.play();
-			}
-			
+
 			checkCollision();
-			
+
 			return new SubwaySurfers(p, s, g, isGameOver, score);
 		} else {
 			return new GameOverScreen(score);
@@ -126,7 +126,7 @@ public class SubwaySurfers implements IWorld {
 	public static void gameOver() {
 		isGameOver = true;
 		System.out.println("game over");
-		Sounds.mainTheme.stop();
 		Sounds.runSound.stop();
+		Sounds.deathSound.play();
 	}
 }

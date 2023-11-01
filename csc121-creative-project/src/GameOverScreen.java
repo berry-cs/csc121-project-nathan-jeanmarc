@@ -2,7 +2,7 @@ import processing.core.PApplet;
 import processing.event.KeyEvent;
 
 public class GameOverScreen implements IWorld {
-	int score;
+	private int score;
 
 	public GameOverScreen(int score) {
 		this.score = score;
@@ -40,7 +40,7 @@ public class GameOverScreen implements IWorld {
 	@Override
 	public IWorld keyPressed(KeyEvent kev) {
 		// TODO Auto-generated method stub
-		return this;
+		return new SubwaySurfers();
 	}
 
 }
