@@ -54,16 +54,17 @@ class Environment {
 		drawSides(c);
 		
 		buildings.forEach(b -> b.draw(c));
-		buildings.forEach(b -> b.update());
-
 		
-		
-		boards.forEach(board -> board.update());
 		boards.forEach(board -> board.draw(c));
 		
 	
 		
 		return c;
+	}
+	
+	void update() {
+		buildings.forEach(b -> b.update());
+		boards.forEach(board -> board.update());
 	}
 
 	void drawTracks(PApplet c) {

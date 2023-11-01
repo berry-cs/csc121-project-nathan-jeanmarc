@@ -4,7 +4,7 @@ import processing.event.KeyEvent;
 public class SubwaySurfers implements IWorld {
 	private Player p;
 	private static Spawner s;
-	private Environment g;
+	private Environment e;
 	private int score;
 
 	private static boolean isGameOver;
@@ -14,7 +14,7 @@ public class SubwaySurfers implements IWorld {
 	 */
 	public SubwaySurfers() {
 		this.p = new Player();
-		this.g = new Environment();
+		this.e = new Environment();
 		SubwaySurfers.s = new Spawner();
 		isGameOver = false;
 		score = 0;
@@ -26,7 +26,7 @@ public class SubwaySurfers implements IWorld {
 	 */
 	public SubwaySurfers(Player p, Spawner sp, Environment g, boolean go, int score) {
 		this.p = p;
-		this.g = g;
+		this.e = g;
 		s = sp;
 		isGameOver = go;
 		this.score = score;
@@ -50,7 +50,7 @@ public class SubwaySurfers implements IWorld {
 
 		s.getAllObstacles().forEach(ob -> ob.draw(c)); // draws all obstacles
 
-		g.draw(c);
+		e.draw(c);
 		p.draw(c);
 
 		c.textFont(SSConstants.font);
@@ -71,6 +71,8 @@ public class SubwaySurfers implements IWorld {
 			s.spawn();
 
 			s.updateObstacles(); // updates all trains
+			
+			e.update();
 
 			score++;
 
@@ -80,7 +82,7 @@ public class SubwaySurfers implements IWorld {
 
 			checkCollision();
 
-			return new SubwaySurfers(p, s, g, isGameOver, score);
+			return new SubwaySurfers(p, s, e, isGameOver, score);
 		} else {
 			return new GameOverScreen(score);
 		}
@@ -109,7 +111,7 @@ public class SubwaySurfers implements IWorld {
 			s.addBarrier(3);
 		}
 
-		return new SubwaySurfers(p, s, g, isGameOver, score);
+		return new SubwaySurfers(p, s, e, isGameOver, score);
 	}
 
 	void checkCollision() {
