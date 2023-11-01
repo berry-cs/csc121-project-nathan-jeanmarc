@@ -13,11 +13,11 @@ public class GameOverScreen implements IWorld {
 	@Override
 	public PApplet draw(PApplet c) {
 		c.background(255);
-		c.textSize(100);
+		c.textSize(200);
 		c.textFont(SSConstants.font);
-		c.text("Game over!", c.width / 2, c.height / 2);
-		c.textSize(75);
-		c.text("Score: " + score, c.width / 2, c.height / 2 + 85);
+		c.text("Game Over!", SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2);
+		c.textSize(150);
+		c.text("Score: " + score, SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 150);
 		return c;
 	}
 
