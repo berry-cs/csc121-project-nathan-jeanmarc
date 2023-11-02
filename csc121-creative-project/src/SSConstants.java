@@ -39,8 +39,8 @@ public class SSConstants {
 	
 	public static final int DELETE_POINT = CAMERA_Z - 300;
 	
-	
     public static final Random rgen = new Random();
+ 
     
     public static Animation playerSprite;
     

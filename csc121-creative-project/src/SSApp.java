@@ -12,6 +12,8 @@ public class SSApp extends PApplet {
 		this.size(SSConstants.WIDTH, SSConstants.HEIGHT, P3D);
 		loadImages();
 		loadSounds();
+		
+		Highscore.scanFile();
 	}
 
 	public void setup() {
@@ -27,6 +29,7 @@ public class SSApp extends PApplet {
 		w = w.update();
 		
 		w.draw(this);
+		
 	}
 
 	public void keyPressed(KeyEvent kev) {

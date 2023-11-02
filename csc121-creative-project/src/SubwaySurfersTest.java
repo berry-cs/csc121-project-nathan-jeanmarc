@@ -201,5 +201,14 @@ class SubwaySurfersTest {
 		v3.newZ(-40);
 		assertEquals(new Vector(100, -20, -40), v3);
 	}
+	
+	@Test
+	void testHighscore() {
+		Highscore.setHighScore(100);
+		assertEquals(100, Highscore.getHighscore());
+		
+		Highscore.setHighScore(0);
+		assertEquals(0, Highscore.getHighscore());
+	}
 
 }

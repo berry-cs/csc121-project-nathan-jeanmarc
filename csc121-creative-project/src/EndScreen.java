@@ -1,10 +1,10 @@
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
-public class GameOverScreen implements IWorld {
+public class EndScreen implements IWorld {
 	private int score;
 
-	public GameOverScreen(int score) {
+	public EndScreen(int score) {
 		this.score = score;
 	}
 	
@@ -26,7 +26,7 @@ public class GameOverScreen implements IWorld {
 		c.textSize(125);
 		c.text("Score: " + score, SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 20);
 		c.textSize(100);
-		c.text("HighScore: " + "---", SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 140);
+		c.text("HighScore: " + Highscore.getHighscore(), SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 140);
 		c.textSize(75);
 		c.text("Press Any Key to Play Again!", SSConstants.WIDTH / 2, SSConstants.HEIGHT - 25);
 		return c;

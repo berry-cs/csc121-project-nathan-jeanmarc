@@ -160,5 +160,9 @@ public class Spawner {
 		t3Barriers.removeIf(ob -> ob.isOffScreen()); // off the screen
 		t3Barriers.forEach(ob -> ob.update());
 	}
+	
+	public void removeAllObstacles() {
+		allObstacles.removeAll(allObstacles);
+	}
 
 }

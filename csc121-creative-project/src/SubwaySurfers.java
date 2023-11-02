@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import processing.core.PApplet;
 import processing.event.KeyEvent;
 
@@ -43,7 +45,7 @@ public class SubwaySurfers implements IWorld {
 		c.camera(p.getPos().getX(), SSConstants.HEIGHT / 2 - (SSConstants.floorLvl - p.getBounds().getbBound()),
 				SSConstants.CAMERA_Z, p.getPos().getX(),
 				SSConstants.HEIGHT - (SSConstants.floorLvl - p.getBounds().getbBound()), 0, 0, 1, 0);
-		
+
 		// colors the canvas background
 		c.background(45, 160, 230);
 		// c.lights(); //lights would go here or in any draw function
@@ -55,7 +57,16 @@ public class SubwaySurfers implements IWorld {
 
 		c.textFont(SSConstants.font);
 		c.textAlign(3);
-		c.fill(0);
+
+		c.pushMatrix();
+		c.translate(0, 0, -10);
+		
+		c.fill(220, 220, 25);
+		c.textSize(155);
+		c.text("Score: " + score, p.getPos().getX(), p.getPos().getY() - 810);
+		c.popMatrix();
+
+		c.fill(190, 90, 0);
 		c.textSize(150);
 		c.text("Score: " + score, p.getPos().getX(), p.getPos().getY() - 800);
 		return c;
@@ -71,7 +82,7 @@ public class SubwaySurfers implements IWorld {
 			s.spawn();
 
 			s.updateObstacles(); // updates all trains
-			
+
 			e.update();
 
 			score++;
@@ -84,15 +95,13 @@ public class SubwaySurfers implements IWorld {
 
 			return new SubwaySurfers(p, s, e, isGameOver, score);
 		} else {
-			return new GameOverScreen(score);
+			return new EndScreen(score);
 		}
 	}
 
 	/**
 	 * Handles KeyEvents for the SubwaySurfers game
 	 * 
-	 * @param kev - the KeyEvent to be processed
-	 * @return the updated game
 	 */
 	public IWorld keyPressed(KeyEvent kev) {
 		p.move(kev);
@@ -124,11 +133,17 @@ public class SubwaySurfers implements IWorld {
 
 	/**
 	 * Ends the game
+	 * 
+	 * @throws FileNotFoundException
 	 */
-	public static void gameOver() {
+	public void gameOver() {
 		isGameOver = true;
 		System.out.println("game over");
 		Sounds.runSound.stop();
 		Sounds.deathSound.play();
+
+		if (score > Highscore.getHighscore()) {
+			Highscore.setHighScore(score);
+		}
 	}
 }
