@@ -95,8 +95,8 @@ public class SubwaySurfers implements IWorld {
 
 			return new SubwaySurfers(p, s, e, isGameOver, score);
 		} else {
-			return new EndScreen(score);
-		}
+			return new EndScreen(score, p.getPos().getX());
+		} 
 	}
 
 	/**

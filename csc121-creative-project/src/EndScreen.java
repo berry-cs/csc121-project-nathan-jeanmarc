@@ -3,32 +3,80 @@ import processing.event.KeyEvent;
 
 public class EndScreen implements IWorld {
 	private int score;
+	
+	private Environment e;
+	
+	private float camX;
 
-	public EndScreen(int score) {
+	public EndScreen(int score, float x) {
 		this.score = score;
+		
+		this.e = new Environment();
+		
+		this.camX = x;
 	}
 	
+	//SSConstants.WIDTH/2f
 	@Override
 	public PApplet draw(PApplet c) {
-		c.camera(SSConstants.WIDTH/2f, SSConstants.HEIGHT/2f, (SSConstants.HEIGHT/2f) / c.tan(c.PI*30.0f / 180.0f), SSConstants.WIDTH/2f, SSConstants.HEIGHT/2f, 0f, 0f, 1f, 0f);
+		c.camera(camX, SSConstants.HEIGHT/2f, (SSConstants.HEIGHT/2f) / c.tan(c.PI*30.0f / 180.0f), camX, SSConstants.HEIGHT/2f, 0f, 0f, 1f, 0f);
 		c.background(25, 30, 35);
 		
-		c.fill(60, 35, 15); 
-		c.rect(SSConstants.WIDTH / 2, 125, 1000, 225, 75);
-		c.rect(SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 35, SSConstants.WIDTH, 275);
-		c.rect(SSConstants.WIDTH / 2, SSConstants.HEIGHT, 1000, 225, 75);
+		e.draw(c);
+		
+		c.pushMatrix();
+		
+		c.translate(camX - SSConstants.WIDTH/2f, 0);
 		
 		c.textFont(SSConstants.font);
-		c.fill(115, 30, 145); //255, 130, 15
-		c.textSize(200);
 		c.textAlign(3);
-		c.text("Game Over!", SSConstants.WIDTH / 2, 200);
-		c.textSize(125);
-		c.text("Score: " + score, SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 20);
-		c.textSize(100);
-		c.text("HighScore: " + Highscore.getHighscore(), SSConstants.WIDTH / 2, SSConstants.HEIGHT / 2 + 140);
-		c.textSize(75);
-		c.text("Press Any Key to Play Again!", SSConstants.WIDTH / 2, SSConstants.HEIGHT - 25);
+		
+		c.pushMatrix();
+		c.translate(0, 0, -10);
+		c.fill(220, 220, 25);
+		c.textSize(180);
+		c.text("GamE", SSConstants.WIDTH/2, 160);
+		c.textSize(230);
+		c.text("Over!", SSConstants.WIDTH/2, 340);
+		
+		c.noStroke();
+		c.fill(240);
+		c.rect(SSConstants.WIDTH/2, 453, 540, 160, 10);
+		
+		c.fill(255, 255, 100);
+		c.rect(SSConstants.WIDTH/2, 362, 560, 5, 18);
+		c.rect(SSConstants.WIDTH/2, 542, 560, 5, 18);
+		c.stroke(0);
+		
+		c.textSize(52);
+		c.text("Your Score: " + score, SSConstants.WIDTH / 2, 435);
+		c.text("HighScore: " + Highscore.getHighscore(), SSConstants.WIDTH / 2, 510);
+		
+		c.textSize(82);
+		c.text("Press Any Key To Play Again!", SSConstants.WIDTH/2 + 2, 700);
+		
+		c.popMatrix();
+		
+		c.fill(190, 90, 0);
+		
+		c.textSize(170);
+		c.text("GamE", SSConstants.WIDTH/2, 160);
+		c.textSize(220);
+		c.text("Over!", SSConstants.WIDTH/2, 340);
+		
+		c.noStroke();
+		c.rect(SSConstants.WIDTH/2, 365, 545, 5, 18);
+		c.rect(SSConstants.WIDTH/2, 543, 545, 5, 18);
+		c.stroke(0);
+		
+		c.textSize(50);
+		c.text("Your Score: " + score, SSConstants.WIDTH / 2, 435);
+		c.text("HighScore: " + Highscore.getHighscore(), SSConstants.WIDTH / 2, 510);
+		
+		c.textSize(80);
+		c.text("Press Any Key To Play Again!", SSConstants.WIDTH/2, 695);
+		
+		c.popMatrix();
 		return c;
 	}
 
