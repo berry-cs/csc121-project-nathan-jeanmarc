@@ -209,6 +209,7 @@ class SubwaySurfersTest {
 		
 		Highscore.setHighScore(0);
 		assertEquals(0, Highscore.getHighscore());
+		
+		
 	}
-
 }

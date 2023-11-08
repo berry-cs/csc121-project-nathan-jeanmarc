@@ -22,9 +22,7 @@ public class SSApp extends PApplet {
 	}
 
 	public void draw() {
-		if (!Sounds.mainTheme.isPlaying()) {
-			Sounds.mainTheme.play();
-		}
+		Sounds.playMainTheme();
 		
 		w = w.update();
 		

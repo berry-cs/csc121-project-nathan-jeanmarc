@@ -20,7 +20,7 @@ public class SubwaySurfers implements IWorld {
 		SubwaySurfers.s = new Spawner();
 		isGameOver = false;
 		score = 0;
-		Sounds.guardSound.play();
+		Sounds.playGuardSound();;
 	}
 
 	/*
@@ -139,8 +139,8 @@ public class SubwaySurfers implements IWorld {
 	public void gameOver() {
 		isGameOver = true;
 		System.out.println("game over");
-		Sounds.runSound.stop();
-		Sounds.deathSound.play();
+		Sounds.stopRunSound();
+		Sounds.playDeathSound();
 
 		if (score > Highscore.getHighscore()) {
 			Highscore.setHighScore(score);

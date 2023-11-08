@@ -51,9 +51,7 @@ class Player {
 
 		gravity();
 		
-		if (!Sounds.runSound.isPlaying() && vel.getY() == 0) {
-			Sounds.runSound.play();
-		} 
+		Sounds.playRunSound(); 
 
 	}
 
@@ -78,8 +76,8 @@ class Player {
 	public void jump() {
 		if (bounds.getbBound() >= floorLvl) {
 			vel = new Vector(0, -16, 0);
-			Sounds.jumpSound.play();
-			Sounds.runSound.stop();
+			Sounds.playJumpSound();
+			Sounds.stopRunSound();
 		}
 	}
 
